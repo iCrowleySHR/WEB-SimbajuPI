@@ -4,8 +4,10 @@ Comandos para rodar o `Docker`
 
 ### Para rodar
 
-Acesse em `localhost:5173`
+Basta instalar o **Docker Desktop** e rodar o comando abaixo na raíz do projeto. 
 
 ```bash
 docker-compose up 
 ```
+
+Acesse em `localhost:5173`

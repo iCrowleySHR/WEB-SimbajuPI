@@ -20,7 +20,8 @@ docker-compose stop
 Caso você instale outras dependências, você pode reconstruir o container para instalar
 
 ```bash
-docker-compose build --no-cache
+docker-compose down -v
+docker-compose up --build
 ```
 
 ## Para acessar terminal do container

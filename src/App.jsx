@@ -1,11 +1,22 @@
 import { Routes, Route } from "react-router-dom";
-import LandingPage from "./pages/LandingPage";
+import LandingPage from "./pages/public/LandingPage";
+import Login from "./pages/public/Login";
+import LayoutPublic from './components/LayoutPublic/LayoutPublic';
 
 function App() {
     return (
         <>
             <Routes>
-                <Route path="/" element={<LandingPage />} />
+                <Route path="/" element={
+                    <LayoutPublic>
+                        <LandingPage />
+                    </LayoutPublic>
+                } />
+                <Route path="/login" element={
+                    <LayoutPublic>
+                        <Login />
+                    </LayoutPublic>
+                } />
             </Routes>
         </>
     );

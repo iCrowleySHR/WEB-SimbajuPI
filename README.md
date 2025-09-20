@@ -2,16 +2,31 @@
 
 Comandos para rodar o `Docker`
 
-### Para rodar
+## Para rodar
 
 Basta instalar o **Docker Desktop** e rodar o comando abaixo na raíz do projeto. 
 Acesse em `localhost:5173`
 
 ```bash
-docker-compose up 
+docker compose up 
 ```
 
-### Parar o container
+## Parar o container
 ```bash
-docker-compose stop
+docker compose stop
+```
+
+## Caso precise re-buildar
+Caso você instale outras dependências, você pode reconstruir o container para instalar
+
+```bash
+docker compose down -v
+docker compose up --build
+```
+
+## Para acessar terminal do container
+Pode ser necessário para rodar comando `artisan`
+
+```bash
+docker compose exec web sh  # Pode mudar de SH para Bash
 ```

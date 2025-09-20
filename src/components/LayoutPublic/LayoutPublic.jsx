@@ -5,7 +5,7 @@ export default function LayoutPublic({ children }) {
   return (
     <>
       <NavBarLandingPage />
-      <main>{children}</main>
+      <main className='bg-gray-100'>{children}</main>
       <Footer />
     </>
   );

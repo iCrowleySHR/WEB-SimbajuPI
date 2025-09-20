@@ -6,7 +6,7 @@ export default function LandingPage() {
     return(
         <>
             <NavBarLandingPage/>
-              
+    
             <section class="hero-bg bg- text-white py-20">
                 <div class="container mx-auto px-4 text-center">
                   <div class="max-w-4xl mx-auto">

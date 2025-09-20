@@ -1,7 +1,5 @@
 import './style.css'
 import { Link } from "react-router-dom";
-import NavBarLandingPage from '../../../components/NavBarLandingPage'
-import Footer from '../../../components/Footer'
 
 export default function LandingPage() {
   return (

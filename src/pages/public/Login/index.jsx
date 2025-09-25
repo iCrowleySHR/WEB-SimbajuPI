@@ -2,17 +2,30 @@ import { useState } from 'react';
 import { cpf as cpfValidator } from 'cpf-cnpj-validator';
 import Alert from '../../../components/Alert';
 import { Link } from 'react-router-dom';
+import FirstAccessModalBeneficiary from '../../../components/FirstAcessModalBeneficiary';
+import FirstAccessModalStaff from '../../../components/FirstAccessModalStaff';
+
 
 export default function Login() {
     const [cpf, setCpf] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
     const [staffPassword, setStaffPassword] = useState('');
+
     const [beneficiaryMessage, setBeneficiaryMessage] = useState('');
     const [beneficiaryType, setBeneficiaryType] = useState('error');
-
     const [staffMessage, setStaffMessage] = useState('');
     const [staffType, setStaffType] = useState('error');
+
+    const [showModalBeneficiary, setShowModalBeneficiary] = useState(false);
+    const [showModalStaff, setShowModalStaff] = useState(false);
+
+    const showFirstAccessBeneficiary = () => setShowModalBeneficiary(true);
+    const showFirstAccessStaff = () => setShowModalStaff(true);
+
+    const handleCloseBeneficiary = () => setShowModalBeneficiary(false);
+    const handleCloseStaff = () => setShowModalStaff(false);
+
 
 
     const loginBeneficiary = (event) => {
@@ -36,11 +49,6 @@ export default function Login() {
             setStaffType('error');
             setStaffMessage('Email inválido. Verifique e tente novamente.');
         }
-    };
-
-
-    const showFirstAccess = () => {
-        alert('Criar lógica ainda');
     };
 
 
@@ -87,7 +95,7 @@ export default function Login() {
                                     />
                                 </div>
 
-                                <Alert type={beneficiaryType} message={beneficiaryMessage} />
+                                {beneficiaryMessage && <Alert type={beneficiaryType} message={beneficiaryMessage} />}
 
 
                                 <button
@@ -100,7 +108,7 @@ export default function Login() {
 
                             <div className="mt-4 text-center">
                                 <button
-                                    onClick={showFirstAccess}
+                                    onClick={showFirstAccessBeneficiary}
                                     className="text-blue-600 hover:text-blue-800 text-sm"
                                 >
                                     Primeiro acesso? Clique aqui
@@ -141,7 +149,7 @@ export default function Login() {
                                     />
                                 </div>
 
-                                <Alert type={staffType} message={staffMessage} />
+                                {staffMessage && <Alert type={staffType} message={staffMessage} />}
 
 
                                 <button
@@ -150,7 +158,17 @@ export default function Login() {
                                 >
                                     <i className="fas fa-sign-in-alt mr-2"></i>Entrar como Funcionário
                                 </button>
+
+
                             </form>
+                            <div className="mt-4 text-center">
+                                <button
+                                    onClick={showFirstAccessStaff}
+                                    className="text-blue-600 hover:text-blue-800 text-sm"
+                                >
+                                    Primeiro acesso? Clique aqui
+                                </button>
+                            </div>
                         </div>
                     </div>
 
@@ -166,6 +184,22 @@ export default function Login() {
                     </div>
                 </div>
             </div>
+
+            <FirstAccessModalBeneficiary
+                isOpen={showModalBeneficiary}
+                onClose={handleCloseBeneficiary}
+                onSubmit={({ cpf, tempPassword, newPassword }) => {
+                    handleCloseBeneficiary();
+                }}
+            />
+
+            <FirstAccessModalStaff
+                isOpen={showModalStaff}
+                onClose={handleCloseStaff}
+                onSubmit={({ email, tempPassword, newPassword }) => {
+                    handleCloseStaff();
+                }}
+            />
         </>
     );
 }

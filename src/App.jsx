@@ -17,6 +17,11 @@ function App() {
                         <Login />
                     </LayoutPublic>
                 } />
+                <Route path="/secretaria" element={
+                    <LayoutPublic>
+                        <Login />
+                    </LayoutPublic>
+                } />
             </Routes>
         </>
     );

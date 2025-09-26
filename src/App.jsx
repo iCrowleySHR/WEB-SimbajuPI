@@ -2,6 +2,8 @@ import { Routes, Route } from "react-router-dom";
 import LandingPage from "./pages/public/LandingPage";
 import Login from "./pages/public/Login";
 import LayoutPublic from './components/LayoutPublic/LayoutPublic';
+import LayoutPrivate from "./components/LayoutPrivate";
+import SecretaryHome from "./pages/auth/secretary/Home";
 
 function App() {
     return (
@@ -17,10 +19,12 @@ function App() {
                         <Login />
                     </LayoutPublic>
                 } />
+
+                // Rotas privadas
                 <Route path="/secretaria" element={
-                    <LayoutPublic>
-                        <Login />
-                    </LayoutPublic>
+                    <LayoutPrivate>
+                        <SecretaryHome />
+                    </LayoutPrivate>
                 } />
             </Routes>
         </>

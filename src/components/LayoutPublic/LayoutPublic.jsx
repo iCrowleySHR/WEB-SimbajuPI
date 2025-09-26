@@ -1,4 +1,4 @@
-import NavBarLandingPage from '../NavBarLandingPage';
+import NavBarLandingPage from '../NavBar/NavBarLandingPage';
 import Footer from '../Footer';
 
 export default function LayoutPublic({ children }) {

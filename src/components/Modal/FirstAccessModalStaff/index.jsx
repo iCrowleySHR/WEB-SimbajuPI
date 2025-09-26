@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
-import Alert from "../Alert";
-import { cpf as cpfValidator } from "cpf-cnpj-validator";
+import Alert from "../../Alert";
 
 // onSubmit envia para login.jsx para fazer as requisições da api
 
-export default function FirstAccessModalBeneficiary({ isOpen, onClose, onSubmit }) {
-  const [cpf, setCpf] = useState("");
+export default function FirstAccessModalStaff({ isOpen, onClose, onSubmit }) {
+  const [email, setEmail] = useState("");
   const [tempPassword, setTempPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
 
@@ -15,10 +14,10 @@ export default function FirstAccessModalBeneficiary({ isOpen, onClose, onSubmit 
   // Limpa campos e alertas sempre que o modal abre
   useEffect(() => {
     if (isOpen) {
-      setCpf("");
+      setAlertMessage("");
+      setEmail("");
       setTempPassword("");
       setNewPassword("");
-      setAlertMessage("");
       setAlertType("error");
     }
   }, [isOpen]);
@@ -27,16 +26,17 @@ export default function FirstAccessModalBeneficiary({ isOpen, onClose, onSubmit 
     e.preventDefault();
 
     // Validação dos campos obrigatórios
-    if (!cpf || !tempPassword || !newPassword) {
+    if (!email || !tempPassword || !newPassword) {
       setAlertType("error");
       setAlertMessage("Todos os campos são obrigatórios!");
       return;
     }
 
-    // Validação do CPF
-    if (!cpfValidator.isValid(cpf)) {
+    // Validação de email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
       setAlertType("error");
-      setAlertMessage("CPF inválido!");
+      setAlertMessage("Email inválido!");
       return;
     }
 
@@ -44,8 +44,11 @@ export default function FirstAccessModalBeneficiary({ isOpen, onClose, onSubmit 
     setAlertMessage("");
 
     // Envia dados para o handler externo
-    onSubmit({ cpf, tempPassword, newPassword });
-    console.log("Submitted:", { cpf, tempPassword, newPassword });
+    onSubmit({ email, tempPassword, newPassword });
+    console.log("Submitted:", { email, tempPassword, newPassword });
+
+    // Opcional: fechar modal automaticamente
+    // onClose();
   };
 
   return (
@@ -54,18 +57,18 @@ export default function FirstAccessModalBeneficiary({ isOpen, onClose, onSubmit 
         <div className="fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center z-50">
           <div className="bg-white rounded-xl p-8 max-w-md mx-4 w-full">
             <h3 className="text-xl font-bold text-gray-800 mb-4">
-              Primeiro Acesso - Beneficiário
+              Primeiro Acesso - Administrativo
             </h3>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  CPF
+                  Email
                 </label>
                 <input
                   type="text"
-                  value={cpf}
-                  onChange={(e) => setCpf(e.target.value)}
-                  placeholder="000.000.000-00"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="usuario@dominio.com"
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                 />
               </div>

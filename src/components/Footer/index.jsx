@@ -10,7 +10,7 @@ export default function Footer() {
                     </div>
                     <p className="text-gray-400">Sistema de Distribuição de Fraldas - Cuidando com dignidade</p>
                     <div className="mt-4 pt-4 border-t border-gray-700">
-                        <p className="text-sm text-gray-500">© 2024 - Todos os direitos reservados</p>
+                        <p className="text-sm text-gray-500">© 2025 - Todos os direitos reservados</p>
                     </div>
                 </div>
             </footer>

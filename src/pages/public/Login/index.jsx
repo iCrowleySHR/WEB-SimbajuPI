@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { cpf as cpfValidator } from 'cpf-cnpj-validator';
-import Alert from '../../../components/Alert';
+import LoginBox from '../../../components/LoginBox';
 import { Link } from 'react-router-dom';
-import FirstAccessModalBeneficiary from '../../../components/FirstAcessModalBeneficiary';
-import FirstAccessModalStaff from '../../../components/FirstAccessModalStaff';
+import FirstAccessModalBeneficiary from '../../../components/Modal/FirstAcessModalBeneficiary';
+import FirstAccessModalStaff from '../../../components/Modal/FirstAccessModalStaff';
 
 
 export default function Login() {
@@ -63,113 +63,31 @@ export default function Login() {
                     </div>
 
                     <div className="grid md:grid-cols-2 gap-8">
-                        <div className="bg-white rounded-xl shadow-xl p-8">
-                            <div className="text-center mb-6">
-                                <div className="bg-blue-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
-                                    <i className="fas fa-user text-3xl text-blue-600"></i>
-                                </div>
-                                <h3 className="text-xl font-bold text-gray-800">Acesso do Beneficiário</h3>
-                                <p className="text-gray-600 mt-2">Para pacientes e responsáveis</p>
-                            </div>
+                        <LoginBox
+                            type="Acesso do Beneficiário"
+                            icon="fas fa-user"
+                            color="blue"
+                            fields={[
+                                { label: "CPF", value: cpf, onChange: e => setCpf(e.target.value), type: "text", placeholder: "000.000.000-00" },
+                                { label: "Senha", value: password, onChange: e => setPassword(e.target.value), type: "password", placeholder: "Digite sua senha" },
+                            ]}
+                            message={{ type: beneficiaryType, text: beneficiaryMessage }}
+                            onSubmit={loginBeneficiary}
+                            onFirstAccessClick={showFirstAccessBeneficiary}
+                        />
 
-                            <form onSubmit={loginBeneficiary} className="space-y-4">
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">CPF</label>
-                                    <input
-                                        type="text"
-                                        placeholder="000.000.000-00"
-                                        value={cpf}
-                                        onChange={(e) => setCpf(e.target.value)}
-                                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                    />
-                                </div>
-
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">Senha</label>
-                                    <input
-                                        type="password"
-                                        placeholder="Digite sua senha"
-                                        value={password}
-                                        onChange={(e) => setPassword(e.target.value)}
-                                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                    />
-                                </div>
-
-                                {beneficiaryMessage && <Alert type={beneficiaryType} message={beneficiaryMessage} />}
-
-
-                                <button
-                                    type="submit"
-                                    className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-lg transition-colors"
-                                >
-                                    <i className="fas fa-sign-in-alt mr-2"></i>Entrar como Beneficiário
-                                </button>
-                            </form>
-
-                            <div className="mt-4 text-center">
-                                <button
-                                    onClick={showFirstAccessBeneficiary}
-                                    className="text-blue-600 hover:text-blue-800 text-sm"
-                                >
-                                    Primeiro acesso? Clique aqui
-                                </button>
-                            </div>
-                        </div>
-
-
-                        <div className="bg-white rounded-xl shadow-xl p-8">
-                            <div className="text-center mb-6">
-                                <div className="bg-green-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
-                                    <i className="fas fa-user-tie text-3xl text-green-600"></i>
-                                </div>
-                                <h3 className="text-xl font-bold text-gray-800">Acesso Administrativo</h3>
-                                <p className="text-gray-600 mt-2">Para funcionários e profissionais</p>
-                            </div>
-
-                            <form onSubmit={loginStaff} className="space-y-4">
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                                    <input
-                                        type="email"
-                                        placeholder="seu@email.com"
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
-                                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                                    />
-                                </div>
-
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">Senha</label>
-                                    <input
-                                        type="password"
-                                        placeholder="Digite sua senha"
-                                        value={staffPassword}
-                                        onChange={(e) => setStaffPassword(e.target.value)}
-                                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                                    />
-                                </div>
-
-                                {staffMessage && <Alert type={staffType} message={staffMessage} />}
-
-
-                                <button
-                                    type="submit"
-                                    className="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-3 rounded-lg transition-colors"
-                                >
-                                    <i className="fas fa-sign-in-alt mr-2"></i>Entrar como Funcionário
-                                </button>
-
-
-                            </form>
-                            <div className="mt-4 text-center">
-                                <button
-                                    onClick={showFirstAccessStaff}
-                                    className="text-blue-600 hover:text-blue-800 text-sm"
-                                >
-                                    Primeiro acesso? Clique aqui
-                                </button>
-                            </div>
-                        </div>
+                        <LoginBox
+                            type="Acesso Administrativo"
+                            icon="fas fa-user-tie"
+                            color="green"
+                            fields={[
+                                { label: "Email", value: email, onChange: e => setEmail(e.target.value), type: "email", placeholder: "seu@email.com" },
+                                { label: "Senha", value: staffPassword, onChange: e => setStaffPassword(e.target.value), type: "password", placeholder: "Digite sua senha" },
+                            ]}
+                            message={{ type: staffType, text: staffMessage }}
+                            onSubmit={loginStaff}
+                            onFirstAccessClick={showFirstAccessStaff}
+                        />
                     </div>
 
                     <div className="mt-8 text-center">
@@ -189,6 +107,7 @@ export default function Login() {
                 isOpen={showModalBeneficiary}
                 onClose={handleCloseBeneficiary}
                 onSubmit={({ cpf, tempPassword, newPassword }) => {
+                    console.log(cpf, tempPassword, newPassword);
                     handleCloseBeneficiary();
                 }}
             />
@@ -197,6 +116,7 @@ export default function Login() {
                 isOpen={showModalStaff}
                 onClose={handleCloseStaff}
                 onSubmit={({ email, tempPassword, newPassword }) => {
+                    console.log(email, tempPassword, newPassword);
                     handleCloseStaff();
                 }}
             />

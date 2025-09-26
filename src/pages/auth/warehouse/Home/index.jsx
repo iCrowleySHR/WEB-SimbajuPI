@@ -7,7 +7,7 @@ export default function WarehouseHome() {
         <>
             <Title title={"Painel do Almoxarifado"} subtitle={"Controle de estoque e distribuição."} />
 
-            <div className="grid md:grid-cols-4 gap-6 mb-8">
+            <div className="grid md:grid-cols-3 gap-6 mb-8">
 
                 <StatsCard
                     title="Distribuídas Hoje"

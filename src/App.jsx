@@ -5,6 +5,7 @@ import LayoutPublic from './components/LayoutPublic';
 import LayoutPrivate from "./components/LayoutPrivate";
 import SecretaryHome from "./pages/auth/secretary/Home";
 import WarehouseHome from "./pages/auth/warehouse/Home";
+import UbsHome from "./pages/auth/ubs/Home";
 
 function App() {
     return (
@@ -28,9 +29,15 @@ function App() {
                     </LayoutPrivate>
                 } />
 
-                <Route path="/almoxerifado" element={
+                <Route path="/almoxarifado" element={
                     <LayoutPrivate>
                         <WarehouseHome />
+                    </LayoutPrivate>
+                } />
+
+                <Route path="/ubs" element={
+                    <LayoutPrivate>
+                        <UbsHome />
                     </LayoutPrivate>
                 } />
             </Routes>

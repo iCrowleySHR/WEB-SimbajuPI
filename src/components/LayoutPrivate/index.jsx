@@ -2,7 +2,7 @@ import Footer from '../Footer';
 import { Outlet } from "react-router-dom";
 import NavBarAuth from '../NavBar/NavBarAuth';
 
-export default function LayoutPrivate({ children }) {
+export default function LayoutPrivate() {
   return (
     <>
       <NavBarAuth />

@@ -9,6 +9,9 @@ import SecretaryHome from "./pages/auth/secretary/Home";
 import WarehouseHome from "./pages/auth/warehouse/Home";
 import UbsHome from "./pages/auth/ubs/Home";
 import BeneficiaryHome from "./pages/auth/beneficiary/Home";
+import SecretaryNewBeneficiary from "./pages/auth/secretary/SecretaryNewBeneficiary";
+import NewUbsAccount from "./pages/auth/secretary/NewUbsAccount";
+import NewWareAccount from "./pages/auth/secretary/NewWareAccount";
 
 function App() {
     return (
@@ -21,15 +24,19 @@ function App() {
 
             {/* Rotas privadas */}
             <Route element={<LayoutPrivate />}>
+
                 {/* Secretaria */}
                 <Route path="/secretaria">
                     <Route index element={<SecretaryHome />} />
-                    {/* /secretaria/configurações */}
-                    {/* <Route path="configuracoes" element={<SecretaryConfig />} /> */}
+                    <Route path="novo-beneficiario" element={<SecretaryNewBeneficiary />} />
+                    <Route path="novo-ubs" element={<NewUbsAccount />} />
+                    <Route path="novo-almoxarifado" element={<NewWareAccount />} />
                 </Route>
 
                 {/* Almoxarifado */}
-                <Route path="/almoxarifado" element={<WarehouseHome />} />
+                <Route path="/almoxarifado">
+                    <Route index element={<WarehouseHome />} />
+                </Route>
 
                 {/* UBS */}
                 <Route path="/ubs" element={<UbsHome />} />

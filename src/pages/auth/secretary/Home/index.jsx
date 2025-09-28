@@ -1,15 +1,20 @@
+import { useState } from "react";
 import ActionButton from "../../../../components/ActionButton";
 import StatsCard from "../../../../components/StatsCard";
 import Title from "../../../../components/Title";
+import CreateAdminAccountModal from "../../../../components/Modal/CreateAdminAccountModal";
 
 export default function SecretaryHome() {
-  const showNewBeneficiary = () => {
-    console.log("Novo Beneficiário");
-  };
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
 
   const showBeneficiaryList = () => {
     console.log("Lista de Beneficiários");
   };
+
+  const showModalCreateAdminAccount = () => {
+    setIsModalOpen(true);
+  }
 
   const showReports = () => {
     console.log("Relatórios");
@@ -58,7 +63,7 @@ export default function SecretaryHome() {
           iconClass="fas fa-user-plus"
           bgColor="bg-blue-600"
           hoverColor="hover:bg-blue-700"
-          onClick={showNewBeneficiary}
+          to={"/secretaria/novo-beneficiario"}
         />
         <ActionButton
           title="Lista de Beneficiários"
@@ -78,11 +83,11 @@ export default function SecretaryHome() {
         />
         <ActionButton
           title="Criar Contas Administrativas"
-          description="Criar acessos para UBS e Almoxerifados."
+          description="Criar acessos para UBS ou Almoxarifados."
           iconClass="fa fa-users"
           bgColor="bg-yellow-600"
           hoverColor="hover:bg-yellow-700"
-          onClick={showReports}
+          onClick={showModalCreateAdminAccount}
         />
         <ActionButton
           title="Validar Beneficio"
@@ -92,7 +97,10 @@ export default function SecretaryHome() {
           hoverColor="hover:bg-pink-700"
           onClick={showReports}
         />
+
+        
       </div>
+       <CreateAdminAccountModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </>
   );
 }

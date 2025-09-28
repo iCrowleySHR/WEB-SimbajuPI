@@ -3,45 +3,41 @@ import LandingPage from "./pages/public/LandingPage";
 import Login from "./pages/public/Login";
 import LayoutPublic from './components/LayoutPublic';
 import LayoutPrivate from "./components/LayoutPrivate";
+
+// Páginas privadas
 import SecretaryHome from "./pages/auth/secretary/Home";
 import WarehouseHome from "./pages/auth/warehouse/Home";
 import UbsHome from "./pages/auth/ubs/Home";
+import BeneficiaryHome from "./pages/auth/beneficiary/Home";
 
 function App() {
     return (
-        <>
-            <Routes>
-                <Route path="/" element={
-                    <LayoutPublic>
-                        <LandingPage />
-                    </LayoutPublic>
-                } />
-                <Route path="/login" element={
-                    <LayoutPublic>
-                        <Login />
-                    </LayoutPublic>
-                } />
+        <Routes>
+            {/* Rotas públicas */}
+            <Route element={<LayoutPublic />}>
+                <Route path="/" element={<LandingPage />} />
+                <Route path="/login" element={<Login />} />
+            </Route>
 
-                // Rotas privadas
-                <Route path="/secretaria" element={
-                    <LayoutPrivate>
-                        <SecretaryHome />
-                    </LayoutPrivate>
-                } />
+            {/* Rotas privadas */}
+            <Route element={<LayoutPrivate />}>
+                {/* Secretaria */}
+                <Route path="/secretaria">
+                    <Route index element={<SecretaryHome />} />
+                    {/* /secretaria/configurações */}
+                    {/* <Route path="configuracoes" element={<SecretaryConfig />} /> */}
+                </Route>
 
-                <Route path="/almoxarifado" element={
-                    <LayoutPrivate>
-                        <WarehouseHome />
-                    </LayoutPrivate>
-                } />
+                {/* Almoxarifado */}
+                <Route path="/almoxarifado" element={<WarehouseHome />} />
 
-                <Route path="/ubs" element={
-                    <LayoutPrivate>
-                        <UbsHome />
-                    </LayoutPrivate>
-                } />
-            </Routes>
-        </>
+                {/* UBS */}
+                <Route path="/ubs" element={<UbsHome />} />
+
+                {/* Beneficiário */}
+                <Route path="/beneficiario" element={<BeneficiaryHome />} />
+            </Route>
+        </Routes>
     );
 }
 

@@ -69,15 +69,15 @@ export default function UbsHome() {
           <div className="mb-4">
             <input
               type="text"
-              value={search} // 🔹 conecta ao estado
-              onChange={(e) => setSearch(e.target.value)} // 🔹 atualiza o estado
+              value={search} 
+              onChange={(e) => setSearch(e.target.value)}
               placeholder="Buscar por nome ou CPF..."
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
           <PatientTable
-            patients={filteredPatients} // 🔹 passa pacientes já filtrados
+            patients={filteredPatients} 
             onStatusChange={handleStatusChange}
           />
         </div>

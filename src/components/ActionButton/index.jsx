@@ -1,7 +1,19 @@
-export default function ActionButton({ title, description, iconClass, bgColor, hoverColor, onClick }) {
+import { useNavigate } from "react-router-dom";
+
+export default function ActionButton({ title, description, iconClass, bgColor, hoverColor, onClick, to }) {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    if (to) {
+      navigate(to);
+    } else if (onClick) {
+      onClick();
+    }
+  };
+
   return (
     <button
-      onClick={onClick}
+      onClick={handleClick}
       className={`text-white p-6 rounded-xl transition-colors text-left ${bgColor} ${hoverColor}`}
     >
       <i className={`${iconClass} text-2xl mb-3`}></i>

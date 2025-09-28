@@ -27,7 +27,7 @@ export default function NavBarAuth() {
           </Link>
           <button
             onClick={() => console.log("Logout")}
-            className="text-gray-700 hover:text-blue-600 transition-colors"
+            className="text-red-700 hover:text-red-600 transition-colors"
           >
             Sair
           </button>
@@ -59,7 +59,7 @@ export default function NavBarAuth() {
               console.log("Logout");
               setIsOpen(false);
             }}
-            className="w-full text-left px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+            className="w-full text-left px-4 py-3 text-red-700 hover:bg-red-50 hover:text-red-600 transition-colors"
           >
             Sair
           </button>

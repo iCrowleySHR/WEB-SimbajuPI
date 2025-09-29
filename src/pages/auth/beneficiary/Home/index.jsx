@@ -34,7 +34,7 @@ export default function BeneficiaryHome() {
                     iconClass="fas fa-calendar-alt"
                     bgColor="bg-blue-600"
                     hoverColor="hover:bg-blue-700"
-                    onClick={showNewBeneficiary}
+                    to={"/beneficiario/reagendar-retirada"}
                 />
                 <ActionButton
                     title="Histórico"

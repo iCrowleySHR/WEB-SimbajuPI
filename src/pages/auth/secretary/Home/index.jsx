@@ -71,7 +71,7 @@ export default function SecretaryHome() {
           iconClass="fas fa-list"
           bgColor="bg-green-600"
           hoverColor="hover:bg-green-700"
-          onClick={showBeneficiaryList}
+          to={"/secretaria/lista-beneficiarios"}
         />
         <ActionButton
           title="Relatórios"

@@ -14,7 +14,7 @@ export default function ActionButton({ title, description, iconClass, bgColor, h
   return (
     <button
       onClick={handleClick}
-      className={`text-white p-6 rounded-xl transition-colors text-left ${bgColor} ${hoverColor}`}
+      className={`text-white p-6 rounded-xl transition-colors text-left ${bgColor} ${hoverColor} cursor-pointer`}
     >
       <i className={`${iconClass} text-2xl mb-3`}></i>
       <h3 className="font-semibold mb-2">{title}</h3>

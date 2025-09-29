@@ -8,9 +8,6 @@ export default function BeneficiaryHome() {
         console.log("Novo Beneficiário");
     };
 
-    const showBeneficiaryList = () => {
-        console.log("Lista de Beneficiários");
-    };
 
     const showReports = () => {
         console.log("Relatórios");
@@ -45,7 +42,7 @@ export default function BeneficiaryHome() {
                     iconClass="fas fa-history"
                     bgColor="bg-green-600"
                     hoverColor="hover:bg-green-700"
-                    to="/login"
+                    to="/beneficiario/historico"
                 />
                 <ActionButton
                     title="Cancelar retirada"

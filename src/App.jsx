@@ -14,6 +14,7 @@ import SecretaryNewBeneficiary from "./pages/auth/secretary/SecretaryNewBenefici
 import NewUbsAccount from "./pages/auth/secretary/NewUbsAccount";
 import NewWareAccount from "./pages/auth/secretary/NewWareAccount";
 import BeneficiartyList from "./pages/auth/secretary/BeneficiaryList";
+import BeneficiaryHistory from "./pages/auth/beneficiary/BeneficiaryHistory";
 
 function App() {
     return (
@@ -46,7 +47,10 @@ function App() {
                 <Route path="/ubs" element={<UbsHome />} />
 
                 {/* Beneficiário */}
-                <Route path="/beneficiario" element={<BeneficiaryHome />} />
+                <Route path="/beneficiario" >
+                    <Route index element={<BeneficiaryHome />} />
+                    <Route path="historico" element={<BeneficiaryHistory/>}/>
+                </Route>
             </Route>
         </Routes>
     );

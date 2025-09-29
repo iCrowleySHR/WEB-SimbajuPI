@@ -1,6 +1,5 @@
 import Alert from "../Alert";
 
-
 export default function LoginBox({ 
     type, 
     icon, 

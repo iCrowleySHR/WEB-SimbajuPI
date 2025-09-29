@@ -39,7 +39,7 @@ export default function SecretaryNewBeneficiary() {
       <FormBox
         type="Cadastrar Beneficiário"
         icon="fas fa-user"
-        color="green"
+        color="blue"
         fields={[
           { label: "Nome", value: name, onChange: e => setName(e.target.value), type: "text", placeholder: "Digite o nome do beneficiário" },
           { label: "CPF", value: cpf, onChange: e => setCpf(e.target.value), type: "text", placeholder: "000.000.000-00" },
@@ -56,6 +56,13 @@ export default function SecretaryNewBeneficiary() {
         ]}
         onSubmit={handleSubmit}
         message={message} 
+        infoBox={{
+          title: "Informações Importantes",
+          items: [
+            "Uma senha temporária será enviada por e-mail",
+            "O Paciente deverá alterar a senha no primeiro acesso",
+          ]
+        }}
       />
     </>
   );

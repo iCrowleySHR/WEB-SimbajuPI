@@ -95,7 +95,7 @@ export default function SecretaryHome() {
           iconClass="fa fa-users"
           bgColor="bg-pink-600"
           hoverColor="hover:bg-pink-700"
-          onClick={showReports}
+          to={"/secretaria/validar-beneficio"}
         />
 
         

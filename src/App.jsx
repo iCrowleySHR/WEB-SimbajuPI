@@ -17,6 +17,7 @@ import BeneficiartyList from "./pages/auth/secretary/BeneficiaryList";
 import BeneficiaryHistory from "./pages/auth/beneficiary/BeneficiaryHistory";
 import CancelWithdrawal from "./pages/auth/beneficiary/CancelWithdrawal";
 import ValidateBeneficiary from "./pages/auth/secretary/ValidateBeneficiary";
+import BeneficiaryDetails from "./pages/auth/secretary/BeneficiaryDetails";
 
 function App() {
     return (
@@ -39,6 +40,7 @@ function App() {
                     <Route path="novo-almoxarifado" element={<NewWareAccount />} />
                     <Route path="lista-beneficiarios" element={<BeneficiartyList />}/>
                     <Route path="validar-beneficio" element={<ValidateBeneficiary />} />
+                    <Route path="detalhes-beneficiario/:id" element={<BeneficiaryDetails/>} />
                 </Route>
 
                 {/* Almoxarifado */}

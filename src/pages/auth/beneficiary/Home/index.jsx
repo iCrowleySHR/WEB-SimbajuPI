@@ -50,7 +50,7 @@ export default function BeneficiaryHome() {
                     iconClass="fas fa-xmark"
                     bgColor="bg-red-800"
                     hoverColor="hover:bg-red-900"
-                    onClick={showReports}
+                    to={"/beneficiario/cancelar-retirada"}
                 />
             </div>
         </>

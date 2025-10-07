@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import Logo from "../../../components/Logo"
 
 export default function NavBarAuth() {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,7 +12,7 @@ export default function NavBarAuth() {
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         {/* Logo */}
         <Link to="/" className="flex items-center space-x-3">
-          <i className="fas fa-heartbeat text-blue-600 text-2xl"></i>
+          <Logo size={50} />
           <h1 className="text-xl font-bold text-gray-800">
             Sistema de Distribuição de Fraldas
           </h1>

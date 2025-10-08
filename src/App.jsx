@@ -20,7 +20,7 @@ import CancelWithdrawal from "./pages/auth/beneficiary/CancelWithdrawal";
 import ValidateBeneficiary from "./pages/auth/secretary/ValidateBeneficiary";
 import BeneficiaryDetails from "./pages/auth/secretary/BeneficiaryDetails";
 import ReschedulePickup from "./pages/auth/beneficiary/ReschedulePickup";
-import VLibras from "./components/Accessibility/Vlibras";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
     return (
@@ -37,7 +37,7 @@ function App() {
                 <Route element={<LayoutPrivate />}>
 
                     {/* Secretaria */}
-                    <Route path="/secretaria">
+                    <Route path="/secretaria" element={<PrivateRoute roles={['secretary']} />}>
                         <Route index element={<SecretaryHome />} />
                         <Route path="novo-beneficiario" element={<SecretaryNewBeneficiary />} />
                         <Route path="novo-ubs" element={<NewUbsAccount />} />
@@ -49,15 +49,17 @@ function App() {
                     </Route>
 
                     {/* Almoxarifado */}
-                    <Route path="/almoxarifado">
+                    <Route path="/almoxarifado"  element={<PrivateRoute roles={['warehouse']} />}>
                         <Route index element={<WarehouseHome />} />
                     </Route>
 
                     {/* UBS */}
-                    <Route path="/ubs" element={<UbsHome />} />
+                    <Route path="/ubs"  element={<PrivateRoute roles={['ubs']} />}>
+                        <Route index element={<UbsHome />} />
+                    </Route>
 
                     {/* Beneficiário */}
-                    <Route path="/beneficiario" >
+                    <Route path="/beneficiario" element={<PrivateRoute roles={['beneficiary']} />}>
                         <Route index element={<BeneficiaryHome />} />
                         <Route path="historico" element={<BeneficiaryHistory />} />
                         <Route path="cancelar-retirada" element={<CancelWithdrawal />} />

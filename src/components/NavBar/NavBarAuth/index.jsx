@@ -1,11 +1,19 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import Logo from "../../../components/Logo"
+import { Link, useNavigate } from "react-router-dom";
+import Logo from "../../../components/Logo";
+import { useAuth } from "../../../hook/useAuth";
 
 export default function NavBarAuth() {
   const [isOpen, setIsOpen] = useState(false);
+  const { logout } = useAuth();
+  const navigate = useNavigate();
 
   const toggleMenu = () => setIsOpen(!isOpen);
+
+  const handleLogout = () => {
+    logout(); 
+    navigate("/");
+  };
 
   return (
     <header className="bg-white shadow-lg border-b-4 border-blue-600">
@@ -27,7 +35,7 @@ export default function NavBarAuth() {
             Configurações
           </Link>
           <button
-            onClick={() => console.log("Logout")}
+            onClick={handleLogout}
             className="text-red-700 hover:text-red-600 transition-colors"
           >
             Sair
@@ -57,7 +65,7 @@ export default function NavBarAuth() {
           </Link>
           <button
             onClick={() => {
-              console.log("Logout");
+              handleLogout();
               setIsOpen(false);
             }}
             className="w-full text-left px-4 py-3 text-red-700 hover:bg-red-50 hover:text-red-600 transition-colors"

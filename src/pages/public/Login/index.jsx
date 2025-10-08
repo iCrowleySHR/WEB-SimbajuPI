@@ -1,10 +1,10 @@
-import { useState } from 'react';
-import { cpf as cpfValidator } from 'cpf-cnpj-validator';
+import { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import LoginBox from '../../../components/LoginBox';
-import { Link } from 'react-router-dom';
 import FirstAccessModalBeneficiary from '../../../components/Modal/FirstAcessModalBeneficiary';
 import FirstAccessModalStaff from '../../../components/Modal/FirstAccessModalStaff';
-
+import { useAuth } from "../../../hook/useAuth";
+import { useUser } from "../../../contexts/UserContext";
 
 export default function Login() {
     const [cpf, setCpf] = useState('');
@@ -13,48 +13,75 @@ export default function Login() {
     const [staffPassword, setStaffPassword] = useState('');
 
     const [beneficiaryMessage, setBeneficiaryMessage] = useState('');
-    const [beneficiaryType, setBeneficiaryType] = useState('error');
+    const [beneficiaryType, setBeneficiaryType] = useState('');
     const [staffMessage, setStaffMessage] = useState('');
-    const [staffType, setStaffType] = useState('error');
+    const [staffType, setStaffType] = useState('');
 
     const [showModalBeneficiary, setShowModalBeneficiary] = useState(false);
     const [showModalStaff, setShowModalStaff] = useState(false);
 
-    const showFirstAccessBeneficiary = () => setShowModalBeneficiary(true);
-    const showFirstAccessStaff = () => setShowModalStaff(true);
-
-    const handleCloseBeneficiary = () => setShowModalBeneficiary(false);
-    const handleCloseStaff = () => setShowModalStaff(false);
+    const navigate = useNavigate();
+    const { user, loading } = useUser();
+    const { login } = useAuth();
 
 
+    const redirectByRole = (role) => {
+        const routes = {
+            beneficiary: '/beneficiado',
+            ubs: '/ubs',
+            warehouse: '/almoxarifado',
+            secretary: '/secretaria'
+        };
+        return routes[role] || '/login';
+    };
 
-    const loginBeneficiary = (event) => {
+    useEffect(() => {
+        if (!loading && user) {
+            navigate(redirectByRole(user.role));
+        }
+    }, [user, loading]);
+
+    // --- Login Beneficiário ---
+    const loginBeneficiary = async (event) => {
         event.preventDefault();
-        if (cpfValidator.isValid(cpf)) {
+        try {
+            const response = await login({ cpf, password });
             setBeneficiaryType('success');
-            setBeneficiaryMessage('Login do beneficiário realizado com sucesso!');
-        } else {
+            setBeneficiaryMessage(response.message || 'Login realizado com sucesso!');
+            navigate(redirectByRole(response.role));
+        } catch (error) {
             setBeneficiaryType('error');
-            setBeneficiaryMessage('CPF inválido. Verifique e tente novamente.');
+            setBeneficiaryMessage(error.response?.data?.errors || 'Erro ao logar. Verifique seus dados.');
+            console.log('Erro ao logar (beneficiário):', error);
         }
     };
 
-    const loginStaff = (event) => {
+    // --- Login Administrativo ---
+    const loginStaff = async (event) => {
         event.preventDefault();
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (emailRegex.test(email)) {
+        try {
+            const response = await login({ email, password: staffPassword });
             setStaffType('success');
-            setStaffMessage('Login administrativo realizado com sucesso!');
-        } else {
+            setStaffMessage(response.message || 'Login realizado com sucesso!');
+            navigate(redirectByRole(response.role));
+        } catch (error) {
             setStaffType('error');
-            setStaffMessage('Email inválido. Verifique e tente novamente.');
+            setStaffMessage(error.response?.data?.errors || 'Erro ao logar. Verifique seus dados.');
+            console.log('Erro ao logar (administrativo):', error);
         }
     };
 
+    if (loading) {
+        return (
+            <div className="flex justify-center items-center h-screen">
+                <div className="w-12 h-12 border-4 border-blue-500 border-dashed rounded-full animate-spin"></div>
+            </div>
+        );
+    }
 
     return (
         <>
-            <div className="container mx-auto px-4 py-12 ">
+            <div className="container mx-auto px-4 py-12">
                 <div className="max-w-4xl mx-auto">
                     <div className="text-center mb-8">
                         <i className="fas fa-user-circle text-6xl text-blue-600 mb-4"></i>
@@ -73,7 +100,7 @@ export default function Login() {
                             ]}
                             message={{ type: beneficiaryType, text: beneficiaryMessage }}
                             onSubmit={loginBeneficiary}
-                            onFirstAccessClick={showFirstAccessBeneficiary}
+                            onFirstAccessClick={() => setShowModalBeneficiary(true)}
                         />
 
                         <LoginBox
@@ -86,38 +113,35 @@ export default function Login() {
                             ]}
                             message={{ type: staffType, text: staffMessage }}
                             onSubmit={loginStaff}
-                            onFirstAccessClick={showFirstAccessStaff}
+                            onFirstAccessClick={() => setShowModalStaff(true)}
                         />
                     </div>
 
                     <div className="mt-8 text-center">
                         <Link to="/">
-                            <button
-                                className="text-gray-600 hover:text-gray-800"
-                            >
+                            <button className="text-gray-600 hover:text-gray-800">
                                 <i className="fas fa-arrow-left mr-2"></i>Voltar ao início
                             </button>
                         </Link>
-
                     </div>
                 </div>
             </div>
 
             <FirstAccessModalBeneficiary
                 isOpen={showModalBeneficiary}
-                onClose={handleCloseBeneficiary}
+                onClose={() => setShowModalBeneficiary(false)}
                 onSubmit={({ cpf, tempPassword, newPassword }) => {
                     console.log(cpf, tempPassword, newPassword);
-                    handleCloseBeneficiary();
+                    setShowModalBeneficiary(false);
                 }}
             />
 
             <FirstAccessModalStaff
                 isOpen={showModalStaff}
-                onClose={handleCloseStaff}
+                onClose={() => setShowModalStaff(false)}
                 onSubmit={({ email, tempPassword, newPassword }) => {
                     console.log(email, tempPassword, newPassword);
-                    handleCloseStaff();
+                    setShowModalStaff(false);
                 }}
             />
         </>

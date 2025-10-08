@@ -27,7 +27,7 @@ export default function Login() {
 
     const redirectByRole = (role) => {
         const routes = {
-            beneficiary: '/beneficiado',
+            beneficiary: '/beneficiario',
             ubs: '/ubs',
             warehouse: '/almoxarifado',
             secretary: '/secretaria'

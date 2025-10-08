@@ -8,6 +8,7 @@ import LayoutPrivate from "./components/Layout/Private";
 // Páginas privadas
 import SecretaryHome from "./pages/auth/secretary/Home";
 import WarehouseHome from "./pages/auth/warehouse/Home";
+import GeneralSettings from "./pages/auth/shared/GeneralSettings";
 import UbsHome from "./pages/auth/ubs/Home";
 import BeneficiaryHome from "./pages/auth/beneficiary/Home";
 import SecretaryNewBeneficiary from "./pages/auth/secretary/SecretaryNewBeneficiary";
@@ -44,6 +45,7 @@ function App() {
                         <Route path="lista-beneficiarios" element={<BeneficiartyList />} />
                         <Route path="validar-beneficio" element={<ValidateBeneficiary />} />
                         <Route path="detalhes-beneficiario/:id" element={<BeneficiaryDetails />} />
+                        <Route path="configuracoes" element={<GeneralSettings />} />
                     </Route>
 
                     {/* Almoxarifado */}

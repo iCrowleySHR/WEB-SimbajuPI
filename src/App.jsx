@@ -19,7 +19,7 @@ import CancelWithdrawal from "./pages/auth/beneficiary/CancelWithdrawal";
 import ValidateBeneficiary from "./pages/auth/secretary/ValidateBeneficiary";
 import BeneficiaryDetails from "./pages/auth/secretary/BeneficiaryDetails";
 import ReschedulePickup from "./pages/auth/beneficiary/ReschedulePickup";
-import Vlibras from "./components/Accessibility/Vlibras";
+import VLibras from "./components/Accessibility/Vlibras";
 
 function App() {
     return (
@@ -63,7 +63,6 @@ function App() {
                     </Route>
                 </Route>
             </Routes>
-            <Vlibras />
         </>
 
     );

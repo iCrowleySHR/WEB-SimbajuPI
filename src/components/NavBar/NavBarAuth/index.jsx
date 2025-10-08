@@ -13,7 +13,7 @@ export default function NavBarAuth() {
         {/* Logo */}
         <Link to="/" className="flex items-center space-x-3">
           <Logo size={50} />
-          <h1 className="text-xl font-bold text-gray-800">
+          <h1 className="ml-5 text-xl font-bold text-gray-800">
             Sistema de Distribuição de Fraldas
           </h1>
         </Link>

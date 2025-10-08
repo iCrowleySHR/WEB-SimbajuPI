@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import Logo from "../../../components/Logo"
 
 export default function NavBarLandingPage() {
     return (
@@ -8,8 +9,8 @@ export default function NavBarLandingPage() {
                     <div className="flex justify-between items-center">
                         <Link to="/">
                             <div className="flex items-center space-x-3 ">
-                                <i className="fas fa-heartbeat text-blue-600 text-2xl"></i>
-                                <h1 className="text-xl font-bold text-gray-800">Sistema de Distribuição de Fraldas</h1>
+                                <Logo size={50} />
+                                <h1 className="ml-5 text-xl font-bold text-gray-800">Sistema de Distribuição de Fraldas</h1>
                             </div>
                         </Link>
                     </div>

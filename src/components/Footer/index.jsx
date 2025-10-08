@@ -1,11 +1,12 @@
 
+import Logo from "../Logo";
 export default function Footer() {
     return(
         <>
             <footer className="bg-gray-800 text-white py-8  ">
                 <div className="container mx-auto px-4 text-center">
                     <div className="mb-4">
-                        <i className="fas fa-heartbeat text-3xl text-blue-400 mb-2"></i>
+                        <Logo size={80} />
                         <p className="text-lg font-semibold">Secretaria Municipal de Saúde</p>
                     </div>
                     <p className="text-gray-400">Sistema de Distribuição de Fraldas - Cuidando com dignidade</p>

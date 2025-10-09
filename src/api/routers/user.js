@@ -5,5 +5,7 @@ export const getMyData = async () => {
   return response.data;
 };
 
-
-
+export const updateUser = async (userData) => {
+  const response = await api.patch("/users/update", userData);
+  return response.data;
+} 

@@ -51,11 +51,13 @@ function App() {
                     {/* Almoxarifado */}
                     <Route path="/almoxarifado"  element={<PrivateRoute roles={['warehouse']} />}>
                         <Route index element={<WarehouseHome />} />
+                        <Route path="configuracoes" element={<GeneralSettings />} />
                     </Route>
 
                     {/* UBS */}
                     <Route path="/ubs"  element={<PrivateRoute roles={['ubs']} />}>
                         <Route index element={<UbsHome />} />
+                        <Route path="configuracoes" element={<GeneralSettings />} />
                     </Route>
 
                     {/* Beneficiário */}

@@ -7,6 +7,7 @@ import { useAuth } from "../../../hook/useAuth";
 import { useUser } from "../../../contexts/UserContext";
 import { changePasswordTemporary } from '../../../api/routers/auth';
 import getErrorMessage from '../../../utils/getErrorMessage';
+import routeTable from '../../../utils/routeTable';
 
 export default function Login() {
     const [cpf, setCpf] = useState('');
@@ -27,15 +28,8 @@ export default function Login() {
     const { login } = useAuth();
 
 
-    const redirectByRole = (role) => {
-        const routes = {
-            beneficiary: '/beneficiario',
-            ubs: '/ubs',
-            warehouse: '/almoxarifado',
-            secretary: '/secretaria'
-        };
-        return routes[role] || '/login';
-    };
+    const redirectByRole = (role) => routeTable(role);
+
 
     useEffect(() => {
         if (!loading && user) {

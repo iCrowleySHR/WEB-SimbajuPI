@@ -1,9 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Title from "../../../../components/Title";
 import FormBox from "../../../../components/FormBox";
+import { useUser } from "../../../../contexts/UserContext";
+import translate from '../../../../utils/translate';
+import formatDate from '../../../../utils/formatDate';
+import { updateUser } from '../../../../api/routers/user'; 
 
 export default function GeneralSettings() {
-  const [email, setEmail] = useState("");
+  const { user } = useUser();
+
+  const [email, setEmail] = useState(user?.email || "");
   const [currentPassword, setCurrentPassword] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
@@ -11,59 +17,39 @@ export default function GeneralSettings() {
   const [messagePassword, setMessagePassword] = useState(null);
   const [showPasswordForm, setShowPasswordForm] = useState(false);
 
-  const userDataFromApi = {
-    name: "João Silva",
-    email: "joao.silva@email.com",
-    created_at: "2023-01-10 15:23:00",
-    updated_at: "2023-09-05 10:45:00",
-    role: "Usuário",
-  };
-
-
-  useEffect(() => {
-    setEmail(userDataFromApi.email);
-  }, []);
-
-
-  const handleEmailUpdate = () => {
+  const handleEmailUpdate = async () => {
     if (!email) {
       setMessageEmail({ type: "error", text: "Email é obrigatório." });
       return;
     }
 
-    console.log({ email });
-    setMessageEmail({ type: "success", text: "Email atualizado com sucesso!" });
+    try {
+      const response = await updateUser({ email });
+      setMessageEmail({ type: "success", text: response.message });
+    } catch (error) {
+      setMessageEmail({ type: "error", text: error.response?.data?.message || "Erro ao atualizar email." });
+    }
   };
 
-  const handlePasswordUpdate = () => {
+  const handlePasswordUpdate = async () => {
     if (!currentPassword || !password || !passwordConfirmation) {
-      setMessagePassword({
-        type: "error",
-        text: "Todos os campos de senha são obrigatórios.",
-      });
+      setMessagePassword({ type: "error", text: "Todos os campos de senha são obrigatórios." });
       return;
     }
 
-    if (password !== passwordConfirmation) {
-      setMessagePassword({
-        type: "error",
-        text: "Nova senha e confirmação não conferem.",
+    try {
+       const response = await updateUser({
+        current_password: currentPassword,
+        password,
+        password_confirmation: passwordConfirmation,
       });
-      return;
+      setMessagePassword({ type: "success", text: response.message });
+      setCurrentPassword("");
+      setPassword("");
+      setPasswordConfirmation("");
+    } catch (error) {
+      setMessagePassword({ type: "error", text: error.response?.data?.message || "Erro ao atualizar senha." });
     }
-
-    console.log({
-      current_password: currentPassword,
-      password,
-      password_confirmation: passwordConfirmation,
-    });
-
-    setMessagePassword({ type: "success", text: "Senha atualizada com sucesso!" });
-
-    setCurrentPassword("");
-    setPassword("");
-    setPasswordConfirmation("");
-    setShowPasswordForm(false);
   };
 
   return (
@@ -76,10 +62,11 @@ export default function GeneralSettings() {
 
       <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
         <h3 className="text-lg font-semibold mb-4">Informações do usuário</h3>
-        <p><strong>Nome:</strong> {userDataFromApi.name}</p>
-        <p><strong>Criado em:</strong> {userDataFromApi.created_at}</p>
-        <p><strong>Última atualização:</strong> {userDataFromApi.updated_at}</p>
-        <p><strong>Perfil:</strong> {userDataFromApi.role}</p>
+        <p><strong>Nome:</strong> {user?.name}</p>
+        <p><strong>Email:</strong> {user?.email}</p>
+        <p><strong>Criado em:</strong> {formatDate(user?.created_at)}</p>
+        <p><strong>Última atualização:</strong> {formatDate(user?.updated_at)}</p>
+        <p><strong>Perfil:</strong> {translate(user?.role)}</p>
       </div>
 
       <FormBox
@@ -104,7 +91,6 @@ export default function GeneralSettings() {
         ]}
       />
 
-      {/* --- Botão para mostrar/ocultar formulário de senha --- */}
       {!showPasswordForm ? (
         <div className="text-center mt-4">
           <button

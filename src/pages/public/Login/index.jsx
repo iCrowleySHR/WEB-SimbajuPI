@@ -5,6 +5,8 @@ import FirstAccessModalBeneficiary from '../../../components/Modal/FirstAcessMod
 import FirstAccessModalStaff from '../../../components/Modal/FirstAccessModalStaff';
 import { useAuth } from "../../../hook/useAuth";
 import { useUser } from "../../../contexts/UserContext";
+import { changePasswordTemporary } from '../../../api/routers/auth';
+import getErrorMessage from '../../../utils/getErrorMessage';
 
 export default function Login() {
     const [cpf, setCpf] = useState('');
@@ -44,6 +46,12 @@ export default function Login() {
     // --- Login Beneficiário ---
     const loginBeneficiary = async (event) => {
         event.preventDefault();
+
+        if (!cpf || !password) {
+            setBeneficiaryType('error');
+            setBeneficiaryMessage('CPF e senha são obrigatórios!');
+            return;
+        }
         try {
             const response = await login({ cpf, password });
             setBeneficiaryType('success');
@@ -51,14 +59,18 @@ export default function Login() {
             navigate(redirectByRole(response.role));
         } catch (error) {
             setBeneficiaryType('error');
-            setBeneficiaryMessage(error.response?.data?.errors || 'Erro ao logar. Verifique seus dados.');
-            console.log('Erro ao logar (beneficiário):', error);
+            setBeneficiaryMessage(getErrorMessage(error));
         }
     };
 
     // --- Login Administrativo ---
     const loginStaff = async (event) => {
         event.preventDefault();
+        if (!email || !staffPassword) {
+            setStaffType('error');
+            setStaffMessage('Email e senha são obrigatórios!');
+            return;
+        }
         try {
             const response = await login({ email, password: staffPassword });
             setStaffType('success');
@@ -66,10 +78,50 @@ export default function Login() {
             navigate(redirectByRole(response.role));
         } catch (error) {
             setStaffType('error');
-            setStaffMessage(error.response?.data?.errors || 'Erro ao logar. Verifique seus dados.');
-            console.log('Erro ao logar (administrativo):', error);
+            setStaffMessage(getErrorMessage(error));
         }
     };
+
+    // --- Handle Primeiro Acesso (Beneficiário) ---
+    const handleFirstAccessBeneficiary = async ({ cpf, password: tempPassword, new_password: newPassword, new_password_confirmation: newPasswordConfirmation }) => {
+        try {
+            const response = await changePasswordTemporary({
+                cpf,
+                password: tempPassword,
+                new_password: newPassword,
+                new_password_confirmation: newPasswordConfirmation
+            });
+
+            setBeneficiaryType('success');
+            setBeneficiaryMessage(response.message || 'Senha redefinida com sucesso! Faça login.');
+            setShowModalBeneficiary(false);
+        } catch (error) {
+            setBeneficiaryType('error');
+            setBeneficiaryMessage(getErrorMessage(error));
+            setShowModalBeneficiary(false);
+        }
+    };
+
+    // --- Handle Primeiro Acesso (Administrativo) ---
+    const handleFirstAccessStaff = async ({ email, password: tempPassword, new_password: newPassword, new_password_confirmation: newPasswordConfirmation }) => {
+        try {
+            const response = await changePasswordTemporary({
+                email,
+                password: tempPassword,
+                new_password: newPassword,
+                new_password_confirmation: newPasswordConfirmation
+            });
+
+            setStaffType('success');
+            setStaffMessage(response.message || 'Senha redefinida com sucesso! Faça login.');
+            setShowModalStaff(false);
+        } catch (error) {
+            setStaffType('error');
+            setStaffMessage(getErrorMessage(error));
+            setShowModalStaff(false);
+        }
+    };
+
 
     if (loading) {
         return (
@@ -130,19 +182,13 @@ export default function Login() {
             <FirstAccessModalBeneficiary
                 isOpen={showModalBeneficiary}
                 onClose={() => setShowModalBeneficiary(false)}
-                onSubmit={({ cpf, tempPassword, newPassword }) => {
-                    console.log(cpf, tempPassword, newPassword);
-                    setShowModalBeneficiary(false);
-                }}
+                onSubmit={handleFirstAccessBeneficiary}
             />
 
             <FirstAccessModalStaff
                 isOpen={showModalStaff}
                 onClose={() => setShowModalStaff(false)}
-                onSubmit={({ email, tempPassword, newPassword }) => {
-                    console.log(email, tempPassword, newPassword);
-                    setShowModalStaff(false);
-                }}
+                onSubmit={handleFirstAccessStaff}
             />
         </>
     );

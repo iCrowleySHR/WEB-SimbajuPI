@@ -7,6 +7,7 @@ export default function FirstAccessModalStaff({ isOpen, onClose, onSubmit }) {
   const [email, setEmail] = useState("");
   const [tempPassword, setTempPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
+  const [newPasswordConfirmation, setNewPasswordConfirmation] = useState("");
 
   const [alertMessage, setAlertMessage] = useState("");
   const [alertType, setAlertType] = useState("error");
@@ -16,6 +17,7 @@ export default function FirstAccessModalStaff({ isOpen, onClose, onSubmit }) {
     if (isOpen) {
       setAlertMessage("");
       setEmail("");
+      setNewPasswordConfirmation("");
       setTempPassword("");
       setNewPassword("");
       setAlertType("error");
@@ -44,8 +46,13 @@ export default function FirstAccessModalStaff({ isOpen, onClose, onSubmit }) {
     setAlertMessage("");
 
     // Envia dados para o handler externo
-    onSubmit({ email, tempPassword, newPassword });
-    console.log("Submitted:", { email, tempPassword, newPassword });
+    onSubmit({
+      email,
+      password: tempPassword,
+      new_password: newPassword,
+      new_password_confirmation: newPasswordConfirmation
+    });
+
 
     // Opcional: fechar modal automaticamente
     // onClose();
@@ -92,6 +99,18 @@ export default function FirstAccessModalStaff({ isOpen, onClose, onSubmit }) {
                   type="password"
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
+                  placeholder="Digite sua nova senha"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Nova Senha (confirmação)
+                </label>
+                <input
+                  type="password"
+                  value={newPasswordConfirmation}
+                  onChange={(e) => setNewPasswordConfirmation(e.target.value)}
                   placeholder="Digite sua nova senha"
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                 />

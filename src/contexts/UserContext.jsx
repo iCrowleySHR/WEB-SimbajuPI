@@ -19,7 +19,6 @@ export const UserProvider = ({ children }) => {
       const response = await getMyData(); 
       setUser(response.data);
     } catch (err) {
-      console.error("Erro ao carregar usuário:", err);
       setUser(null);
     } finally {
       setLoading(false);

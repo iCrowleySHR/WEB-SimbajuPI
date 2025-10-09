@@ -2,22 +2,21 @@ import { useEffect, useState } from "react";
 import Alert from "../../Alert";
 import { cpf as cpfValidator } from "cpf-cnpj-validator";
 
-// onSubmit envia para login.jsx para fazer as requisições da api
-
 export default function FirstAccessModalBeneficiary({ isOpen, onClose, onSubmit }) {
   const [cpf, setCpf] = useState("");
   const [tempPassword, setTempPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
+  const [newPasswordConfirmation, setNewPasswordConfirmation] = useState("");
 
   const [alertMessage, setAlertMessage] = useState("");
   const [alertType, setAlertType] = useState("error");
 
-  // Limpa campos e alertas sempre que o modal abre
   useEffect(() => {
     if (isOpen) {
       setCpf("");
       setTempPassword("");
       setNewPassword("");
+      setNewPasswordConfirmation("");
       setAlertMessage("");
       setAlertType("error");
     }
@@ -26,26 +25,27 @@ export default function FirstAccessModalBeneficiary({ isOpen, onClose, onSubmit 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Validação dos campos obrigatórios
     if (!cpf || !tempPassword || !newPassword) {
       setAlertType("error");
       setAlertMessage("Todos os campos são obrigatórios!");
       return;
     }
 
-    // Validação do CPF
     if (!cpfValidator.isValid(cpf)) {
       setAlertType("error");
       setAlertMessage("CPF inválido!");
       return;
     }
 
-    // Limpa alerta
     setAlertMessage("");
 
-    // Envia dados para o handler externo
-    onSubmit({ cpf, tempPassword, newPassword });
-    console.log("Submitted:", { cpf, tempPassword, newPassword });
+    onSubmit({
+      cpf,
+      password: tempPassword,
+      new_password: newPassword,
+      new_password_confirmation: newPasswordConfirmation
+    });
+
   };
 
   return (
@@ -89,6 +89,18 @@ export default function FirstAccessModalBeneficiary({ isOpen, onClose, onSubmit 
                   type="password"
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
+                  placeholder="Digite sua nova senha"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Nova Senha (confirmação)
+                </label>
+                <input
+                  type="password"
+                  value={newPasswordConfirmation}
+                  onChange={(e) => setNewPasswordConfirmation(e.target.value)}
                   placeholder="Digite sua nova senha"
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                 />

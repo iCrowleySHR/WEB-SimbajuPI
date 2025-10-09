@@ -14,7 +14,6 @@ export const logout = async () => {
 
 export const changePasswordTemporary = async (data) => {
   const response = await api.post("/auth/temporary-password", data);
-  localStorage.removeItem("token");
   return response.data;
 };
 

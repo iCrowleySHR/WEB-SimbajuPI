@@ -21,6 +21,7 @@ import ValidateBeneficiary from "./pages/auth/secretary/ValidateBeneficiary";
 import BeneficiaryDetails from "./pages/auth/secretary/BeneficiaryDetails";
 import ReschedulePickup from "./pages/auth/beneficiary/ReschedulePickup";
 import PrivateRoute from "./components/PrivateRoute";
+import BeneficiarySettings from "./pages/auth/beneficiary/BeneficiarySettings";
 
 function App() {
     return (
@@ -66,6 +67,7 @@ function App() {
                         <Route path="historico" element={<BeneficiaryHistory />} />
                         <Route path="cancelar-retirada" element={<CancelWithdrawal />} />
                         <Route path="reagendar-retirada" element={<ReschedulePickup />} />
+                        <Route path="configuracoes" element={<BeneficiarySettings />} />
                     </Route>
                 </Route>
             </Routes>

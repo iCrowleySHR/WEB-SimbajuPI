@@ -3,9 +3,11 @@ import { getMyLocate, updateLocate } from "../api/routers/locate";
 import { useLoading } from "../contexts/LoadingContext";
 import getErrorMessage from "../utils/getErrorMessage";
 import { getAddressByCep } from "../utils/cepUtils";
+import { sanitizeCep } from "../utils/sanitize";
+import { maskCep } from "../utils/mask";
 
 export function useLocateSettings() {
-  const [cep, setCepState] = useState("");
+  const [cepState, setCepState] = useState("");
   const [streetName, setStreetName] = useState("");
   const [numberHouse, setNumberHouse] = useState("");
   const [neighborhood, setNeighborhood] = useState("");
@@ -19,7 +21,7 @@ export function useLocateSettings() {
       showLoading();
       try {
         const data = await getMyLocate();
-        setCepState(data.cep ?? "");
+        setCepState(maskCep(data.cep) ?? "");
         setStreetName(data.streetName ?? "");
         setNumberHouse(data.numberHouse != null ? String(data.numberHouse) : "");
         setNeighborhood(data.neighborhood ?? "");
@@ -33,11 +35,12 @@ export function useLocateSettings() {
     fetchLocation();
   }, []);
 
+
   const handleLocateUpdate = async () => {
     showLoading();
     try {
       await updateLocate({
-        cep,
+        cep: sanitizeCep(cepState),
         streetName,
         numberHouse: Number(numberHouse),
         neighborhood,
@@ -55,14 +58,14 @@ export function useLocateSettings() {
     setCepState(value);
     const address = await getAddressByCep(value);
     if (address) {
-      setStreetName(address.streetName);
-      setNeighborhood(address.neighborhood);
-      setCity(address.city);
+      setStreetName(address.streetName ?? "");
+      setNeighborhood(address.neighborhood ?? "");
+      setCity(address.city ?? "");
     }
   };
 
   return {
-    cep, setCep,
+    cep: cepState, setCep,
     streetName, setStreetName,
     numberHouse, setNumberHouse,
     neighborhood, setNeighborhood,

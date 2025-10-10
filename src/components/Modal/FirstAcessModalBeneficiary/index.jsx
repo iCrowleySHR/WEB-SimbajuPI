@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import Alert from "../../Alert";
 import { cpf as cpfValidator } from "cpf-cnpj-validator";
+import { maskCpf } from "../../../utils/mask";
+import { sanitizeCpf } from "../../../utils/sanitize";
 
 export default function FirstAccessModalBeneficiary({ isOpen, onClose, onSubmit }) {
   const [cpf, setCpf] = useState("");
@@ -40,7 +42,7 @@ export default function FirstAccessModalBeneficiary({ isOpen, onClose, onSubmit 
     setAlertMessage("");
 
     onSubmit({
-      cpf,
+      cpf: sanitizeCpf(cpf),
       password: tempPassword,
       new_password: newPassword,
       new_password_confirmation: newPasswordConfirmation
@@ -64,7 +66,7 @@ export default function FirstAccessModalBeneficiary({ isOpen, onClose, onSubmit 
                 <input
                   type="text"
                   value={cpf}
-                  onChange={(e) => setCpf(e.target.value)}
+                  onChange={(e) => setCpf(maskCpf(e.target.value))}
                   placeholder="000.000.000-00"
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                 />

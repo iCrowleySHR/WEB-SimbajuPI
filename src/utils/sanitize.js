@@ -12,3 +12,7 @@ export function sanitizeCpf(cpf) {
   const digits = sanitizeNumeric(cpf);
   return digits.slice(0, 11); // opcional: limita a 11 chars
 }
+
+export function sanitizeLetters(value) {
+  return (value || "").toString().replace(/[^a-zA-ZÀ-ÿ\s]+/g, "");
+}

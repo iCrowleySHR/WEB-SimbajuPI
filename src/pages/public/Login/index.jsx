@@ -5,6 +5,7 @@ import FirstAccessModalBeneficiary from '../../../components/Modal/FirstAcessMod
 import FirstAccessModalStaff from '../../../components/Modal/FirstAccessModalStaff';
 import { useUser } from "../../../contexts/UserContext";
 import useLogin from '../../../hook/useLogin';
+import { maskCpf } from '../../../utils/mask';
 
 export default function Login() {
     const { user, loading } = useUser();
@@ -40,7 +41,7 @@ export default function Login() {
                             icon="fas fa-user"
                             color="blue"
                             fields={[
-                                { label: "CPF", value: cpf, onChange: e => setCpf(e.target.value), type: "text", placeholder: "000.000.000-00" },
+                                { label: "CPF", value: cpf, onChange: e => setCpf(maskCpf(e.target.value)), type: "text", placeholder: "000.000.000-00" },
                                 { label: "Senha", value: password, onChange: e => setPassword(e.target.value), type: "password", placeholder: "Digite sua senha" },
                             ]}
                             message={{ type: beneficiaryType, text: beneficiaryMessage }}

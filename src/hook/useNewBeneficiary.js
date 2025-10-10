@@ -3,6 +3,7 @@ import { createBeneficiary } from "../api/routers/beneficiary";
 import getErrorMessage from '../utils/getErrorMessage';
 import { useLoading } from "../contexts/LoadingContext";
 import { getAddressByCep } from "../utils/cepUtils";
+import { sanitizeCep, sanitizeCpf } from "../utils/sanitize";
 
 export function useNewBeneficiary() {
   const [name, setName] = useState("");
@@ -37,9 +38,9 @@ export function useNewBeneficiary() {
       setMessage({ type: "error", text: "Por favor, preencha todos os campos obrigatórios." });
       return;
     }
-    const data = { nameResponsible: nameResponsible || null, cpf, emailResponsible: emailResponsible || null,
+    const data = { nameResponsible: nameResponsible || null, cpf: sanitizeCpf(cpf), emailResponsible: emailResponsible || null,
       telephone, telephoneResponsible: telephoneResponsible || null, birthDate, typeBenefit,
-      prescriptionTimeDays, prescriptionQuantity, cep, streetName, numberHouse, neighborhood, city, name, email };
+      prescriptionTimeDays, prescriptionQuantity, cep: sanitizeCep(cep), streetName, numberHouse, neighborhood, city, name, email };
 
     try {
       showLoading();

@@ -6,6 +6,7 @@ import routeTable from '../utils/routeTable';
 import { useAuth } from "../hook/useAuth";
 import { changePasswordTemporary } from '../api/routers/auth';
 import getErrorMessage from '../utils/getErrorMessage';
+import { sanitizeCpf } from "../utils/sanitize";
 
 export default function useLogin(user, loading) {
     const navigate = useNavigate();
@@ -40,7 +41,7 @@ export default function useLogin(user, loading) {
         }
         try {
             showLoading();
-            const response = await login({ cpf, password });
+            const response = await login({ cpf: sanitizeCpf(cpf), password });
             setBeneficiaryType('success');
             setBeneficiaryMessage(response.message || 'Login realizado com sucesso!');
             if (response) navigate(redirectByRole(response.role));

@@ -54,8 +54,6 @@ export default function FirstAccessModalStaff({ isOpen, onClose, onSubmit }) {
     });
 
 
-    // Opcional: fechar modal automaticamente
-    // onClose();
   };
 
   return (

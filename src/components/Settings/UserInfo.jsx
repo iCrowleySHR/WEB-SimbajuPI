@@ -1,6 +1,5 @@
-import React from "react";
-import formatDate from '../utils/formatDate';
-import translate from '../utils/translate';
+import formatDate from '../../utils/formatDate';
+import translate from '../../utils/translate';
 
 export default function UserInfo({ user }) {
   return (

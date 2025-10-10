@@ -2,9 +2,9 @@ import { useState } from "react";
 import Title from "../../../../components/Title";
 import { useUser } from "../../../../contexts/UserContext";
 import { useUserSettings } from "../../../../hook/useUserSettings";
-import UserInfo from "../../../../components/UserInfo";
-import EmailForm from "../../../../components/EmailForm";
-import PasswordForm from "../../../../components/PasswordForm";
+import UserInfo from "../../../../components/Settings/userInfo";
+import EmailForm from "../../../../components/Settings/EmailForm";
+import PasswordForm from "../../../../components/Settings/PasswordForm";
 
 export default function GeneralSettings() {
   const { user } = useUser();

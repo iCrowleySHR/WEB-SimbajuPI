@@ -1,57 +1,28 @@
-import { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import LoginBox from '../../../components/LoginBox';
 import FirstAccessModalBeneficiary from '../../../components/Modal/FirstAcessModalBeneficiary';
 import FirstAccessModalStaff from '../../../components/Modal/FirstAccessModalStaff';
 import { useUser } from "../../../contexts/UserContext";
-import routeTable from '../../../utils/routeTable';
-import useLoginApi from '../../../hook/useLogin';
-import { useLoading } from "../../../contexts/LoadingContext";
+import useLogin from '../../../hook/useLogin';
 
 export default function Login() {
-    const [cpf, setCpf] = useState('');
-    const [password, setPassword] = useState('');
-    const [email, setEmail] = useState('');
-    const [staffPassword, setStaffPassword] = useState('');
-
+    const { user, loading } = useUser();
     const [showModalBeneficiary, setShowModalBeneficiary] = useState(false);
     const [showModalStaff, setShowModalStaff] = useState(false);
 
-    const navigate = useNavigate();
-    const { user, loading } = useUser();
-    const { showLoading, hideLoading } = useLoading();
-
-    const { beneficiaryMessage, beneficiaryType, staffMessage, staffType, loginBeneficiary, loginStaff, firstAccessBeneficiary, firstAccessStaff } = useLoginApi();
-
-    const redirectByRole = (role) => routeTable(role);
-
-    useEffect(() => {
-        if (!loading && user) {
-            navigate(redirectByRole(user.role));
-        }
-    }, [user, loading]);
-
-    const handleLoginBeneficiary = async (event) => {
-        event.preventDefault();
-        try {
-            showLoading();
-            const response = await loginBeneficiary({ cpf, password });
-            if (response) navigate(redirectByRole(response.role));
-        } finally {
-            hideLoading();
-        }
-    };
-
-    const handleLoginStaff = async (event) => {
-        event.preventDefault();
-        try {
-            showLoading();
-            const response = await loginStaff({ email, password: staffPassword });
-            if (response) navigate(redirectByRole(response.role));
-        } finally {
-            hideLoading();
-        }
-    };
+    const {
+        cpf, setCpf,
+        password, setPassword,
+        email, setEmail,
+        staffPassword, setStaffPassword,
+        beneficiaryMessage, beneficiaryType,
+        staffMessage, staffType,
+        submitBeneficiary,
+        submitStaff,
+        firstAccessBeneficiary,
+        firstAccessStaff
+    } = useLogin(user, loading);
 
     return (
         <>
@@ -73,7 +44,7 @@ export default function Login() {
                                 { label: "Senha", value: password, onChange: e => setPassword(e.target.value), type: "password", placeholder: "Digite sua senha" },
                             ]}
                             message={{ type: beneficiaryType, text: beneficiaryMessage }}
-                            onSubmit={handleLoginBeneficiary}
+                            onSubmit={submitBeneficiary}
                             onFirstAccessClick={() => setShowModalBeneficiary(true)}
                             disabled={loading}
                         />
@@ -87,7 +58,7 @@ export default function Login() {
                                 { label: "Senha", value: staffPassword, onChange: e => setStaffPassword(e.target.value), type: "password", placeholder: "Digite sua senha" },
                             ]}
                             message={{ type: staffType, text: staffMessage }}
-                            onSubmit={handleLoginStaff}
+                            onSubmit={submitStaff}
                             onFirstAccessClick={() => setShowModalStaff(true)}
                             disabled={loading}
                         />

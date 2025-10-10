@@ -5,8 +5,10 @@ import { useUserSettings } from "../../../../hook/useUserSettings";
 import UserInfo from "../../../../components/Settings/userInfo";
 import EmailForm from "../../../../components/Settings/EmailForm";
 import PasswordForm from "../../../../components/Settings/PasswordForm";
+import LocateForm from "../../../../components/Settings/BeneficiarySettings/LocateForm";
+import { useLocateSettings } from "../../../../hook/useLocateSettings";
 
-export default function GeneralSettings() {
+export default function BeneficiarySettings() {
   const { user } = useUser();
   const [showPasswordForm, setShowPasswordForm] = useState(false);
 
@@ -19,7 +21,15 @@ export default function GeneralSettings() {
     handleEmailUpdate, handlePasswordUpdate
   } = useUserSettings(user?.email);
 
-
+  const {
+    cep, setCep,
+    streetName, setStreetName,
+    numberHouse, setNumberHouse,
+    neighborhood, setNeighborhood,
+    city, setCity,
+    messageLocate,
+    handleLocateUpdate
+  } = useLocateSettings(user?.id);
 
   return (
     <>
@@ -36,6 +46,21 @@ export default function GeneralSettings() {
         setEmail={setEmail}
         handleEmailUpdate={handleEmailUpdate}
         messageEmail={messageEmail}
+      />
+
+      <LocateForm
+        cep={cep}
+        setCep={setCep}
+        streetName={streetName}
+        setStreetName={setStreetName}
+        numberHouse={numberHouse}
+        setNumberHouse={setNumberHouse}
+        neighborhood={neighborhood}
+        setNeighborhood={setNeighborhood}
+        city={city}
+        setCity={setCity}
+        handleLocateUpdate={handleLocateUpdate}
+        messageLocate={messageLocate}
       />
 
       {!showPasswordForm ? (

@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { updateUser } from '../api/routers/user';
+import getErrorMessage from "../utils/getErrorMessage";
+import { useLoading } from "../contexts/LoadingContext";
 
 export function useUserSettings(initialEmail = "") {
   const [email, setEmail] = useState(initialEmail);
@@ -9,6 +11,8 @@ export function useUserSettings(initialEmail = "") {
   const [messageEmail, setMessageEmail] = useState(null);
   const [messagePassword, setMessagePassword] = useState(null);
 
+  const { showLoading, hideLoading } = useLoading();
+
   const handleEmailUpdate = async () => {
     if (!email) {
       setMessageEmail({ type: "error", text: "Email é obrigatório." });
@@ -16,10 +20,13 @@ export function useUserSettings(initialEmail = "") {
     }
 
     try {
+      showLoading();
       const response = await updateUser({ email });
       setMessageEmail({ type: "success", text: response.message });
+      hideLoading();
     } catch (error) {
-      setMessageEmail({ type: "error", text: error.response?.data?.message || "Erro ao atualizar email." });
+      setMessageEmail(getErrorMessage(error));
+      hideLoading();
     }
   };
 
@@ -30,6 +37,7 @@ export function useUserSettings(initialEmail = "") {
     }
 
     try {
+      showLoading();
       const response = await updateUser({
         current_password: currentPassword,
         password,
@@ -39,8 +47,10 @@ export function useUserSettings(initialEmail = "") {
       setCurrentPassword("");
       setPassword("");
       setPasswordConfirmation("");
+      hideLoading();
     } catch (error) {
-      setMessagePassword({ type: "error", text: error.response?.data?.message || "Erro ao atualizar senha." });
+      setMessagePassword(getErrorMessage(error));
+      hideLoading();
     }
   };
 

@@ -11,7 +11,7 @@ import WarehouseHome from "./pages/auth/warehouse/Home";
 import GeneralSettings from "./pages/auth/shared/GeneralSettings";
 import UbsHome from "./pages/auth/ubs/Home";
 import BeneficiaryHome from "./pages/auth/beneficiary/Home";
-import SecretaryNewBeneficiary from "./pages/auth/secretary/SecretaryNewBeneficiary";
+import NewBeneficiaryAccount from "./pages/auth/secretary/NewBeneficiaryAccount";
 import NewUbsAccount from "./pages/auth/secretary/NewUbsAccount";
 import NewWareAccount from "./pages/auth/secretary/NewWareAccount";
 import BeneficiartyList from "./pages/auth/secretary/BeneficiaryList";
@@ -40,7 +40,7 @@ function App() {
                     {/* Secretaria */}
                     <Route path="/secretaria" element={<PrivateRoute roles={['secretary']} />}>
                         <Route index element={<SecretaryHome />} />
-                        <Route path="novo-beneficiario" element={<SecretaryNewBeneficiary />} />
+                        <Route path="novo-beneficiario" element={<NewBeneficiaryAccount />} />
                         <Route path="novo-ubs" element={<NewUbsAccount />} />
                         <Route path="novo-almoxarifado" element={<NewWareAccount />} />
                         <Route path="lista-beneficiarios" element={<BeneficiartyList />} />

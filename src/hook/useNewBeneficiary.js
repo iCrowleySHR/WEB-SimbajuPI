@@ -3,7 +3,7 @@ import { createBeneficiary } from "../api/routers/beneficiary";
 import getErrorMessage from '../utils/getErrorMessage';
 import { useLoading } from "../contexts/LoadingContext";
 import { getAddressByCep } from "../utils/cepUtils";
-import { sanitizeCep, sanitizeCpf } from "../utils/sanitize";
+import { sanitizeCep, sanitizeCpf, sanitizeNumeric } from "../utils/sanitize";
 
 export function useNewBeneficiary() {
   const [name, setName] = useState("");
@@ -39,7 +39,7 @@ export function useNewBeneficiary() {
       return;
     }
     const data = { nameResponsible: nameResponsible || null, cpf: sanitizeCpf(cpf), emailResponsible: emailResponsible || null,
-      telephone, telephoneResponsible: telephoneResponsible || null, birthDate, typeBenefit,
+      telephone : sanitizeNumeric(telephone),  telephoneResponsible: sanitizeNumeric(telephoneResponsible) || null, birthDate, typeBenefit,
       prescriptionTimeDays, prescriptionQuantity, cep: sanitizeCep(cep), streetName, numberHouse, neighborhood, city, name, email };
 
     try {

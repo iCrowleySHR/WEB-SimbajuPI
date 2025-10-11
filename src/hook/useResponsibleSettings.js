@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { sanitizeNumeric, sanitizeLetters } from "../utils/sanitize";
 import { getMyBeneficiaryData, updateResponsibleData } from "../api/routers/beneficiary";
 import getErrorMessage from "../utils/getErrorMessage";
+import { maskTelephone } from "../utils/mask";
 
 export function useResponsibleSettings(userId) {
   const [nameResponsible, setNameResponsible] = useState("");
@@ -10,7 +11,6 @@ export function useResponsibleSettings(userId) {
   const [telephoneResponsible, setTelephoneResponsible] = useState("");
   const [messageResponsible, setMessageResponsible] = useState(null);
   const [loading, setLoading] = useState(false);
-
 
   const [originalData, setOriginalData] = useState({});
 
@@ -26,8 +26,8 @@ export function useResponsibleSettings(userId) {
 
         setNameResponsible(data.nameResponsible || "");
         setEmailResponsible(data.emailResponsible || "");
-        setTelephone(data.telephone || "");
-        setTelephoneResponsible(data.telephoneResponsible || "");
+        setTelephone(maskTelephone(data.telephone) || "");
+        setTelephoneResponsible(maskTelephone(data.telephoneResponsible) || "");
       } catch (error) {
         setMessageResponsible({ type: "error", text: getErrorMessage(error) });
       } finally {
@@ -48,16 +48,17 @@ export function useResponsibleSettings(userId) {
       setLoading(true);
 
       const payload = {};
+
       if (nameResponsible !== originalData.nameResponsible) {
         payload.nameResponsible = sanitizeLetters(nameResponsible);
       }
       if (emailResponsible !== originalData.emailResponsible) {
         payload.emailResponsible = emailResponsible;
       }
-      if (telephone !== originalData.telephone) {
+      if (sanitizeNumeric(telephone) !== sanitizeNumeric(originalData.telephone)) {
         payload.telephone = sanitizeNumeric(telephone);
       }
-      if (telephoneResponsible !== originalData.telephoneResponsible) {
+      if (sanitizeNumeric(telephoneResponsible) !== sanitizeNumeric(originalData.telephoneResponsible)) {
         payload.telephoneResponsible = sanitizeNumeric(telephoneResponsible);
       }
 
@@ -66,7 +67,7 @@ export function useResponsibleSettings(userId) {
         return;
       }
 
-      const response = await updateResponsibleData(payload);
+      await updateResponsibleData(payload);
 
       setOriginalData(prev => ({ ...prev, ...payload }));
 

@@ -1,7 +1,7 @@
 import React from "react";
 import FormBox from "../FormBox";
 import { sanitizeCep, sanitizeCpf, sanitizeNumeric, sanitizeLetters } from "../../utils/sanitize";
-import { maskCep, maskCpf } from "../../utils/mask";
+import { maskCep, maskCpf, maskTelephone } from "../../utils/mask";
 
 export default function BeneficiaryForm(props) {
   const {
@@ -73,14 +73,14 @@ export default function BeneficiaryForm(props) {
         { 
           label: "Telefone", 
           value: telephone, 
-          onChange: e => setTelephone(sanitizeNumeric(e.target.value)), 
+          onChange: e => setTelephone(maskTelephone(e.target.value)), 
           type: "text", 
           placeholder: "11999999999" 
         },
         { 
           label: "Telefone Responsável (opcional)", 
           value: telephoneResponsible, 
-          onChange: e => setTelephoneResponsible(sanitizeNumeric(e.target.value)), 
+          onChange: e => setTelephoneResponsible(maskTelephone(e.target.value)), 
           type: "text", 
           placeholder: "11999999999", 
           required: false 

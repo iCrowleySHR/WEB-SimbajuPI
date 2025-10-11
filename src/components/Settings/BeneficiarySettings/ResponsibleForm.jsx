@@ -1,6 +1,7 @@
 import React from "react";
 import FormBox from "../../FormBox";
 import { sanitizeNumeric, sanitizeLetters } from "../../../utils/sanitize";
+import { maskTelephone } from "../../../utils/mask";
 
 export default function ResponsibleForm({
   emailResponsible, setEmailResponsible,
@@ -14,7 +15,7 @@ export default function ResponsibleForm({
     <FormBox
       type="Atualizar Responsável/Dados de contato"
       icon="fas fa-user"
-      color="green"
+      color="blue"
       onSubmit={handleResponsibleUpdate}
       message={messageResponsible}
       infoBox={{
@@ -46,7 +47,7 @@ export default function ResponsibleForm({
           label: "Telefone (Seu telefone)", 
           type: "text", 
           value: telephone, 
-          onChange: (e) => setTelephone(sanitizeNumeric(e.target.value)), 
+          onChange: (e) => setTelephone(maskTelephone(e.target.value)), 
           placeholder: "Digite o telefone", 
           required: true 
         },
@@ -54,7 +55,7 @@ export default function ResponsibleForm({
           label: "Telefone do Responsável", 
           type: "text", 
           value: telephoneResponsible, 
-          onChange: (e) => setTelephoneResponsible(sanitizeNumeric(e.target.value)), 
+          onChange: (e) => setTelephoneResponsible(maskTelephone(e.target.value)), 
           placeholder: "Digite o telefone do responsável", 
           required: true 
         },

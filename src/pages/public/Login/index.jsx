@@ -27,8 +27,6 @@ export default function Login() {
     const beneficiaryHook = useFirstAccessModal("beneficiary");
     const staffHook = useFirstAccessModal("staff");
 
-
-
     return (
         <>
             <div className="container mx-auto px-4 py-12">

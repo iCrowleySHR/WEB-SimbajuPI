@@ -7,6 +7,8 @@ import EmailForm from "../../../../components/Settings/EmailForm";
 import PasswordForm from "../../../../components/Settings/PasswordForm";
 import LocateForm from "../../../../components/Settings/BeneficiarySettings/LocateForm";
 import { useLocateSettings } from "../../../../hook/useLocateSettings";
+import ResponsibleForm from "../../../../components/Settings/BeneficiarySettings/ResponsibleForm";
+import { useResponsibleSettings } from "../../../../hook/useResponsibleSettings";
 
 export default function BeneficiarySettings() {
   const { user } = useUser();
@@ -30,6 +32,19 @@ export default function BeneficiarySettings() {
     messageLocate,
     handleLocateUpdate
   } = useLocateSettings(user?.id);
+
+  const {
+    nameResponsible,
+    setNameResponsible,
+    emailResponsible,
+    setEmailResponsible,
+    telephone,
+    setTelephone,
+    telephoneResponsible,
+    setTelephoneResponsible,
+    messageResponsible,
+    handleResponsibleUpdate,
+  } = useResponsibleSettings(user?.id);
 
   return (
     <>
@@ -61,6 +76,19 @@ export default function BeneficiarySettings() {
         setCity={setCity}
         handleLocateUpdate={handleLocateUpdate}
         messageLocate={messageLocate}
+      />
+
+      <ResponsibleForm
+        nameResponsible={nameResponsible}
+        setNameResponsible={setNameResponsible}
+        emailResponsible={emailResponsible}
+        setEmailResponsible={setEmailResponsible}
+        telephone={telephone}
+        setTelephone={setTelephone}
+        telephoneResponsible={telephoneResponsible}
+        setTelephoneResponsible={setTelephoneResponsible}
+        handleResponsibleUpdate={handleResponsibleUpdate}
+        messageResponsible={messageResponsible}
       />
 
       {!showPasswordForm ? (

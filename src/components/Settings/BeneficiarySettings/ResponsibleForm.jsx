@@ -12,7 +12,7 @@ export default function ResponsibleForm({
 }) {
   return (
     <FormBox
-      type="Atualizar Responsável"
+      type="Atualizar Responsável/Dados de contato"
       icon="fas fa-user"
       color="green"
       onSubmit={handleResponsibleUpdate}
@@ -43,7 +43,7 @@ export default function ResponsibleForm({
           required: true 
         },
         { 
-          label: "Telefone", 
+          label: "Telefone (Seu telefone)", 
           type: "text", 
           value: telephone, 
           onChange: (e) => setTelephone(sanitizeNumeric(e.target.value)), 

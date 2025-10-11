@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import LoginBox from '../../../components/LoginBox';
-import FirstAccessModalBeneficiary from '../../../components/Modal/FirstAcessModalBeneficiary';
-import FirstAccessModalStaff from '../../../components/Modal/FirstAccessModalStaff';
+import FirstAccessModal from '../../../components/Modal/FirstAccessModal';
 import { useUser } from "../../../contexts/UserContext";
 import useLogin from '../../../hook/useLogin';
+import useFirstAccessModal from '../../../hook/useFirstAccessModal';
 import { maskCpf } from '../../../utils/mask';
 
 export default function Login() {
@@ -12,6 +12,7 @@ export default function Login() {
     const [showModalBeneficiary, setShowModalBeneficiary] = useState(false);
     const [showModalStaff, setShowModalStaff] = useState(false);
 
+    // --- Login Hook ---
     const {
         cpf, setCpf,
         password, setPassword,
@@ -20,10 +21,13 @@ export default function Login() {
         beneficiaryMessage, beneficiaryType,
         staffMessage, staffType,
         submitBeneficiary,
-        submitStaff,
-        firstAccessBeneficiary,
-        firstAccessStaff
+        submitStaff
     } = useLogin(user, loading);
+
+    const beneficiaryHook = useFirstAccessModal("beneficiary");
+    const staffHook = useFirstAccessModal("staff");
+
+
 
     return (
         <>
@@ -75,16 +79,38 @@ export default function Login() {
                 </div>
             </div>
 
-            <FirstAccessModalBeneficiary
+            <FirstAccessModal
                 isOpen={showModalBeneficiary}
                 onClose={() => setShowModalBeneficiary(false)}
-                onSubmit={firstAccessBeneficiary}
+                userType="beneficiary"
+                identifier={beneficiaryHook.identifier}
+                setIdentifier={beneficiaryHook.setIdentifier}
+                tempPassword={beneficiaryHook.tempPassword}
+                setTempPassword={beneficiaryHook.setTempPassword}
+                newPassword={beneficiaryHook.newPassword}
+                setNewPassword={beneficiaryHook.setNewPassword}
+                newPasswordConfirmation={beneficiaryHook.newPasswordConfirmation}
+                setNewPasswordConfirmation={beneficiaryHook.setNewPasswordConfirmation}
+                message={beneficiaryHook.message}
+                type={beneficiaryHook.type}
+                onSubmit={beneficiaryHook.handleFirstAccess}
             />
 
-            <FirstAccessModalStaff
+            <FirstAccessModal
                 isOpen={showModalStaff}
                 onClose={() => setShowModalStaff(false)}
-                onSubmit={firstAccessStaff}
+                userType="staff"
+                identifier={staffHook.identifier}
+                setIdentifier={staffHook.setIdentifier}
+                tempPassword={staffHook.tempPassword}
+                setTempPassword={staffHook.setTempPassword}
+                newPassword={staffHook.newPassword}
+                setNewPassword={staffHook.setNewPassword}
+                newPasswordConfirmation={staffHook.newPasswordConfirmation}
+                setNewPasswordConfirmation={staffHook.setNewPasswordConfirmation}
+                message={staffHook.message}
+                type={staffHook.type}
+                onSubmit={staffHook.handleFirstAccess}
             />
         </>
     );

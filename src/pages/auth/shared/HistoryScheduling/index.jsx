@@ -5,12 +5,15 @@ import useAllScheduling from "../../../../hook/useAllScheduling";
 import { filterByNameOrCpf } from "../../../../utils/filterByNameOrCpf";
 import SearchInputBeneficiary from "../../../../components/SearchInputBeneficiary";
 import StatusFilter from "../../../../components/StatusFilters";
+import { useUser } from "../../../../contexts/UserContext";
+import translate from "../../../../utils/translate";
 
 export default function HistoryScheduling() {
   const [filterStatus, setFilterStatus] = useState("Todos");
   const [searchTerm, setSearchTerm] = useState("");
 
   const { schedulings, error, message, refetch } = useAllScheduling(filterStatus);
+  const { user } = useUser();
 
   const columns = [
     { label: "ID", accessor: "id" },
@@ -61,7 +64,7 @@ export default function HistoryScheduling() {
           actions={[
             {
               label: "Ver detalhes",
-              getPath: (row) => `/almoxarifado/retirada/detalhes/${row.id}`,
+              getPath: (row) => `/${translate(user.role).toLowerCase()}/retirada/detalhes/${row.id}`,
             },
           ]}
         />

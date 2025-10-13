@@ -18,7 +18,6 @@ export function useWithdrawalDetails(withdrawalId) {
 
       const response = await getWithdrawalById(id) || [];
 
-      console.log(response)
       setWithdrawal(response);
 
     } catch (err) {

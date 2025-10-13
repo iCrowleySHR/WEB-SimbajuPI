@@ -5,7 +5,7 @@ import Title from "../../../../components/Title";
 import CreateAdminAccountModal from "../../../../components/Modal/CreateAdminAccountModal";
 
 export default function SecretaryHome() {
-    const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
 
   const showBeneficiaryList = () => {
@@ -98,9 +98,26 @@ export default function SecretaryHome() {
           to={"/secretaria/validar-beneficio"}
         />
 
-        
+        <ActionButton
+          title="Histórico de agendamentos"
+          description="Acompanhe a lista de todos os agendamentos."
+          iconClass="fas fa-calendar-check"
+          bgColor="bg-blue-600"
+          hoverColor="hover:bg-blue-700"
+          to={"/secretaria/agendamento/lista"}
+        />
+        <ActionButton
+          title="Histórico de retiradas"
+          description="Acompanhe a lista de retiradas"
+          iconClass="fas fa-plus"
+          bgColor="bg-blue-600"
+          hoverColor="hover:bg-blue-700"
+          to={"/secretaria/retirada/lista"}
+        />
+
+
       </div>
-       <CreateAdminAccountModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <CreateAdminAccountModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </>
   );
 }

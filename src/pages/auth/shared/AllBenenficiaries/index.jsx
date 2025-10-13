@@ -46,7 +46,7 @@ export default function AllBeneficiaries() {
           actions={[
             {
               label: "Ver detalhes",
-              getPath: (row) => `/${translate(user.role)}/beneficiario/detalhes/${row.id}`,
+              getPath: (row) => `/${translate(user.role).toLowerCase()}/beneficiario/detalhes/${row.id}`,
             },
           ]}
         />

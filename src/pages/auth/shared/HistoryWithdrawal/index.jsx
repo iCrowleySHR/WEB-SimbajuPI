@@ -5,11 +5,13 @@ import useAllWitdrawals from "../../../../hook/useAllWithdrawals";
 import SearchInputBeneficiary from "../../../../components/SearchInputBeneficiary";
 import { filterByNameOrCpf } from "../../../../utils/filterByNameOrCpf";
 import { filterByDateRange } from "../../../../utils/filterByDateRange";
+import { useUser } from "../../../../contexts/UserContext";
+import translate from "../../../../utils/translate";
 
 export default function HistoryWithdrawal() {
   const [searchTerm, setSearchTerm] = useState("");
   const { withdrawals, error, message, refetch } = useAllWitdrawals();
-
+  const { user } = useUser();
   const columns = [
     { label: "ID", accessor: "id" },
     { label: "Beneficiário", accessor: "beneficiaryName" },
@@ -46,7 +48,7 @@ export default function HistoryWithdrawal() {
           actions={[
             {
               label: "Ver detalhes",
-              getPath: (row) => `/almoxarifado/retirada/detalhes/${row.id}`,
+              getPath: (row) => `/${translate(user.role).toLowerCase()}/retirada/detalhes/${row.id}`,
             },
           ]}
         />

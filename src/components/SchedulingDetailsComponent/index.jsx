@@ -2,6 +2,7 @@ import BeneficiaryDetailsComponent from "../BeneficiaryDetailsComponent";
 import DetailField from "../DetailsField/DetailField";
 import LocationDetailsComponent from "../LocateDetailsComponent";
 import StatusDetailsComponent from "../StatusDetailsComponent";
+import UserDetailsComponent from "../UserDetailsComponent";
 
 
 export default function SchedulingDetailsComponent({ scheduling }) {
@@ -45,20 +46,7 @@ export default function SchedulingDetailsComponent({ scheduling }) {
       {userWarehouse && (
         <div>
           <h2 className="text-lg font-semibold mb-3">Responsável do Almoxarifado</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-            <DetailField label="ID" value={userWarehouse.id} />
-            <DetailField label="Nome" value={userWarehouse.name} />
-            <DetailField label="Email" value={userWarehouse.email} />
-            <DetailField label="Função" value={userWarehouse.role} />
-            <DetailField
-              label="Criado em"
-              value={new Date(userWarehouse.created_at).toLocaleDateString("pt-BR")}
-            />
-            <DetailField
-              label="Atualizado em"
-              value={new Date(userWarehouse.updated_at).toLocaleDateString("pt-BR")}
-            />
-          </div>
+            <UserDetailsComponent user={userWarehouse} />
         </div>
       )}
 

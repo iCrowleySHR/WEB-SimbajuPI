@@ -37,7 +37,15 @@ export default function BeneficiaryHome() {
                     to={"/beneficiario/reagendar-retirada"}
                 />
                 <ActionButton
-                    title="Histórico"
+                    title="Histórico de agendamentos"
+                    description="Veja seus agendamentos anteriores."
+                    iconClass="fas fa-history"
+                    bgColor="bg-green-600"
+                    hoverColor="hover:bg-green-700"
+                    to="/beneficiario/historico"
+                />
+                <ActionButton
+                    title="Histórico de retiradas"
                     description="Veja suas retiradas anteriores."
                     iconClass="fas fa-history"
                     bgColor="bg-green-600"

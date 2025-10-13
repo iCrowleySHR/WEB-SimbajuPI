@@ -54,6 +54,7 @@ export default function WarehouseHome() {
           iconClass="fas fa-list"
           bgColor="bg-yellow-600"
           hoverColor="hover:bg-yellow-700"
+          to={"/almoxarifado/lista-beneficiarios"}
         />
 
         <ActionButton

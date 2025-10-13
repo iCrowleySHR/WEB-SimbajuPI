@@ -9,3 +9,8 @@ export const updateUser = async (userData) => {
   const response = await api.patch("/users/update", userData);
   return response.data;
 } 
+
+export const createWarehouse = async (data) => {
+  const response = await api.post("/users/warehouse", data);
+  return response.data;
+};

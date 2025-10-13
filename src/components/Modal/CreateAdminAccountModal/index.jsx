@@ -20,14 +20,14 @@ export default function CreateAdminAccountModal({ isOpen, onClose }) {
                 hoverColor="hover:bg-green-700"
                 to={"/secretaria/novo-almoxarifado"}
               />
-              <ActionButton
+              {/* <ActionButton
                 title="Criar nova conta de UBS"
                 description="Crie uma nova conta de Unidade Básica de Saúde."
                 iconClass="fas fa-plus"
                 bgColor="bg-blue-600"
                 hoverColor="hover:bg-blue-700"
                 to="/secretaria/novo-ubs"
-              />
+              /> */}
             </div>
 
             <div className="mt-6 text-right">

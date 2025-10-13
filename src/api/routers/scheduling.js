@@ -5,6 +5,11 @@ export const getTodaySchedulings = async () => {
     return response.data?.data || [];
 };
 
+export const getAllSchedulings = async () => {
+    const response = await api.get("/scheduling");
+    return response.data?.data || [];
+};
+
 export const getSchedulingById = async (id) => {
     const response = await api.get(`/scheduling/show/${id}`);
     return response.data?.data || [];

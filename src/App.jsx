@@ -24,6 +24,7 @@ import ReschedulePickup from "./pages/auth/beneficiary/ReschedulePickup";
 import PrivateRoute from "./components/PrivateRoute";
 import BeneficiarySettings from "./pages/auth/beneficiary/BeneficiarySettings";
 import SchedulingDetails from "./pages/auth/warehouse/SchedulingDetails";
+import HistoryScheduling from "./pages/auth/warehouse/HistoryScheduling";
 
 function App() {
     return (
@@ -56,6 +57,7 @@ function App() {
                         <Route index element={<WarehouseHome />} />
                         <Route path="configuracoes" element={<GeneralSettings />} />
                         <Route path="agendamento/hoje" element={<TodaySchedulings />} />
+                        <Route path="agendamento/historico" element={<HistoryScheduling />} />
                         <Route path="agendamento/detalhes/:id" element={<SchedulingDetails />} />
                     </Route>
 

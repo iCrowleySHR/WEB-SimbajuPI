@@ -47,6 +47,17 @@ export default function WarehouseHome() {
           hoverColor="hover:bg-green-700"
         />
 
+
+
+          <ActionButton
+          title="Histórico de retiradas"
+          description="Acompanhe a lista de retiradas"
+          iconClass="fas fa-plus"
+          bgColor="bg-blue-600"
+          hoverColor="hover:bg-blue-700"
+          to={"/almoxarifado/retirada/lista"}
+        />
+
         <ActionButton
           title="Lista de Beneficiários Ativos"
           description="Confirmar retirada de insumo mediante a beneficio."

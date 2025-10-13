@@ -9,6 +9,7 @@ import StatusFilter from "../../../../components/StatusFilters";
 export default function HistoryScheduling() {
   const [filterStatus, setFilterStatus] = useState("Todos");
   const [searchTerm, setSearchTerm] = useState("");
+
   const { schedulings, error, message, refetch } = useAllScheduling(filterStatus);
 
   const columns = [
@@ -22,10 +23,12 @@ export default function HistoryScheduling() {
 
   const statuses = ["Todos", "Agendado", "Concluido", "Ausente", "Cancelado"];
 
-  const filteredByStatus = schedulings.filter(
+  let filtered = schedulings.filter(
     (item) => filterStatus === "Todos" || item.status === filterStatus
   );
-  const filteredSchedulings = filterByNameOrCpf(filteredByStatus, searchTerm);
+
+  filtered = filterByNameOrCpf(filtered, searchTerm);
+
 
   return (
     <>
@@ -47,17 +50,18 @@ export default function HistoryScheduling() {
         placeholder="Pesquisar por nome ou CPF..."
       />
 
+
       {error && <p className="text-red-500 text-center mt-4">{error}</p>}
       {message && <p className="text-gray-500 text-center mt-4">{message}</p>}
 
       <div className="mt-4">
         <DynamicTable
-          data={filteredSchedulings}
+          data={filtered}
           columns={columns}
           actions={[
             {
               label: "Ver detalhes",
-              getPath: (row) => `/almoxarifado/agendamento/detalhes/${row.id}`,
+              getPath: (row) => `/almoxarifado/retirada/detalhes/${row.id}`,
             },
           ]}
         />

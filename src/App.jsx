@@ -25,6 +25,8 @@ import BeneficiarySettings from "./pages/auth/beneficiary/BeneficiarySettings";
 import SchedulingDetails from "./pages/auth/warehouse/SchedulingDetails";
 import HistoryScheduling from "./pages/auth/warehouse/HistoryScheduling";
 import AllBeneficiaries from "./pages/auth/shared/AllBenenficiaries";
+import HistoryWithdrawal from "./pages/auth/warehouse/HistoryWithdrawal";
+import WithdrawalDetails from "./pages/auth/warehouse/WithdrawalDetails";
 
 function App() {
     return (
@@ -61,6 +63,8 @@ function App() {
                         <Route path="agendamento/detalhes/:id" element={<SchedulingDetails />} />
                         <Route path="beneficiario/lista" element={<AllBeneficiaries />} />
                         <Route path="beneficiario/detalhes/:id" element={<BeneficiaryDetails />} />
+                        <Route path="retirada/lista" element={<HistoryWithdrawal />} />
+                        <Route path="retirada/detalhes/:id" element={<WithdrawalDetails />} />
                     </Route>
 
                     {/* UBS */}

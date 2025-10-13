@@ -15,17 +15,16 @@ import BeneficiaryHome from "./pages/auth/beneficiary/Home";
 import NewBeneficiaryAccount from "./pages/auth/secretary/NewBeneficiaryAccount";
 import NewUbsAccount from "./pages/auth/secretary/NewUbsAccount";
 import NewWareAccount from "./pages/auth/secretary/NewWareAccount";
-import BeneficiartyList from "./pages/auth/secretary/BeneficiaryList";
 import BeneficiaryHistory from "./pages/auth/beneficiary/BeneficiaryHistory";
 import CancelWithdrawal from "./pages/auth/beneficiary/CancelWithdrawal";
 import ValidateBeneficiary from "./pages/auth/secretary/ValidateBeneficiary";
-import BeneficiaryDetails from "./pages/auth/secretary/BeneficiaryDetails";
+import BeneficiaryDetails from "./pages/auth/shared/BeneficiaryDetails";
 import ReschedulePickup from "./pages/auth/beneficiary/ReschedulePickup";
 import PrivateRoute from "./components/PrivateRoute";
 import BeneficiarySettings from "./pages/auth/beneficiary/BeneficiarySettings";
 import SchedulingDetails from "./pages/auth/warehouse/SchedulingDetails";
 import HistoryScheduling from "./pages/auth/warehouse/HistoryScheduling";
-import AllBeneficiaries from "./pages/auth/warehouse/AllBenenficiaries";
+import AllBeneficiaries from "./pages/auth/shared/AllBenenficiaries";
 
 function App() {
     return (
@@ -47,9 +46,9 @@ function App() {
                         <Route path="novo-beneficiario" element={<NewBeneficiaryAccount />} />
                         <Route path="novo-ubs" element={<NewUbsAccount />} />
                         <Route path="novo-almoxarifado" element={<NewWareAccount />} />
-                        <Route path="lista-beneficiarios" element={<BeneficiartyList />} />
                         <Route path="validar-beneficio" element={<ValidateBeneficiary />} />
-                        <Route path="detalhes-beneficiario/:id" element={<BeneficiaryDetails />} />
+                        <Route path="beneficiario/detalhes/:id" element={<BeneficiaryDetails />} />
+                        <Route path="beneficiario/lista" element={<AllBeneficiaries />} />
                         <Route path="configuracoes" element={<GeneralSettings />} />
                     </Route>
 
@@ -60,7 +59,8 @@ function App() {
                         <Route path="agendamento/hoje" element={<TodaySchedulings />} />
                         <Route path="agendamento/historico" element={<HistoryScheduling />} />
                         <Route path="agendamento/detalhes/:id" element={<SchedulingDetails />} />
-                        <Route path="lista-beneficiarios" element={<AllBeneficiaries />} />
+                        <Route path="beneficiario/lista" element={<AllBeneficiaries />} />
+                        <Route path="beneficiario/detalhes/:id" element={<BeneficiaryDetails />} />
                     </Route>
 
                     {/* UBS */}

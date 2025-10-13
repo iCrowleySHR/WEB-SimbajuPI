@@ -4,10 +4,13 @@ import DynamicTable from "../../../../components/DynamicTable";
 import useAllBeneficiaries from "../../../../hook/useAllBeneficiaries";
 import SearchInputBeneficiary from "../../../../components/SearchInputBeneficiary";
 import { filterByNameOrCpf } from "../../../../utils/filterByNameOrCpf";
+import { useUser } from "../../../../contexts/UserContext";
+import translate from "../../../../utils/translate";
 
 export default function AllBeneficiaries() {
   const { beneficiaries, error, message, refetch } = useAllBeneficiaries();
   const [searchTerm, setSearchTerm] = useState("");
+  const { user } = useUser();
 
   const columns = [
     { label: "ID", accessor: "id" },
@@ -43,7 +46,7 @@ export default function AllBeneficiaries() {
           actions={[
             {
               label: "Ver detalhes",
-              getPath: (row) => `/almoxarifado/beneficiario/detalhes/${row.id}`,
+              getPath: (row) => `/${translate(user.role)}/beneficiario/detalhes/${row.id}`,
             },
           ]}
         />

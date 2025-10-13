@@ -20,4 +20,9 @@ export const getAllBeneficiaries = async () => {
   return response.data?.data || [];
 }
 
+export const getBeneficiaryById = async (id) => {
+  const response = await api.get(`/beneficiary/show/${id}`,);
+  return response.data?.data || [];
+}
+
 

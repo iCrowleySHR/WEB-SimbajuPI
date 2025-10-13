@@ -39,7 +39,6 @@ export default function WarehouseHome() {
           hoverColor="hover:bg-blue-700"
         />
 
-
         <ActionButton
           title="Registrar Retirada e Próximo Agendamento"
           description="Confirmar retirada de insumo do paciente e próxima retirada."
@@ -54,7 +53,7 @@ export default function WarehouseHome() {
           iconClass="fas fa-list"
           bgColor="bg-yellow-600"
           hoverColor="hover:bg-yellow-700"
-          to={"/almoxarifado/lista-beneficiarios"}
+          to={"/almoxarifado/beneficiario/lista"}
         />
 
         <ActionButton
@@ -69,7 +68,7 @@ export default function WarehouseHome() {
         <ActionButton
           title="Histórico de agendamentos"
           description="Acompanhe a lista de todos os agendamentos."
-            iconClass="fas fa-calendar-check"
+          iconClass="fas fa-calendar-check"
           bgColor="bg-blue-600"
           hoverColor="hover:bg-blue-700"
           to={"/almoxarifado/agendamento/historico"}

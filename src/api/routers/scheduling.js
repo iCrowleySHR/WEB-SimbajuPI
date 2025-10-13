@@ -1,0 +1,12 @@
+import api from "../api.js";
+
+export const getTodaySchedulings = async () => {
+    const response = await api.get("/scheduling/today");
+    return response.data?.data || [];
+};
+
+export const getSchedulingById = async (id) => {
+    const response = await api.get(`/scheduling/show/${id}`);
+    return response.data?.data || [];
+};
+

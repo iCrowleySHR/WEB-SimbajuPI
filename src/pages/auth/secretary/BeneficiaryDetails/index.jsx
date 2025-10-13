@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import BeneficiaryGrid from "../../../../components/BeneficiaryDetails/BeneficiaryGrid";
+import BeneficiaryDetailsComponent from "../../../../components/BeneficiaryDetailsComponent";
 import Title from "../../../../components/Title";
 import SimpleButton from "../../../../components/SimpleButton";
 import SelectField from "../../../../components/SelectField";
@@ -94,7 +94,7 @@ export default function BeneficiaryDetails({ id: propId }) {
         </div>
 
         {/* Grid de detalhes */}
-        <BeneficiaryGrid beneficiary={beneficiary} />
+        <BeneficiaryDetailsComponent beneficiary={beneficiary} />
       </div>
     </>
   );

@@ -8,6 +8,7 @@ import LayoutPrivate from "./components/Layout/Private";
 // Páginas privadas
 import SecretaryHome from "./pages/auth/secretary/Home";
 import WarehouseHome from "./pages/auth/warehouse/Home";
+import TodaySchedulings from "./pages/auth/warehouse/TodaySchedulings";
 import GeneralSettings from "./pages/auth/shared/GeneralSettings";
 import UbsHome from "./pages/auth/ubs/Home";
 import BeneficiaryHome from "./pages/auth/beneficiary/Home";
@@ -22,6 +23,7 @@ import BeneficiaryDetails from "./pages/auth/secretary/BeneficiaryDetails";
 import ReschedulePickup from "./pages/auth/beneficiary/ReschedulePickup";
 import PrivateRoute from "./components/PrivateRoute";
 import BeneficiarySettings from "./pages/auth/beneficiary/BeneficiarySettings";
+import SchedulingDetails from "./pages/auth/warehouse/SchedulingDetails";
 
 function App() {
     return (
@@ -53,6 +55,8 @@ function App() {
                     <Route path="/almoxarifado"  element={<PrivateRoute roles={['warehouse']} />}>
                         <Route index element={<WarehouseHome />} />
                         <Route path="configuracoes" element={<GeneralSettings />} />
+                        <Route path="agendamento/hoje" element={<TodaySchedulings />} />
+                        <Route path="agendamento/detalhes/:id" element={<SchedulingDetails />} />
                     </Route>
 
                     {/* UBS */}

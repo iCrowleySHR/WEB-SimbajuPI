@@ -38,7 +38,7 @@ export default function WarehouseHome() {
                       bgColor="bg-blue-600"
                       hoverColor="hover:bg-blue-700"
                     />
-                    
+ 
 
                     <ActionButton
                       title="Registrar Retirada e Próximo Agendamento"
@@ -57,11 +57,12 @@ export default function WarehouseHome() {
                     />
 
                     <ActionButton
-                      title="Lista de Agendamento"
-                      description="Acompanhe a lista de agendamento."
+                      title="Agendamento marcados para hoje"
+                      description="Acompanhe a lista de agendamento para hoje."
                       iconClass="fas fa-hand-holding"
                       bgColor="bg-purple-600"
                       hoverColor="hover:bg-purple-700"
+                      to={"/almoxarifado/agendamento/hoje"}
                     />
             </div>
         </>

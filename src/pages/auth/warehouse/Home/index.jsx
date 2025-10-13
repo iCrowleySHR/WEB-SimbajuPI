@@ -71,7 +71,7 @@ export default function WarehouseHome() {
             iconClass="fas fa-calendar-check"
           bgColor="bg-blue-600"
           hoverColor="hover:bg-blue-700"
-          to={"/almoxarifado/agendamento/hoje"}
+          to={"/almoxarifado/agendamento/historico"}
         />
       </div>
     </>

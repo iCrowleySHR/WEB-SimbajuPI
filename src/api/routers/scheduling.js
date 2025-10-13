@@ -10,6 +10,11 @@ export const getAllSchedulings = async () => {
     return response.data?.data || [];
 };
 
+export const getSchedulingsFilters = async (status) => {
+    const response = await api.get(`/scheduling/status/${status}`);
+    return response.data?.data || [];
+};
+
 export const getSchedulingById = async (id) => {
     const response = await api.get(`/scheduling/show/${id}`);
     return response.data?.data || [];

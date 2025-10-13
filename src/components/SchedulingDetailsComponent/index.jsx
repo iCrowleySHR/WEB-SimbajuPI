@@ -10,10 +10,10 @@ export default function SchedulingDetailsComponent({ scheduling }) {
 
   const locate = beneficiary?.location;
   const status = beneficiary?.status;
+  const user = beneficiary?.user;
 
   return (
     <div className="space-y-6">
-      {/* DADOS DO AGENDAMENTO */}
       <div>
         <h2 className="text-lg font-semibold mb-3">Detalhes do Agendamento</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
@@ -42,7 +42,6 @@ export default function SchedulingDetailsComponent({ scheduling }) {
         </div>
       </div>
 
-      {/* DADOS DO USUÁRIO DO ALMOXARIFADO */}
       {userWarehouse && (
         <div>
           <h2 className="text-lg font-semibold mb-3">Responsável do Almoxarifado</h2>
@@ -54,6 +53,14 @@ export default function SchedulingDetailsComponent({ scheduling }) {
         <div>
           <h2 className="text-lg font-semibold mb-3">Detalhes do Beneficiário</h2>
           <BeneficiaryDetailsComponent beneficiary={beneficiary} />
+        </div>
+      )}
+
+      
+      {user && (
+        <div>
+          <h2 className="text-lg font-semibold mb-3">Detalhes de Usuário do Beneficirio</h2>
+          <UserDetailsComponent user={user} />
         </div>
       )}
 

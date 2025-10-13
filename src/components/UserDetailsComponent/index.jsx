@@ -1,3 +1,4 @@
+import translate from "../../utils/translate";
 import DetailField from "../DetailsField/DetailField";
 
 export default function UserDetailsComponent({ user }) {
@@ -6,7 +7,7 @@ export default function UserDetailsComponent({ user }) {
             <DetailField label="ID" value={user.id} />
             <DetailField label="Nome" value={user.name} />
             <DetailField label="Email" value={user.email} />
-            <DetailField label="Função" value={user.role} />
+            <DetailField label="Função" value={translate(user.role)} />
             <DetailField
                 label="Criado em"
                 value={new Date(user.created_at).toLocaleDateString("pt-BR")}

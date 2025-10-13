@@ -90,12 +90,12 @@ export default function SecretaryHome() {
           onClick={showModalCreateAdminAccount}
         />
         <ActionButton
-          title="Validar Beneficio"
-          description="Valide os benefícios dos pacientes junto a UBS."
+          title="Reavaliação semestral"
+          description="Valide os benefícios dos pacientes, efetuando a reavaliação semestral."
           iconClass="fa fa-users"
           bgColor="bg-pink-600"
           hoverColor="hover:bg-pink-700"
-          to={"/secretaria/validar-beneficio"}
+          to={"/secretaria/beneficiario/ultima-veriricacao"}
         />
 
         <ActionButton

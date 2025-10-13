@@ -25,4 +25,7 @@ export const getBeneficiaryById = async (id) => {
   return response.data?.data || [];
 }
 
-
+export const getLastCheck = async () => {
+  const response = await api.get(`/beneficiary/lastcheck`,);
+  return response.data?.data || [];
+}

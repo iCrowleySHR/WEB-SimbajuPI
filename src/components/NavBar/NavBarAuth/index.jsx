@@ -22,7 +22,7 @@ export default function NavBarAuth() {
 
   return (
     <header className="bg-white shadow-lg border-b-4 border-blue-600">
-      <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+      <div className="max-w-9/10 mx-auto px-4 py-4 flex justify-between items-center">
 
         <Link to="/" className="flex items-center space-x-3">
           <Logo size={50} />

@@ -17,7 +17,6 @@ import NewUbsAccount from "./pages/auth/secretary/NewUbsAccount";
 import NewWareAccount from "./pages/auth/secretary/NewWareAccount";
 import BeneficiaryHistory from "./pages/auth/beneficiary/BeneficiaryHistory";
 import CancelWithdrawal from "./pages/auth/beneficiary/CancelWithdrawal";
-import ValidateBeneficiary from "./pages/auth/secretary/ValidateBeneficiary";
 import BeneficiaryDetails from "./pages/auth/shared/BeneficiaryDetails";
 import ReschedulePickup from "./pages/auth/beneficiary/ReschedulePickup";
 import PrivateRoute from "./components/PrivateRoute";
@@ -27,6 +26,7 @@ import HistoryScheduling from "./pages/auth/shared/HistoryScheduling";
 import AllBeneficiaries from "./pages/auth/shared/AllBenenficiaries";
 import HistoryWithdrawal from "./pages/auth/shared/HistoryWithdrawal";
 import WithdrawalDetails from "./pages/auth/shared/WithdrawalDetails";
+import SemiannualReassessment from "./pages/auth/secretary/SemiannualReassessment";
 
 function App() {
     return (
@@ -48,7 +48,7 @@ function App() {
                         <Route path="novo-beneficiario" element={<NewBeneficiaryAccount />} />
                         <Route path="novo-ubs" element={<NewUbsAccount />} />
                         <Route path="novo-almoxarifado" element={<NewWareAccount />} />
-                        <Route path="validar-beneficio" element={<ValidateBeneficiary />} />
+                        <Route path="beneficiario/ultima-veriricacao" element={<SemiannualReassessment />} />
                         <Route path="beneficiario/detalhes/:id" element={<BeneficiaryDetails />} />
                         <Route path="beneficiario/lista" element={<AllBeneficiaries />} />
                         <Route path="configuracoes" element={<GeneralSettings />} />

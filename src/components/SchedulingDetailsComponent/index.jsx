@@ -8,9 +8,7 @@ import UserDetailsComponent from "../UserDetailsComponent";
 export default function SchedulingDetailsComponent({ scheduling }) {
   const { beneficiary, userWarehouse } = scheduling;
 
-  const locate = beneficiary?.location;
-  const status = beneficiary?.status;
-  const user = beneficiary?.user;
+
 
   return (
     <div className="space-y-6">
@@ -57,26 +55,6 @@ export default function SchedulingDetailsComponent({ scheduling }) {
       )}
 
       
-      {user && (
-        <div>
-          <h2 className="text-lg font-semibold mb-3">Detalhes de Usuário do Beneficirio</h2>
-          <UserDetailsComponent user={user} />
-        </div>
-      )}
-
-      {locate && (
-        <div>
-          <h2 className="text-lg font-semibold mb-3">Detalhes de Localização</h2>
-          <LocationDetailsComponent locate={locate} />
-        </div>
-      )}
-
-      {status && (
-        <div>
-          <h2 className="text-lg font-semibold mb-3">Detalhes de Status</h2>
-          <StatusDetailsComponent status={status} />
-        </div>
-      )}
     </div>
   );
 }

@@ -2,7 +2,7 @@ import DetailField from "../DetailsField/DetailField";
 
 export default function StatusDetailsComponent({ status }) {
   if (!status) return null; 
-  
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
       <DetailField label="ID" value={status.id} />
@@ -15,7 +15,7 @@ export default function StatusDetailsComponent({ status }) {
         label="Documento UBS"
         value={
           status.documentationStatusUbs ? (
-            <a href={status.documentationStatusUbs} target="_blank" rel="noopener noreferrer">
+            <a href={status.documentationStatusUbs} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-700">
               Visualizar
             </a>
           ) : (
@@ -32,7 +32,7 @@ export default function StatusDetailsComponent({ status }) {
         label="Documento Secretaria"
         value={
           status.documentationStatusSecretary ? (
-            <a href={status.documentationStatusSecretary} target="_blank" rel="noopener noreferrer">
+            <a href={status.documentationStatusSecretary} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-700">
               Visualizar
             </a>
           ) : (

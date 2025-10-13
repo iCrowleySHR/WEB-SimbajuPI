@@ -59,6 +59,7 @@ function App() {
                         <Route path="agendamento/hoje" element={<TodaySchedulings />} />
                         <Route path="agendamento/historico" element={<HistoryScheduling />} />
                         <Route path="agendamento/detalhes/:id" element={<SchedulingDetails />} />
+                        <Route path="lista-beneficiarios/ativos" element={<SchedulingDetails />} />
                     </Route>
 
                     {/* UBS */}

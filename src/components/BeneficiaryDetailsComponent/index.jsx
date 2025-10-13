@@ -1,7 +1,13 @@
 import DetailField from "../DetailsField/DetailField";
-import { maskCpf, maskTelephone } from "../../utils/mask"; 
+import { maskCpf, maskTelephone } from "../../utils/mask";
+import UserDetailsComponent from "../UserDetailsComponent";
+import LocationDetailsComponent from "../LocateDetailsComponent";
+import StatusDetailsComponent from "../StatusDetailsComponent";
 
 export default function BeneficiaryDetailsComponent({ beneficiary }) {
+  const locate = beneficiary?.location;
+  const status = beneficiary?.status;
+  const user = beneficiary?.user;
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
       <DetailField label="ID" value={beneficiary.id} />
@@ -30,6 +36,26 @@ export default function BeneficiaryDetailsComponent({ beneficiary }) {
         label="Apagado em"
         value={beneficiary.deleted_at ? new Date(beneficiary.deleted_at).toLocaleDateString("pt-BR") : "Não"}
       />
+      {user && (
+        <div>
+          <h2 className="text-lg font-semibold mb-3">Detalhes de Usuário do Beneficirio</h2>
+          <UserDetailsComponent user={user} />
+        </div>
+      )}
+
+      {locate && (
+        <div>
+          <h2 className="text-lg font-semibold mb-3">Detalhes de Localização</h2>
+          <LocationDetailsComponent locate={locate} />
+        </div>
+      )}
+
+      {status && (
+        <div>
+          <h2 className="text-lg font-semibold mb-3">Detalhes de Status</h2>
+          <StatusDetailsComponent status={status} />
+        </div>
+      )}
     </div>
   );
 }

@@ -24,7 +24,7 @@ export default function useTodaySchedulings() {
 
             const formatted = data.map((item) => ({
                 id: item.id,
-                beneficiaryName: item.beneficiary?.nameResponsible || "-",
+                beneficiaryName: item.beneficiary?.user?.name || "-",
                 cpf: item.beneficiary?.cpf ? maskCpf(item.beneficiary.cpf) : "-",
                 dateTime: new Date(item.dateTime).toLocaleString("pt-BR", {
                     dateStyle: "short",

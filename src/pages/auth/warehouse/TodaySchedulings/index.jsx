@@ -1,18 +1,25 @@
+import { useState } from "react";
 import Title from "../../../../components/Title";
 import DynamicTable from "../../../../components/DynamicTable";
 import useTodaySchedulings from "../../../../hook/useTodaySchedulings";
+import { filterByNameOrCpf } from "../../../../utils/filterByNameOrCpf";
+import SearchInputBeneficiary from "../../../../components/SearchInputBeneficiary";
 
 export default function TodaySchedulings() {
   const { schedulings, error, message, refetch } = useTodaySchedulings();
+  const [searchTerm, setSearchTerm] = useState("");
 
-const columns = [
-  { label: "ID", accessor: "id" },
-  { label: "Beneficiário", accessor: "beneficiaryName" },
-  { label: "CPF", accessor: "cpf" },
-  { label: "Data e Hora", accessor: "dateTime" },
-  { label: "Status", accessor: "status" },
-  { label: "Almoxarifado", accessor: "warehouse" },
-];
+  const columns = [
+    { label: "ID", accessor: "id" },
+    { label: "Beneficiário", accessor: "beneficiaryName" },
+    { label: "CPF", accessor: "cpf" },
+    { label: "Data e Hora", accessor: "dateTime" },
+    { label: "Status", accessor: "status" },
+    { label: "Almoxarifado", accessor: "warehouse" },
+  ];
+
+
+  const filteredSchedulings = filterByNameOrCpf(schedulings, searchTerm);
 
   return (
     <>
@@ -25,9 +32,15 @@ const columns = [
       {error && <p className="text-red-500 text-center mt-4">{error}</p>}
       {message && <p className="text-gray-500 text-center mt-4">{message}</p>}
 
+      <SearchInputBeneficiary
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        placeholder="Pesquisar por nome ou CPF..."
+      />
+
       <div className="mt-4">
         <DynamicTable
-          data={schedulings}
+          data={filteredSchedulings}
           columns={columns}
           actions={[
             {

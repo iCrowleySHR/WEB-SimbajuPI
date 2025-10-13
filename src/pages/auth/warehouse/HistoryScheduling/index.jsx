@@ -2,9 +2,13 @@ import { useState } from "react";
 import Title from "../../../../components/Title";
 import DynamicTable from "../../../../components/DynamicTable";
 import useAllScheduling from "../../../../hook/useAllScheduling";
+import { filterByNameOrCpf } from "../../../../utils/filterByNameOrCpf";
+import SearchInputBeneficiary from "../../../../components/SearchInputBeneficiary";
+import StatusFilter from "../../../../components/StatusFilters";
 
 export default function HistoryScheduling() {
   const [filterStatus, setFilterStatus] = useState("Todos");
+  const [searchTerm, setSearchTerm] = useState("");
   const { schedulings, error, message, refetch } = useAllScheduling(filterStatus);
 
   const columns = [
@@ -16,7 +20,12 @@ export default function HistoryScheduling() {
     { label: "Almoxarifado", accessor: "warehouse" },
   ];
 
-  const statuses = ["Todos", "Agendado", "Concluído", "Ausente", "Cancelado"];
+  const statuses = ["Todos", "Agendado", "Concluido", "Ausente", "Cancelado"];
+
+  const filteredByStatus = schedulings.filter(
+    (item) => filterStatus === "Todos" || item.status === filterStatus
+  );
+  const filteredSchedulings = filterByNameOrCpf(filteredByStatus, searchTerm);
 
   return (
     <>
@@ -25,29 +34,25 @@ export default function HistoryScheduling() {
         subtitle="Acompanhe a lista de todos os agendamentos."
         back="true"
       />
-      
-      <div className="flex gap-2 justify-center mb-4">
-        {statuses.map((status) => (
-          <button
-            key={status}
-            onClick={() => setFilterStatus(status)}
-            className={`px-3 py-1 rounded-lg transition ${
-              filterStatus === status
-                ? "bg-blue-600 text-white"
-                : "bg-gray-200 text-gray-800 hover:bg-gray-300"
-            }`}
-          >
-            {status}
-          </button>
-        ))}
-      </div>
+
+      <StatusFilter
+        statuses={statuses}
+        currentStatus={filterStatus}
+        onChange={setFilterStatus}
+      />
+
+      <SearchInputBeneficiary
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        placeholder="Pesquisar por nome ou CPF..."
+      />
 
       {error && <p className="text-red-500 text-center mt-4">{error}</p>}
       {message && <p className="text-gray-500 text-center mt-4">{message}</p>}
 
       <div className="mt-4">
         <DynamicTable
-          data={schedulings}
+          data={filteredSchedulings}
           columns={columns}
           actions={[
             {

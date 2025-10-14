@@ -3,11 +3,13 @@ import { maskCpf, maskTelephone } from "../../utils/mask";
 import UserDetailsComponent from "../UserDetailsComponent";
 import LocationDetailsComponent from "../LocateDetailsComponent";
 import StatusDetailsComponent from "../StatusDetailsComponent";
+import formatDate from "../../utils/formatDate";
 
 export default function BeneficiaryDetailsComponent({ beneficiary }) {
   const locate = beneficiary?.location;
   const status = beneficiary?.status;
   const user = beneficiary?.user;
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
       <DetailField label="ID" value={beneficiary.id} />
@@ -16,42 +18,46 @@ export default function BeneficiaryDetailsComponent({ beneficiary }) {
       <DetailField label="Email do Responsável" value={beneficiary.emailResponsible} />
       <DetailField label="Telefone" value={maskTelephone(beneficiary.telephone)} />
       <DetailField label="Telefone do Responsável" value={maskTelephone(beneficiary.telephoneResponsible)} />
+
       <DetailField
         label="Data de Nascimento"
-        value={new Date(beneficiary.birthDate).toLocaleDateString("pt-BR")}
+        value={formatDate(beneficiary.birthDate)}
       />
+
       <DetailField label="Tipo de Benefício" value={beneficiary.typeBenefit} />
-      <DetailField label="Prazo de Prescrição (Dias)" value={beneficiary.prescriptionTimeDays} />
+      <DetailField label="Prazo de Prescrição" value={formatDate(beneficiary.prescriptionTimeDays)} />
       <DetailField label="Quantidade de Prescrição" value={beneficiary.prescriptionQuantity} />
-      <DetailField label="Período Mínimo de Agendamento" value={beneficiary.minimumSchedulingPeriod} />
+      <DetailField label="Período Mínimo de Agendamento" value={formatDate(beneficiary.minimumSchedulingPeriod)} />
+
       <DetailField
         label="Criado em"
-        value={new Date(beneficiary.created_at).toLocaleDateString("pt-BR")}
+        value={formatDate(beneficiary.created_at)}
       />
       <DetailField
         label="Atualizado em"
-        value={new Date(beneficiary.updated_at).toLocaleDateString("pt-BR")}
+        value={formatDate(beneficiary.updated_at)}
       />
       <DetailField
         label="Apagado em"
-        value={beneficiary.deleted_at ? new Date(beneficiary.deleted_at).toLocaleDateString("pt-BR") : "Não"}
+        value={beneficiary.deleted_at ? formatDate(beneficiary.deleted_at) : "Não"}
       />
+
       {user && (
-        <div>
-          <h2 className="text-lg font-semibold mb-3">Detalhes de Usuário do Beneficirio</h2>
+        <div className="md:col-span-2">
+          <h2 className="text-lg font-semibold mb-3">Detalhes de Usuário do Beneficiário</h2>
           <UserDetailsComponent user={user} />
         </div>
       )}
 
       {locate && (
-        <div>
+        <div className="md:col-span-2">
           <h2 className="text-lg font-semibold mb-3">Detalhes de Localização</h2>
           <LocationDetailsComponent locate={locate} />
         </div>
       )}
 
       {status && (
-        <div>
+        <div className="md:col-span-2">
           <h2 className="text-lg font-semibold mb-3">Detalhes de Status</h2>
           <StatusDetailsComponent status={status} />
         </div>

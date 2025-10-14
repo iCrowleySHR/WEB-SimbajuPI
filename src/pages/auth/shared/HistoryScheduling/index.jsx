@@ -64,7 +64,7 @@ export default function HistoryScheduling() {
           actions={[
             {
               label: "Ver detalhes",
-              getPath: (row) => `/${translate(user.role).toLowerCase()}/retirada/detalhes/${row.id}`,
+              getPath: (row) => `/${translate(user.role).toLowerCase()}/agendamento/detalhes/${row.id}`,
             },
           ]}
         />

@@ -124,6 +124,15 @@ export default function SecretaryHome() {
           to={"/secretaria/beneficiario/desativados"}
         />
 
+        <ActionButton
+          title="Status"
+          description="Acompanhe a lista de beneficiados desativados"
+          iconClass="fas fa-plus"
+          bgColor="bg-red-600"
+          hoverColor="hover:bg-red-700"
+          to={"/secretaria/beneficiario/desativados"}
+        />
+
 
       </div>
       <CreateAdminAccountModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />

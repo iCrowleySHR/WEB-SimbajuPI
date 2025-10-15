@@ -4,7 +4,7 @@ import { updateSecretaryStatus, uploadFileSecretary } from "../api/routers/statu
 import getErrorMessage from "../utils/getErrorMessage";
 import { useLoading } from "../contexts/LoadingContext";
 
-export function useBeneficiaryStatus(beneficiaryId) {
+export function useBeneficiarySecretaryStatus(beneficiaryId) {
   const [beneficiary, setBeneficiary] = useState(null);
   const [error, setError] = useState("");
   const [errorUpdate, setErrorUpdate] = useState("");
@@ -73,13 +73,18 @@ export function useBeneficiaryStatus(beneficiaryId) {
       showLoading();
 
       const formData = new FormData();
-      formData.append("file", files[0]); // apenas um arquivo
+      formData.append("file", files[0]); 
 
-      const response = await uploadFileSecretary(beneficiary.status.id, formData);
-      console.log(response);
+        
+
+      await uploadFileSecretary(beneficiary.status.id, formData);
 
       setMessageFile({ type: "success", text: "Arquivo enviado com sucesso!" });
       setFiles([]);
+      setTimeout(async () => {
+          await fetchBeneficiary();
+      }, 1200);
+
     } catch (err) {
       setErrorFile(getErrorMessage(err));
       console.log(err);

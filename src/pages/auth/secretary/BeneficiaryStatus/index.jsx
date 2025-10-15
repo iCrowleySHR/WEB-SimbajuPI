@@ -2,7 +2,7 @@ import Title from "../../../../components/Title";
 import { useParams } from "react-router-dom";
 import BeneficiaryInfo from "../../../../components/BeneficiaryInfo";
 import Alert from "../../../../components/Alert";
-import { useBeneficiaryStatus } from "../../../../hook/useBeneficiaryStatus";
+import { useBeneficiarySecretaryStatus } from "../../../../hook/useBeneficiarySecretaryStatus";
 import SecretaryStatusForm from "../../../../components/SecretaryStatusForm";
 import UploadDocumentsForm from "../../../../components/UploadDocumentsForm";
 import StatusDetailsComponent from "../../../../components/StatusDetailsComponent";
@@ -26,7 +26,7 @@ export default function BeneficiaryStatus() {
         handleFileChange,
         handleUpdateStatus,
         handleUploadFiles
-    } = useBeneficiaryStatus(id);
+    } = useBeneficiarySecretaryStatus(id);
 
     return (
         <>
@@ -44,15 +44,16 @@ export default function BeneficiaryStatus() {
             {beneficiary && (
                 <>
                     <StatusDetailsComponent status={beneficiary.status} />
-
-                    <SecretaryStatusForm
-                        secretaryStatus={secretaryStatus}
-                        setSecretaryStatus={setSecretaryStatus}
-                        observationSecretary={observationSecretary}
-                        setObservationSecretary={setObservationSecretary}
-                        handleStatusUpdate={handleUpdateStatus}
-                        messageStatus={messageUpdate || errorUpdate}
-                    />
+                    <div className="mt-5">
+                        <SecretaryStatusForm
+                            secretaryStatus={secretaryStatus}
+                            setSecretaryStatus={setSecretaryStatus}
+                            observationSecretary={observationSecretary}
+                            setObservationSecretary={setObservationSecretary}
+                            handleStatusUpdate={handleUpdateStatus}
+                            messageStatus={messageUpdate || errorUpdate}
+                        />
+                    </div>
 
                     <UploadDocumentsForm
                         files={files}

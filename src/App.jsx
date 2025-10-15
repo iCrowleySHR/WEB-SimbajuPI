@@ -29,6 +29,7 @@ import WithdrawalDetails from "./pages/auth/shared/WithdrawalDetails";
 import SemiannualReassessment from "./pages/auth/secretary/SemiannualReassessment";
 import EditPrescription from "./pages/auth/secretary/EditPrescription";
 import DisableBeneficiaryAccount from "./pages/auth/secretary/DisableBeneficiaryAccount";
+import BeneficiaryStatus from "./pages/auth/secretary/BeneficiaryStatus";
 
 function App() {
     return (
@@ -50,14 +51,19 @@ function App() {
                         <Route path="novo-beneficiario" element={<NewBeneficiaryAccount />} />
                         <Route path="novo-ubs" element={<NewUbsAccount />} />
                         <Route path="novo-almoxarifado" element={<NewWareAccount />} />
+
                         <Route path="beneficiario/ultima-veriricacao" element={<SemiannualReassessment />} />
                         <Route path="beneficiario/desabilitar-conta/:id" element={<DisableBeneficiaryAccount />} />
                         <Route path="beneficiario/editar/prescricao/:id" element={<EditPrescription />} />
                         <Route path="beneficiario/detalhes/:id" element={<BeneficiaryDetails />} />
                         <Route path="beneficiario/lista" element={<AllBeneficiaries />} />
+                        <Route path="beneficiario/editar/status/:id" element={<BeneficiaryStatus />} />
+
                         <Route path="configuracoes" element={<GeneralSettings />} />
+
                         <Route path="agendamento/lista" element={<HistoryScheduling />} />
                         <Route path="agendamento/detalhes/:id" element={<SchedulingDetails />} />
+
                         <Route path="retirada/lista" element={<HistoryWithdrawal />} />
                         <Route path="retirada/detalhes/:id" element={<WithdrawalDetails />} />
                     </Route>

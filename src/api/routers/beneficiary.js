@@ -39,3 +39,7 @@ export const disableBeneficiaryById = async (id) => {
   const response = await api.patch(`/beneficiary/deactivate/${id}`);
   return response.data?.data || [];
 }
+
+
+
+

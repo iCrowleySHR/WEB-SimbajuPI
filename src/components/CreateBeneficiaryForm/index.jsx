@@ -96,7 +96,10 @@ export default function BeneficiaryForm(props) {
           value: typeBenefit, 
           onChange: e => setTypeBenefit(e.target.value), 
           type: "select", 
-          options: ["Judicial", "Administrativo"] 
+          options: [
+            { label: "Judicial", value: "Judicial" },
+            { label: "Administrativo", value: "Administrativo" },
+          ],
         },
         { 
           label: "Data da Prescrição", 

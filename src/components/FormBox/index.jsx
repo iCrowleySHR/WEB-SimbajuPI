@@ -12,7 +12,7 @@ export default function FormBox({
 }) {
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (onSubmit) onSubmit();
+    if (onSubmit) onSubmit(e);
   };
 
   const colorClasses = {
@@ -33,40 +33,71 @@ export default function FormBox({
     "w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400";
 
   const renderField = (field, index) => {
-    if (field.type === "select") {
-      return (
-        <div key={index}>
-          <label className="block text-gray-700 font-medium mb-1">{field.label}</label>
-          <select
-            value={field.value}
-            onChange={field.onChange}
-            className={inputClass}
-          >
-            <option value="" disabled>{field.placeholder || "Selecione"}</option>
-            {field.options.map((opt, i) => (
-              <option key={i} value={opt}>
-                {opt}
-              </option>
-            ))}
-          </select>
-        </div>
-      );
-    }
+    switch (field.type) {
+      case "select":
+        return (
+          <div key={index}>
+            <label className="block text-gray-700 font-medium mb-1">{field.label}</label>
+            <select
+              value={field.value}
+              onChange={field.onChange}
+              className={inputClass}
+              required={field.required !== false}
+            >
+              <option value="" disabled>{field.placeholder || "Selecione"}</option>
+              {field.options.map((opt, i) => (
+                <option key={i} value={opt.value}>
+                  {opt.label}
+                </option>
+              ))}
+            </select>
+          </div>
+        );
 
-    return (
-      <div key={index}>
-        <label className="block text-gray-700 font-medium mb-1">{field.label}</label>
-        <input
-          type={field.type}
-          value={field.value}
-          onChange={field.onChange}
-          placeholder={field.placeholder || ""}
-          className={inputClass}
-          required={field.required !== false}
-          min={field.min}
-        />
-      </div>
-    );
+      case "textarea":
+        return (
+          <div key={index}>
+            <label className="block text-gray-700 font-medium mb-1">{field.label}</label>
+            <textarea
+              value={field.value}
+              onChange={field.onChange}
+              placeholder={field.placeholder || ""}
+              className={`${inputClass} resize-none h-24`}
+              required={field.required !== false}
+            />
+          </div>
+        );
+
+      case "file":
+        return (
+          <div key={index}>
+            <label className="block text-gray-700 font-medium mb-1">{field.label}</label>
+            <input
+              type="file"
+              onChange={field.onChange}
+              className={inputClass}
+              multiple={field.multiple || false}
+              required={field.required !== false}
+            />
+          </div>
+        );
+
+      default:
+        return (
+          <div key={index}>
+            <label className="block text-gray-700 font-medium mb-1">{field.label}</label>
+            <input
+              type={field.type}
+              value={field.value}
+              onChange={field.onChange}
+              placeholder={field.placeholder || ""}
+              className={inputClass}
+              required={field.required !== false}
+              min={field.min}
+            />
+          </div>
+        );
+    }
   };
 
   const renderInfoBox = () => {
@@ -97,7 +128,7 @@ export default function FormBox({
       <form onSubmit={handleSubmit} className="space-y-4">
         {fields.map(renderField)}
 
-        {message && <Alert type={message.type} message={message.text} />}
+        {message && <Alert type={message.type} message={message.text || message} />}
 
         {renderInfoBox()}
 

@@ -19,7 +19,7 @@ export default function ActionPanelSecretaryBeneficiaryDetails({ beneficiary, re
           label: "Verificar Conta/Status",
           color: "green",
           icon: "fa-regular fa-user",
-          onClick: () => navigate(`/scheduling/beneficiary/${beneficiary.id}`),
+          onClick: () => navigate(`/secretaria/beneficiario/editar/status/${beneficiary.id}`),
         },
         {
           label: "Desativar Conta",

@@ -32,7 +32,10 @@ export default function PrescriptionForm({
           type: "select",
           value: typeBenefit,
           onChange: (e) => setTypeBenefit(e.target.value),
-          options: ["Judicial", "Administrativo"],
+          options: [
+            { label: "Judicial", value: "Judicial" },
+            { label: "Administrativo", value: "Administrativo" },
+          ],
           placeholder: "Selecione o tipo de benefício",
           required: true,
         },

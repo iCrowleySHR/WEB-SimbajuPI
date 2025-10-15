@@ -2,12 +2,12 @@ import Title from "../../../../components/Title";
 import { useParams } from "react-router-dom";
 import BeneficiaryInfo from "../../../../components/BeneficiaryInfo";
 import Alert from "../../../../components/Alert";
-import { useBeneficiarySecretaryStatus } from "../../../../hook/useBeneficiarySecretaryStatus";
-import SecretaryStatusForm from "../../../../components/SecretaryStatusForm";
 import UploadDocumentsForm from "../../../../components/UploadDocumentsForm";
 import StatusDetailsComponent from "../../../../components/StatusDetailsComponent";
+import { useBeneficiaryUbsStatus } from "../../../../hook/useBeneficiaryUbsStatus";
+import UbsStatusForm from "../../../../components/UbsStatusForm";
 
-export default function BeneficiaryStatus() {
+export default function BeneficiaryStatusUbs() {
     const { id } = useParams();
 
     const {
@@ -18,21 +18,21 @@ export default function BeneficiaryStatus() {
         message,
         messageFile,
         messageUpdate,
-        secretaryStatus,
-        setSecretaryStatus,
-        observationSecretary,
-        setObservationSecretary,
+        ubsStatus,
+        setUbsStatus,
+        observationUbs,
+        setObservationUbs,
         files,
         handleFileChange,
         handleUpdateStatus,
         handleUploadFiles
-    } = useBeneficiarySecretaryStatus(id);
+    } = useBeneficiaryUbsStatus(id);
 
     return (
         <>
             <Title
                 title="Status do beneficiário"
-                subtitle="Veja e altere o status do beneficiário, e veja o status da UBS para tomar sua decisão"
+                subtitle="Veja e altere o status do beneficiário, com base no seu status, a secretária toma sua ação."
                 back={true}
             />
 
@@ -45,11 +45,11 @@ export default function BeneficiaryStatus() {
                 <>
                     <StatusDetailsComponent status={beneficiary.status} />
                     <div className="mt-5">
-                        <SecretaryStatusForm
-                            secretaryStatus={secretaryStatus}
-                            setSecretaryStatus={setSecretaryStatus}
-                            observationSecretary={observationSecretary}
-                            setObservationSecretary={setObservationSecretary}
+                        <UbsStatusForm
+                            ubsStatus={ubsStatus}
+                            setUbsStatus={setUbsStatus}
+                            observationUbs={observationUbs}
+                            setObservationUbs={setObservationUbs}
                             handleStatusUpdate={handleUpdateStatus}
                             messageStatus={messageUpdate || errorUpdate}
                         />

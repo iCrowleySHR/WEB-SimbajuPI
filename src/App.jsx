@@ -15,7 +15,6 @@ import BeneficiaryHome from "./pages/auth/beneficiary/Home";
 import NewBeneficiaryAccount from "./pages/auth/secretary/NewBeneficiaryAccount";
 import NewUbsAccount from "./pages/auth/secretary/NewUbsAccount";
 import NewWareAccount from "./pages/auth/secretary/NewWareAccount";
-import BeneficiaryHistory from "./pages/auth/beneficiary/BeneficiaryHistory";
 import CancelWithdrawal from "./pages/auth/beneficiary/CancelWithdrawal";
 import BeneficiaryDetails from "./pages/auth/shared/BeneficiaryDetails";
 import ReschedulePickup from "./pages/auth/beneficiary/ReschedulePickup";
@@ -26,14 +25,15 @@ import HistoryScheduling from "./pages/auth/shared/HistoryScheduling";
 import AllBeneficiaries from "./pages/auth/shared/AllBenenficiaries";
 import HistoryWithdrawal from "./pages/auth/shared/HistoryWithdrawal";
 import WithdrawalDetails from "./pages/auth/shared/WithdrawalDetails";
-import SemiannualReassessment from "./pages/auth/secretary/SemiannualReassessment";
+import SemiannualReassessment from "./pages/auth/shared/SemiannualReassessment";
 import EditPrescription from "./pages/auth/secretary/EditPrescription";
 import DisableBeneficiaryAccount from "./pages/auth/secretary/DisableBeneficiaryAccount";
-import BeneficiaryStatus from "./pages/auth/secretary/BeneficiaryStatus";
 import BeneficiariesDisabled from "./pages/auth/secretary/BeneficiariesDisabled";
 import MyHistoryWithdrawal from "./pages/auth/beneficiary/MyHistoryWithdrawal";
 import MyHistoryScheduling from "./pages/auth/beneficiary/MyHistoryScheduling";
 import ListBeneficiariesStatusUbs from "./pages/auth/secretary/ListBeneficiariesStatusUbs";
+import BeneficiaryStatusSecretary from "./pages/auth/secretary/BeneficiaryStatusSecretary";
+import BeneficiaryStatusUbs from "./pages/auth/ubs/BeneficiaryStatusUbs";
 
 function App() {
     return (
@@ -61,7 +61,7 @@ function App() {
                         <Route path="beneficiario/editar/prescricao/:id" element={<EditPrescription />} />
                         <Route path="beneficiario/detalhes/:id" element={<BeneficiaryDetails />} />
                         <Route path="beneficiario/lista" element={<AllBeneficiaries />} />
-                        <Route path="beneficiario/editar/status/:id" element={<BeneficiaryStatus />} />
+                        <Route path="beneficiario/editar/status/:id" element={<BeneficiaryStatusSecretary />} />
                         <Route path="beneficiario/desativados" element={<BeneficiariesDisabled />} />
                         <Route path="beneficiario/status/suspensoes/ubs" element={<ListBeneficiariesStatusUbs />} />
 
@@ -91,6 +91,10 @@ function App() {
                     <Route path="/ubs"  element={<PrivateRoute roles={['ubs']} />}>
                         <Route index element={<UbsHome />} />
                         <Route path="configuracoes" element={<GeneralSettings />} />
+                        <Route path="beneficiario/detalhes/:id" element={<BeneficiaryDetails />} />
+                        <Route path="beneficiario/lista" element={<AllBeneficiaries />} />
+                        <Route path="beneficiario/ultima-veriricacao" element={<SemiannualReassessment />} />
+                        <Route path="beneficiario/editar/status/:id" element={<BeneficiaryStatusUbs />} />
                     </Route>
 
                     {/* Beneficiário */}

@@ -1,42 +1,12 @@
-import { useState } from "react";
+import ActionButton from "../../../../components/ActionButton";
 import StatsCard from "../../../../components/StatsCard";
 import Title from "../../../../components/Title";
-import { PatientTable } from "../../../../components/PatientTableUBS/PatientTable";
 
 export default function UbsHome() {
-  const [patients, setPatients] = useState([
-    {
-      name: "Maria Silva Santos",
-      cpf: "123.456.789-00",
-      status: "ativo",
-    },
-    {
-      name: "João Oliveira",
-      cpf: "987.654.321-00",
-      status: "ativo",
-    },
-  ]);
-
-  const [search, setSearch] = useState("");
-
-  const handleStatusChange = (cpf, newStatus) => {
-    setPatients((prev) =>
-      prev.map((p) => (p.cpf === cpf ? { ...p, status: newStatus } : p))
-    );
-  };
-
-  const filteredPatients = patients.filter(
-    (p) =>
-      p.name.toLowerCase().includes(search.toLowerCase()) ||
-      p.cpf.includes(search)
-  );
-
   return (
     <>
-      <Title
-        title={"Painel da UBS"}
-        subtitle={"Validação e acompanhamento de pacientes."}
-      />
+
+      <Title title={"Painel da UBS"} subtitle={"Gerencie beneficiários e os status."} />
 
       <div className="grid md:grid-cols-3 gap-6 mb-8">
         <StatsCard
@@ -59,28 +29,26 @@ export default function UbsHome() {
         />
       </div>
 
-      <div id="ubsDashboard" className="fade-in">
-        <div className="bg-white rounded-xl shadow-lg p-6">
-          <h3 className="text-xl font-bold text-gray-800 mb-6">
-            <i className="fas fa-hospital mr-2 text-blue-600"></i>
-            Validação de Status dos Pacientes
-          </h3>
+      {/* Botões de Ação */}
+      <div className="grid md:grid-cols-3 gap-6 mb-10">
+        <ActionButton
+          title="Lista de beneficiarios ativos"
+          description="Veja todos os beneficiarios cadastrados."
+          iconClass="fas fa-user-plus"
+          bgColor="bg-blue-600"
+          hoverColor="hover:bg-blue-700"
+          to={"/ubs/beneficiario/lista"}
+        />
 
-          <div className="mb-4">
-            <input
-              type="text"
-              value={search} 
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="Buscar por nome ou CPF..."
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
+        <ActionButton
+          title="Reavaliação semestral"
+          description="Valide os benefícios dos pacientes, efetuando a reavaliação semestral."
+          iconClass="fa fa-users"
+          bgColor="bg-pink-600"
+          hoverColor="hover:bg-pink-700"
+          to={"/ubs/beneficiario/ultima-veriricacao"}
+        />
 
-          <PatientTable
-            patients={filteredPatients} 
-            onStatusChange={handleStatusChange}
-          />
-        </div>
       </div>
     </>
   );

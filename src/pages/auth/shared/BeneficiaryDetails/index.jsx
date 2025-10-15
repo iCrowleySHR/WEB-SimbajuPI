@@ -6,6 +6,7 @@ import BeneficiaryDetailsComponent from "../../../../components/BeneficiaryDetai
 import { useUser } from "../../../../contexts/UserContext"; 
 import ActionPanelSecretaryBeneficiaryDetails from "../../../../components/ActionPanelSecretaryBeneficiaryDetails";
 import Alert from "../../../../components/Alert";
+import ActionPanelUbsBeneficiaryDetails from "../../../../components/ActionPanelUbsBeneficiaryDetails";
 
 export default function BeneficiaryDetails() {
   const { id } = useParams();
@@ -27,6 +28,12 @@ export default function BeneficiaryDetails() {
         <>
           {user?.role === "secretary" && (
             <ActionPanelSecretaryBeneficiaryDetails
+              beneficiary={beneficiary}
+              refetch={refetch}
+            />
+          )}
+        {user?.role === "ubs" && (
+            <ActionPanelUbsBeneficiaryDetails
               beneficiary={beneficiary}
               refetch={refetch}
             />

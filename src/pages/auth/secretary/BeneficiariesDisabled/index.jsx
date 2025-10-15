@@ -4,7 +4,6 @@ import DynamicTable from "../../../../components/DynamicTable";
 import SearchInputBeneficiary from "../../../../components/SearchInputBeneficiary";
 import { filterByNameOrCpf } from "../../../../utils/filterByNameOrCpf";
 import { useUser } from "../../../../contexts/UserContext";
-import translate from "../../../../utils/translate";
 import Alert from "../../../../components/Alert";
 import useAllBeneficiariesDisabled from "../../../../hook/useAllBeneficiariesDisable";
 
@@ -26,8 +25,8 @@ export default function BeneficiariesDisabled() {
   return (
     <>
       <Title
-        title="Histórico de retiradas"
-        subtitle="Acompanhe a lista de todas as retiradas."
+        title="Lista de beneficiarios desativados"
+        subtitle="Acompanhe a lista."
         back="true"
       />
 

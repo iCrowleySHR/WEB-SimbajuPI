@@ -26,8 +26,9 @@ export default function SecretaryStatusForm({
         title: "Informações para atualização",
         items: [
           "Selecione o status da secretaria.",
-          "Adicione observações se necessário.",
-          "Caso mude o status pra INDEFERIDO, a conta do beneficiário será desativada."
+          "Adicione observações é obrigatório.",
+          "Caso mude o status pra INDEFERIDO, a conta do beneficiário será desativada.",
+          "Um email será enviado ao beneficiado sinalizando a mundaça de status."
         ],
       }}
       fields={[

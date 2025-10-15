@@ -1,3 +1,4 @@
+import React from "react";
 import Alert from "../Alert";
 
 export default function FormBox({ 
@@ -41,6 +42,7 @@ export default function FormBox({
             onChange={field.onChange}
             className={inputClass}
           >
+            <option value="" disabled>{field.placeholder || "Selecione"}</option>
             {field.options.map((opt, i) => (
               <option key={i} value={opt}>
                 {opt}
@@ -61,6 +63,7 @@ export default function FormBox({
           placeholder={field.placeholder || ""}
           className={inputClass}
           required={field.required !== false}
+          min={field.min}
         />
       </div>
     );
@@ -68,7 +71,6 @@ export default function FormBox({
 
   const renderInfoBox = () => {
     if (!infoBox) return null;
-
     const colors = infoBoxColors[color];
     return (
       <div className={`${colors.bg} p-4 rounded-lg mt-4`}>

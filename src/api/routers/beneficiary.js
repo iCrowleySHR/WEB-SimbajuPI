@@ -29,3 +29,8 @@ export const getLastCheck = async () => {
   const response = await api.get(`/beneficiary/lastcheck`,);
   return response.data?.data || [];
 }
+
+export const updatePrescription = async (id, data) => {
+  const response = await api.patch(`/beneficiary/secretary/update/${id}`, data);
+  return response.data?.data || [];
+}

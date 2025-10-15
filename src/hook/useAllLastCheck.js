@@ -21,7 +21,7 @@ export default function useAllLastCheck() {
       if (data.length === 0) {
         setMessage("Nenhum registro encontrado.");
       }
-console.log(data)
+
       const formatted = data.map((item) => ({
         
         id: item.id,

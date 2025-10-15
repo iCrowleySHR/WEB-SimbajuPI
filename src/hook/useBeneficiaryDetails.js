@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { getBeneficiaryById } from "../api/routers/beneficiary";
 import { useLoading } from "../contexts/LoadingContext";
 import getErrorMessage from "../utils/getErrorMessage";
-import { maskCpf } from "../utils/mask";
 
 export function useBeneficiaryDetail(beneficiaryId) {
   const { showLoading, hideLoading } = useLoading();

@@ -125,12 +125,12 @@ export default function SecretaryHome() {
         />
 
         <ActionButton
-          title="Status"
-          description="Acompanhe a lista de beneficiados desativados"
+          title="Status da UBS"
+          description="Acompanhe a lista de beneficiarios ativos com o status diferente de Ativado da UBS."
           iconClass="fas fa-plus"
-          bgColor="bg-red-600"
-          hoverColor="hover:bg-red-700"
-          to={"/secretaria/beneficiario/desativados"}
+          bgColor="bg-pink-600"
+          hoverColor="hover:bg-pink-700"
+          to={"/secretaria/beneficiario/status/suspensoes/ubs"}
         />
 
 

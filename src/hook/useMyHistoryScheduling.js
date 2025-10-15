@@ -22,7 +22,6 @@ export default function useMyHistoryScheduling() {
                 setMessage("Nenhum registro encontrado.");
             }
 
-            console.log(data)
 
             const formatted = data.map((item) => ({
                 beneficiaryName: item.beneficiary?.user?.name || "-",

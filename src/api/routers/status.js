@@ -5,6 +5,11 @@ export const updateSecretaryStatus = async (id, data) => {
   return response.data?.data || [];
 }
 
+export const suspensionsUbs = async () => {
+  const response = await api.post(`/status/suspensions/ubs`,);
+  return response.data?.data || [];
+}
+
 export const uploadFileSecretary = async (id, formData) => {
   const response = await api.post(
     `/status/documentions/secretary/${id}`,

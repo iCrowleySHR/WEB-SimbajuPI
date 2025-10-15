@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getBeneficiaryById } from "../api/routers/beneficiary";
+import { disableBeneficiaryById, getBeneficiaryById } from "../api/routers/beneficiary";
 import { updateSecretaryStatus, uploadFileSecretary } from "../api/routers/status";
 import getErrorMessage from "../utils/getErrorMessage";
 import { useLoading } from "../contexts/LoadingContext";
@@ -35,6 +35,7 @@ export function useBeneficiarySecretaryStatus(beneficiaryId) {
       setBeneficiary(response);
       setSecretaryStatus(response.status?.secretaryStatus || "");
       setObservationSecretary(response.status?.observationSecretary || "");
+
     } catch (err) {
       setError(getErrorMessage(err));
       setBeneficiary(null);
@@ -56,6 +57,9 @@ export function useBeneficiarySecretaryStatus(beneficiaryId) {
 
       setBeneficiary((prev) => ({ ...prev, status: response }));
       setMessageUpdate({ type: "success", text: "Status atualizado com sucesso!" });
+      if(secretaryStatus == "Indeferido"){
+          await disableBeneficiaryById(beneficiaryId);
+      }
     } catch (err) {
       setErrorUpdate(getErrorMessage(err));
     } finally {

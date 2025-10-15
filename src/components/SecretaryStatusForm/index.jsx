@@ -19,14 +19,15 @@ export default function SecretaryStatusForm({
     <FormBox
       type="Atualizar Status Secretaria"
       icon="fas fa-file-alt"
-      color="green"
+      color="blue"
       onSubmit={handleStatusUpdate}
       message={messageStatus}
       infoBox={{
         title: "Informações para atualização",
         items: [
           "Selecione o status da secretaria.",
-          "Adicione observações se necessário."
+          "Adicione observações se necessário.",
+          "Caso mude o status pra INDEFERIDO, a conta do beneficiário será desativada."
         ],
       }}
       fields={[

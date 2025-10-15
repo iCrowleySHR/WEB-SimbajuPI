@@ -33,6 +33,7 @@ import BeneficiaryStatus from "./pages/auth/secretary/BeneficiaryStatus";
 import BeneficiariesDisabled from "./pages/auth/secretary/BeneficiariesDisabled";
 import MyHistoryWithdrawal from "./pages/auth/beneficiary/MyHistoryWithdrawal";
 import MyHistoryScheduling from "./pages/auth/beneficiary/MyHistoryScheduling";
+import ListBeneficiariesStatusUbs from "./pages/auth/secretary/ListBeneficiariesStatusUbs";
 
 function App() {
     return (
@@ -62,6 +63,7 @@ function App() {
                         <Route path="beneficiario/lista" element={<AllBeneficiaries />} />
                         <Route path="beneficiario/editar/status/:id" element={<BeneficiaryStatus />} />
                         <Route path="beneficiario/desativados" element={<BeneficiariesDisabled />} />
+                        <Route path="beneficiario/status/suspensoes/ubs" element={<ListBeneficiariesStatusUbs />} />
 
                         <Route path="configuracoes" element={<GeneralSettings />} />
 

@@ -42,7 +42,7 @@ export default function BeneficiaryHome() {
                     iconClass="fas fa-history"
                     bgColor="bg-green-600"
                     hoverColor="hover:bg-green-700"
-                    to="/beneficiario/historico"
+                    to="/beneficiario/agendamento/historico"
                 />
                 <ActionButton
                     title="Histórico de retiradas"

@@ -23,8 +23,6 @@ export default function useMyHistoryWithdrawls() {
       }
 
 
-      console.log(data)
-
       const formatted = data.map((item) => ({
         id: item.id,
         beneficiaryName: item.scheduling?.beneficiary?.user?.name || "-",

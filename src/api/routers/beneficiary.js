@@ -40,6 +40,17 @@ export const disableBeneficiaryById = async (id) => {
   return response.data?.data || [];
 }
 
+export const activedBeneficiaryById = async (id) => {
+  const response = await api.patch(`/beneficiary/activate/${id}`);
+  return response.data?.data || [];
+}
+
+
+export const getAllBeneficiariesDisabled = async () => {
+  const response = await api.get(`beneficiary/list/deactivated`);
+  return response.data?.data || [];
+}
+
 
 
 

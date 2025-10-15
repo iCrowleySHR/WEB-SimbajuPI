@@ -41,7 +41,7 @@ export default function DynamicTable({ data = [], columns = [], actions }) {
 
         <tbody className="divide-y divide-gray-200">
           {data.map((row, rowIndex) => (
-            
+
             <tr key={rowIndex} className="hover:bg-gray-50">
               {columns.map((col, colIndex) => (
                 <td
@@ -54,15 +54,29 @@ export default function DynamicTable({ data = [], columns = [], actions }) {
 
               {actions && (
                 <td className="px-6 py-4 text-sm font-semibold space-x-2">
-                  {actions.map((action, i) => (
-                    <Link
-                      key={i}
-                      to={action.getPath(row)}
-                      className="text-blue-600 hover:underline"
-                    >
-                      {action.label}
-                    </Link>
-                  ))}
+                  {actions.map((action, i) => {
+                    if (action.onClick) {
+                      return (
+                        <button
+                          key={i}
+                          onClick={() => action.onClick(row)}
+                          className="text-blue-600 hover:underline"
+                        >
+                          {action.label}
+                        </button>
+                      );
+                    } else {
+                      return (
+                        <Link
+                          key={i}
+                          to={action.getPath(row)}
+                          className="text-blue-600 hover:underline"
+                        >
+                          {action.label}
+                        </Link>
+                      );
+                    }
+                  })}
                 </td>
               )}
             </tr>

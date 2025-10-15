@@ -30,6 +30,7 @@ import SemiannualReassessment from "./pages/auth/secretary/SemiannualReassessmen
 import EditPrescription from "./pages/auth/secretary/EditPrescription";
 import DisableBeneficiaryAccount from "./pages/auth/secretary/DisableBeneficiaryAccount";
 import BeneficiaryStatus from "./pages/auth/secretary/BeneficiaryStatus";
+import BeneficiariesDisabled from "./pages/auth/secretary/BeneficiariesDisabled";
 
 function App() {
     return (
@@ -58,6 +59,7 @@ function App() {
                         <Route path="beneficiario/detalhes/:id" element={<BeneficiaryDetails />} />
                         <Route path="beneficiario/lista" element={<AllBeneficiaries />} />
                         <Route path="beneficiario/editar/status/:id" element={<BeneficiaryStatus />} />
+                        <Route path="beneficiario/desativados" element={<BeneficiariesDisabled />} />
 
                         <Route path="configuracoes" element={<GeneralSettings />} />
 

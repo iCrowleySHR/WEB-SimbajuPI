@@ -17,7 +17,7 @@ export default function BeneficiaryStatusCard({ status, nextPickup, quantity, un
           </h3>
           <div className="flex items-center">
             <span className={`px-3 py-1 rounded-full text-sm font-medium flex items-center ${colorClass}`}>
-              {status.toLowerCase() === "ativo" &&  <i class="fas fa-check-circle mr-1"></i>}
+              {status.toLowerCase() === "ativo" &&  <i className="fas fa-check-circle mr-1"></i>}
               {status}
             </span>
             <span className="ml-4 text-gray-600">

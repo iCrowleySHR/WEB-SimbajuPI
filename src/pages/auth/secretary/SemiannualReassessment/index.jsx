@@ -6,6 +6,7 @@ import { filterByNameOrCpf } from "../../../../utils/filterByNameOrCpf";
 import SearchInputBeneficiary from "../../../../components/SearchInputBeneficiary";
 import DynamicTable from "../../../../components/DynamicTable";
 import translate from "../../../../utils/translate";
+import Alert from "../../../../components/Alert";
 
 export default function SemiannualReassessment() {
   const { beneficiaries, error, message, refetch } = useAllLastCheck();
@@ -28,8 +29,8 @@ export default function SemiannualReassessment() {
         subtitle="Valide os benefícios dos pacientes, efetuando a reavaliação semestral."
         back
       />
-      {error && <p className="text-red-500 text-center mt-4">{error}</p>}
-      {message && <p className="text-gray-500 text-center mt-4">{message}</p>}
+      {message && <Alert type="success" message={message} />}
+      {error && <Alert type="error" message={error} />}
 
       <SearchInputBeneficiary
         value={searchTerm}

@@ -25,7 +25,7 @@ export default function ActionPanelSecretaryBeneficiaryDetails({ beneficiary, re
           label: "Desativar Conta",
           color: "red",
           icon: "fa-solid fa-user-xmark",
-          onClick: () => navigate(`/withdrawals/beneficiary/${beneficiary.id}`),
+          onClick: () => navigate(`/secretaria/beneficiario/desabilitar-conta/${beneficiary.id}`),
         },
         {
           label: "Atualizar Dados",

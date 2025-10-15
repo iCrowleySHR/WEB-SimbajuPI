@@ -2,6 +2,7 @@ import WithdrawalDetailsComponent from "../../../../components/WithdrawalDetails
 import Title from "../../../../components/Title";
 import { useParams } from "react-router-dom";
 import { useWithdrawalDetails } from "../../../../hook/useWithdrawalDetails";
+import Alert from "../../../../components/Alert";
 
 export default function WithdrawalDetails() {
   const { id } = useParams(); 
@@ -15,8 +16,8 @@ export default function WithdrawalDetails() {
         back="true"
       />
 
-      {error && <p className="text-red-500 text-center mt-4">{error}</p>}
-      {message && <p className="text-gray-500 text-center mt-4">{message}</p>}
+            {message && <Alert type="success" message={message} />}
+            {error && <Alert type="error" message={error} />}
 
       {withdrawal && <WithdrawalDetailsComponent withdrawal={withdrawal} />}
 

@@ -6,6 +6,7 @@ import SearchInputBeneficiary from "../../../../components/SearchInputBeneficiar
 import { filterByNameOrCpf } from "../../../../utils/filterByNameOrCpf";
 import { useUser } from "../../../../contexts/UserContext";
 import translate from "../../../../utils/translate";
+import Alert from "../../../../components/Alert";
 
 export default function AllBeneficiaries() {
   const { beneficiaries, error, message, refetch } = useAllBeneficiaries();
@@ -30,8 +31,8 @@ export default function AllBeneficiaries() {
         back="true"
       />
 
-      {error && <p className="text-red-500 text-center mt-4">{error}</p>}
-      {message && <p className="text-gray-500 text-center mt-4">{message}</p>}
+            {message && <Alert type="success" message={message} />}
+            {error && <Alert type="error" message={error} />}
 
       <SearchInputBeneficiary
         value={searchTerm}

@@ -35,7 +35,7 @@ export default function EditPrescription() {
                     prescriptionQuantity={prescriptionQuantity}
                     setPrescriptionQuantity={setPrescriptionQuantity}
                     handlePrescriptionUpdate={updatePrescription}
-                    messagePrescription={message} // alerta já funciona
+                    messagePrescription={message}
                 />
             )}
         </>

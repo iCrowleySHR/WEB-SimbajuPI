@@ -7,6 +7,7 @@ import SearchInputBeneficiary from "../../../../components/SearchInputBeneficiar
 import StatusFilter from "../../../../components/StatusFilters";
 import { useUser } from "../../../../contexts/UserContext";
 import translate from "../../../../utils/translate";
+import Alert from "../../../../components/Alert";
 
 export default function HistoryScheduling() {
   const [filterStatus, setFilterStatus] = useState("Todos");
@@ -54,8 +55,8 @@ export default function HistoryScheduling() {
       />
 
 
-      {error && <p className="text-red-500 text-center mt-4">{error}</p>}
-      {message && <p className="text-gray-500 text-center mt-4">{message}</p>}
+            {message && <Alert type="success" message={message} />}
+            {error && <Alert type="error" message={error} />}
 
       <div className="mt-4">
         <DynamicTable

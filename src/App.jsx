@@ -28,6 +28,7 @@ import HistoryWithdrawal from "./pages/auth/shared/HistoryWithdrawal";
 import WithdrawalDetails from "./pages/auth/shared/WithdrawalDetails";
 import SemiannualReassessment from "./pages/auth/secretary/SemiannualReassessment";
 import EditPrescription from "./pages/auth/secretary/EditPrescription";
+import DisableBeneficiaryAccount from "./pages/auth/secretary/DisableBeneficiaryAccount";
 
 function App() {
     return (
@@ -50,6 +51,7 @@ function App() {
                         <Route path="novo-ubs" element={<NewUbsAccount />} />
                         <Route path="novo-almoxarifado" element={<NewWareAccount />} />
                         <Route path="beneficiario/ultima-veriricacao" element={<SemiannualReassessment />} />
+                        <Route path="beneficiario/desabilitar-conta/:id" element={<DisableBeneficiaryAccount />} />
                         <Route path="beneficiario/editar/prescricao/:id" element={<EditPrescription />} />
                         <Route path="beneficiario/detalhes/:id" element={<BeneficiaryDetails />} />
                         <Route path="beneficiario/lista" element={<AllBeneficiaries />} />

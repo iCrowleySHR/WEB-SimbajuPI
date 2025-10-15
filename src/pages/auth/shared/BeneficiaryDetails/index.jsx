@@ -5,6 +5,7 @@ import BeneficiaryDetailsComponent from "../../../../components/BeneficiaryDetai
 
 import { useUser } from "../../../../contexts/UserContext"; 
 import ActionPanelSecretaryBeneficiaryDetails from "../../../../components/ActionPanelSecretaryBeneficiaryDetails";
+import Alert from "../../../../components/Alert";
 
 export default function BeneficiaryDetails() {
   const { id } = useParams();
@@ -19,8 +20,8 @@ export default function BeneficiaryDetails() {
         back="true"
       />
 
-      {error && <p className="text-red-500 text-center mt-4">{error}</p>}
-      {message && <p className="text-gray-500 text-center mt-4">{message}</p>}
+            {message && <Alert type="success" message={message} />}
+            {error && <Alert type="error" message={error} />}
 
       {beneficiary && (
         <>

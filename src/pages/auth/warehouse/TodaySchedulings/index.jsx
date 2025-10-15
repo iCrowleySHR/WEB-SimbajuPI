@@ -4,6 +4,7 @@ import DynamicTable from "../../../../components/DynamicTable";
 import useTodaySchedulings from "../../../../hook/useTodaySchedulings";
 import { filterByNameOrCpf } from "../../../../utils/filterByNameOrCpf";
 import SearchInputBeneficiary from "../../../../components/SearchInputBeneficiary";
+import Alert from "../../../../components/Alert";
 
 export default function TodaySchedulings() {
   const { schedulings, error, message, refetch } = useTodaySchedulings();
@@ -29,8 +30,8 @@ export default function TodaySchedulings() {
         back="true"
       />
 
-      {error && <p className="text-red-500 text-center mt-4">{error}</p>}
-      {message && <p className="text-gray-500 text-center mt-4">{message}</p>}
+            {message && <Alert type="success" message={message} />}
+            {error && <Alert type="error" message={error} />}
 
       <SearchInputBeneficiary
         value={searchTerm}

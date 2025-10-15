@@ -2,6 +2,7 @@ import SchedulingDetailsComponent from "../../../../components/SchedulingDetails
 import Title from "../../../../components/Title";
 import { useParams } from "react-router-dom";
 import { useSchedulingDetail } from "../../../../hook/useSchedulingDetails";
+import Alert from "../../../../components/Alert";
 
 export default function SchedulingDetails() {
   const { id } = useParams(); 
@@ -11,8 +12,8 @@ export default function SchedulingDetails() {
     <>
       <Title title="Detalhes do Agendamento" subtitle="Veja todas as informações do agendamento." back="true" />
 
-      {error && <p className="text-red-500 text-center mt-4">{error}</p>}
-      {message && <p className="text-gray-500 text-center mt-4">{message}</p>}
+            {message && <Alert type="success" message={message} />}
+            {error && <Alert type="error" message={error} />}
 
       {scheduling && <SchedulingDetailsComponent scheduling={scheduling} />}
 

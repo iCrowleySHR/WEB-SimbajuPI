@@ -34,3 +34,8 @@ export const updatePrescription = async (id, data) => {
   const response = await api.patch(`/beneficiary/secretary/update/${id}`, data);
   return response.data?.data || [];
 }
+
+export const disableBeneficiaryById = async (id) => {
+  const response = await api.patch(`/beneficiary/deactivate/${id}`);
+  return response.data?.data || [];
+}

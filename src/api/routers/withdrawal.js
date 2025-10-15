@@ -7,7 +7,14 @@ export const getAllWithdrawals = async () => {
 
 export const getWithdrawalById = async (id) => {
     const response = await api.get(`/withdrawal/show/${id}`);
-    console.log(response)
     return response.data?.data || [];
 };
+
+
+export const getMyWithdrawals = async () => {
+    const response = await api.get(`/withdrawal/my`);
+    return response.data?.data || [];
+};
+
+
 

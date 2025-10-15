@@ -31,6 +31,7 @@ import EditPrescription from "./pages/auth/secretary/EditPrescription";
 import DisableBeneficiaryAccount from "./pages/auth/secretary/DisableBeneficiaryAccount";
 import BeneficiaryStatus from "./pages/auth/secretary/BeneficiaryStatus";
 import BeneficiariesDisabled from "./pages/auth/secretary/BeneficiariesDisabled";
+import MyHistoryWithdrawal from "./pages/auth/beneficiary/MyHistoryWithdrawal";
 
 function App() {
     return (
@@ -93,6 +94,7 @@ function App() {
                     <Route path="/beneficiario" element={<PrivateRoute roles={['beneficiary']} />}>
                         <Route index element={<BeneficiaryHome />} />
                         <Route path="historico" element={<BeneficiaryHistory />} />
+                        <Route path="retirada/historico" element={<MyHistoryWithdrawal />} />
                         <Route path="cancelar-retirada" element={<CancelWithdrawal />} />
                         <Route path="reagendar-retirada" element={<ReschedulePickup />} />
                         <Route path="configuracoes" element={<BeneficiarySettings />} />

@@ -82,6 +82,7 @@ function App() {
                         <Route path="configuracoes" element={<GeneralSettings />} />
                         <Route path="agendamento/hoje" element={<TodaySchedulings />} />
                         <Route path="agendamento/lista" element={<HistoryScheduling />} />
+                        <Route path="agendamento/cancelar/:id" element={<CancelScheduling />} />
                         <Route path="agendamento/detalhes/:id" element={<SchedulingDetails />} />
                         <Route path="beneficiario/lista" element={<AllBeneficiaries />} />
                         <Route path="beneficiario/detalhes/:id" element={<BeneficiaryDetails />} />

@@ -1,24 +1,12 @@
 import ActionButton from "../../../../components/ActionButton";
 import BeneficiaryStatusCard from "../../../../components/BeneficiaryStatusCard";
-import StatsCard from "../../../../components/StatsCard";
 import Title from "../../../../components/Title";
-import { useUser } from "../../../../contexts/UserContext";
 
 export default function BeneficiaryHome() {
-    const {user} = useUser()
-    const showNewBeneficiary = () => {
-        console.log("Novo Beneficiário");
-    };
-
-    console.log(user)
-    const showReports = () => {
-        console.log("Relatórios");
-    };
 
     return (
         <>
 
-            {/* Título */}
             <Title title={"Painel do Beneficiário"} subtitle={"Gerencie seus agendamentos e acompanhe seu histórico"} />
 
             <BeneficiaryStatusCard
@@ -28,7 +16,6 @@ export default function BeneficiaryHome() {
                 unit="Fraldas/mês"
             />
 
-            {/* Botões de Ação */}
             <div className="grid md:grid-cols-3 gap-6 mb-10">
                 <ActionButton
                     title="Reagendar Retirada"

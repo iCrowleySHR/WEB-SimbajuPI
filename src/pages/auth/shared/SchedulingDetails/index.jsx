@@ -3,19 +3,32 @@ import Title from "../../../../components/Title";
 import { useParams } from "react-router-dom";
 import { useSchedulingDetail } from "../../../../hook/useSchedulingDetails";
 import Alert from "../../../../components/Alert";
+import ActionPanelWarehouseSchedulingDetails from "../../../../components/ActionPanelWarehouseSchedulingDetails";
+import { useUser } from "../../../../contexts/UserContext";
 
 export default function SchedulingDetails() {
-  const { id } = useParams(); 
+  const { id } = useParams();
+  const { user } = useUser()
   const { scheduling, error, message, refetch } = useSchedulingDetail(id);
-  
-  return (  
+
+  return (
     <>
       <Title title="Detalhes do Agendamento" subtitle="Veja todas as informações do agendamento." back="true" />
 
-            {message && <Alert type="success" message={message} />}
-            {error && <Alert type="error" message={error} />}
+      {message && <Alert type="success" message={message} />}
+      {error && <Alert type="error" message={error} />}
 
-      {scheduling && <SchedulingDetailsComponent scheduling={scheduling} />}
+      {scheduling && (
+        <>
+          {user?.role === "warehouse" && scheduling?.schedulingStatus === "Agendado" && (
+            <ActionPanelWarehouseSchedulingDetails
+              scheduling={scheduling}
+              refetch={refetch}
+            />
+          )}
+          <SchedulingDetailsComponent scheduling={scheduling} />
+        </>
+      )}
 
       <div className="text-center mt-6">
         <button

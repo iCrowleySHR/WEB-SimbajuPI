@@ -35,6 +35,7 @@ import BeneficiaryStatusSecretary from "./pages/auth/secretary/BeneficiaryStatus
 import BeneficiaryStatusUbs from "./pages/auth/ubs/BeneficiaryStatusUbs";
 import CancelScheduling from "./pages/auth/shared/CancelScheduling";
 import CancebleListScheduling from "./pages/auth/beneficiary/CancebleScheduling";
+import AusentScheduling from "./pages/auth/warehouse/AusentScheduling";
 
 
 function App() {
@@ -83,6 +84,7 @@ function App() {
                         <Route path="agendamento/hoje" element={<TodaySchedulings />} />
                         <Route path="agendamento/lista" element={<HistoryScheduling />} />
                         <Route path="agendamento/cancelar/:id" element={<CancelScheduling />} />
+                        <Route path="agendamento/ausente/:id" element={<AusentScheduling />} />
                         <Route path="agendamento/detalhes/:id" element={<SchedulingDetails />} />
                         <Route path="beneficiario/lista" element={<AllBeneficiaries />} />
                         <Route path="beneficiario/detalhes/:id" element={<BeneficiaryDetails />} />

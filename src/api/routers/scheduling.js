@@ -30,3 +30,10 @@ export const cancelScheduling = async (id) => {
     return response.data?.data || [];
 };
 
+export const ausentScheduling = async (id) => {
+    const response = await api.get(`/scheduling/update/${id}`);
+    return response.data?.data || [];
+};
+
+
+

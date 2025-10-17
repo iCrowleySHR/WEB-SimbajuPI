@@ -1,17 +1,30 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Logo from "../../../components/Logo";
 import { useAuth } from "../../../hook/useAuth";
 import { useUser } from "../../../contexts/UserContext";
+import { useLoading } from "../../../contexts/LoadingContext";
 import routeTable from "../../../utils/routeTable";
+import translate from "../../../utils/translate";
 
 export default function NavBarAuth() {
   const [isOpen, setIsOpen] = useState(false);
   const { logout } = useAuth();
   const { user } = useUser();
+  const { showLoading, hideLoading } = useLoading();
   const navigate = useNavigate();
 
-  const configRoute = user ? `${routeTable(user.role)}/configuracoes` : "/configuracoes";
+  const [userLoaded, setUserLoaded] = useState(false);
+
+  useEffect(() => {
+    if (!userLoaded) {
+      showLoading();
+      if (user) {
+        setUserLoaded(true);
+        hideLoading();
+      }
+    }
+  }, [user, userLoaded, showLoading, hideLoading]);
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -20,18 +33,21 @@ export default function NavBarAuth() {
     navigate("/");
   };
 
+  if (!userLoaded) return null; 
+
+  const configRoute = user?.role ? `${routeTable(user.role)}/configuracoes` : "/configuracoes";
+  const homeRoute = user?.role ? `/${translate(user.role).toLowerCase()}` : "/";
+
   return (
     <header className="bg-white shadow-md border-b border-gray-200">
       <div className="max-w-9/10 mx-auto px-4 py-3 flex justify-between items-center">
-        {/* Logo e título */}
-        <Link to="/" className="flex items-center space-x-3">
+        <Link to={homeRoute} className="flex items-center space-x-3">
           <Logo size={40} />
           <h1 className="text-lg sm:text-xl font-bold text-gray-800 ml-3">
             Sistema de Distribuição de Fraldas
           </h1>
         </Link>
 
-        {/* Menu Desktop */}
         <nav className="hidden md:flex items-center space-x-5">
           <Link
             to={configRoute}
@@ -47,7 +63,6 @@ export default function NavBarAuth() {
           </button>
         </nav>
 
-        {/* Botão Mobile */}
         <div className="md:hidden">
           <button
             onClick={toggleMenu}
@@ -58,7 +73,6 @@ export default function NavBarAuth() {
         </div>
       </div>
 
-      {/* Menu Mobile */}
       {isOpen && (
         <div className="md:hidden bg-white border-t border-gray-200 shadow-lg">
           <Link

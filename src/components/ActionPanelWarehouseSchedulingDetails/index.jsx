@@ -6,7 +6,7 @@ export default function ActionPanelWarehouseSchedulingDetails({ scheduling, refe
   const navigate = useNavigate();
   return (
     <ActionPanel
-      title="Ações da Secretaria"
+      title="Ações do Almoxarifado"
       actions={[
         {
           label: "Cancelar Agendamento",

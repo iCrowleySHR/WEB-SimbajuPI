@@ -6,6 +6,7 @@ import App from "./App";
 import { UserProvider } from "./contexts/UserContext";
 import { LoadingProvider, useLoading } from "./contexts/LoadingContext";
 import LoadingOverlay from "./components/LoadingOverlay";
+import ScrollToTop from "./components/ScrollToTop";
 
 function LoadingOverlayWrapper() {
   const { isLoading } = useLoading();
@@ -17,6 +18,7 @@ createRoot(document.getElementById("root")).render(
     <LoadingProvider>
       <LoadingOverlayWrapper /> 
       <BrowserRouter>
+        <ScrollToTop />
         <UserProvider>
           <App />
         </UserProvider>

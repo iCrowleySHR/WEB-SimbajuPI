@@ -7,7 +7,7 @@ export default function LayoutPrivate() {
         <>
             <NavBarAuth />
             <main className="container mx-auto px-4 py-8 bg-gray-100 max-w-full fade-in min-h-screen" >
-                <div className="max-w-9/10 mx-auto">
+                <div className="max-w-6xl  mx-auto">
                     <Outlet />
                 </div>
             </main>

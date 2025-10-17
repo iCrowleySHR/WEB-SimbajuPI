@@ -2,7 +2,7 @@ export default function LoadingOverlay({ isLoading }) {
   if (!isLoading) return null;
 
   return (
-    <div className="fixed inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center z-50">
+    <div className="fixed inset-0 bg-gray-50  flex items-center justify-center z-50">
       <div className="flex flex-col items-center space-y-4">
         {/* Spinner azul elegante */}
         <div className="relative">

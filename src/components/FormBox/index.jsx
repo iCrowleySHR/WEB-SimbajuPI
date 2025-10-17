@@ -1,14 +1,14 @@
 import React from "react";
 import Alert from "../Alert";
 
-export default function FormBox({ 
-  type, 
-  icon, 
-  color = "blue", 
-  fields = [], 
-  message, 
-  onSubmit, 
-  infoBox 
+export default function FormBox({
+  type,
+  icon,
+  color = "blue",
+  fields = [],
+  message,
+  onSubmit,
+  infoBox
 }) {
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -28,72 +28,89 @@ export default function FormBox({
   const renderField = (field, index) => {
     const fieldClass = `mb-6 p-4 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-200`;
 
-    switch (field.type) {
-      case "select":
-        return (
-          <div key={index} className={fieldClass}>
-            <label className="block text-gray-800 font-semibold mb-3 text-sm">{field.label}</label>
-            <select
-              value={field.value}
-              onChange={field.onChange}
-              className={`${inputClass} focus:ring-${color}-400`}
-              required={field.required !== false}
-            >
-              <option value="" disabled>{field.placeholder || "Selecione"}</option>
-              {field.options.map((opt, i) => (
-                <option key={i} value={opt.value}>
-                  {opt.label}
-                </option>
-              ))}
-            </select>
-          </div>
-        );
-
-      case "textarea":
-        return (
-          <div key={index} className={fieldClass}>
-            <label className="block text-gray-800 font-semibold mb-3 text-sm">{field.label}</label>
-            <textarea
-              value={field.value}
-              onChange={field.onChange}
-              placeholder={field.placeholder || ""}
-              className={`${inputClass} focus:ring-${color}-400 resize-none h-32`}
-              required={field.required !== false}
-            />
-          </div>
-        );
-
-      case "file":
-        return (
-          <div key={index} className={fieldClass}>
-            <label className="block text-gray-800 font-semibold mb-3 text-sm">{field.label}</label>
+    if (field.type === "checkbox") {
+      return (
+        <div key={index} className={fieldClass}>
+          <label className="flex items-center space-x-2">
             <input
-              type="file"
+              type="checkbox"
+              checked={field.checked} // ✅ usar checked
               onChange={field.onChange}
-              className="w-full text-sm text-gray-600 file:mr-4 file:py-3 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-gray-100 file:text-gray-700 hover:file:bg-gray-200 transition-colors"
-              multiple={field.multiple || false}
-              required={field.required !== false}
+              className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-400"
             />
-          </div>
-        );
-
-      default:
-        return (
-          <div key={index} className={fieldClass}>
-            <label className="block text-gray-800 font-semibold mb-3 text-sm">{field.label}</label>
-            <input
-              type={field.type}
-              value={field.value}
-              onChange={field.onChange}
-              placeholder={field.placeholder || ""}
-              className={`${inputClass} focus:ring-${color}-400`}
-              required={field.required !== false}
-              min={field.min}
-            />
-          </div>
-        );
+            <span className="text-gray-800 font-semibold">{field.label}</span>
+          </label>
+        </div>
+      );
     }
+
+    if (field.type === "select") {
+      return (
+        <div key={index} className={fieldClass}>
+          <label className="block text-gray-800 font-semibold mb-3 text-sm">{field.label}</label>
+          <select
+            value={field.value}
+            onChange={field.onChange}
+            className={`${inputClass} focus:ring-${color}-400`}
+            required={field.required !== false}
+          >
+            <option value="" disabled>{field.placeholder || "Selecione"}</option>
+            {field.options.map((opt, i) => (
+              <option key={i} value={opt.value}>
+                {opt.label}
+              </option>
+            ))}
+          </select>
+        </div>
+      );
+    }
+
+    if (field.type === "textarea") {
+      return (
+        <div key={index} className={fieldClass}>
+          <label className="block text-gray-800 font-semibold mb-3 text-sm">{field.label}</label>
+          <textarea
+            value={field.value}
+            onChange={field.onChange}
+            placeholder={field.placeholder || ""}
+            className={`${inputClass} focus:ring-${color}-400 resize-none h-32`}
+            required={field.required !== false}
+          />
+        </div>
+      );
+    }
+
+    if (field.type === "file") {
+      return (
+        <div key={index} className={fieldClass}>
+          <label className="block text-gray-800 font-semibold mb-3 text-sm">{field.label}</label>
+          <input
+            type="file"
+            onChange={field.onChange}
+            className="w-full text-sm text-gray-600 file:mr-4 file:py-3 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-gray-100 file:text-gray-700 hover:file:bg-gray-200 transition-colors"
+            multiple={field.multiple || false}
+            required={field.required !== false}
+          />
+        </div>
+      );
+    }
+
+    return (
+      <div key={index} className={fieldClass}>
+        <label className="block text-gray-800 font-semibold mb-3 text-sm">{field.label}</label>
+        <input
+          type={field.type}
+          value={field.value}
+          onChange={field.onChange}
+          placeholder={field.placeholder || ""}
+          className={`${inputClass} focus:ring-${color}-400`}
+          required={field.required !== false}
+          min={field.min}
+        />
+      </div>
+    );
   };
+
 
   const renderInfoBox = () => {
     if (!infoBox) return null;

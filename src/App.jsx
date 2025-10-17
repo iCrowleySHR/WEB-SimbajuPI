@@ -36,6 +36,7 @@ import BeneficiaryStatusUbs from "./pages/auth/ubs/BeneficiaryStatusUbs";
 import CancelScheduling from "./pages/auth/shared/CancelScheduling";
 import CancebleListScheduling from "./pages/auth/beneficiary/CancebleScheduling";
 import AusentScheduling from "./pages/auth/warehouse/AusentScheduling";
+import WarehouseConfig from "./pages/auth/warehouse/WarehouseConfig";
 
 
 function App() {
@@ -81,6 +82,7 @@ function App() {
                     <Route path="/almoxarifado"  element={<PrivateRoute roles={['warehouse']} />}>
                         <Route index element={<WarehouseHome />} />
                         <Route path="configuracoes" element={<GeneralSettings />} />
+                        <Route path="configuracoes/funcionamento" element={<WarehouseConfig />} />
                         <Route path="agendamento/hoje" element={<TodaySchedulings />} />
                         <Route path="agendamento/lista" element={<HistoryScheduling />} />
                         <Route path="agendamento/cancelar/:id" element={<CancelScheduling />} />

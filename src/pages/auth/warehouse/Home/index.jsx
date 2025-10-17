@@ -82,6 +82,15 @@ export default function WarehouseHome() {
           hoverColor="hover:bg-blue-700"
           to={"/almoxarifado/agendamento/lista"}
         />
+
+        <ActionButton
+          title="Configurações de funcionamento"
+          description="Configure o horário de funcionamento da unidade."
+          iconClass="fas fa-calendar-check"
+          bgColor="bg-purple-600"
+          hoverColor="hover:bg-purple-700"
+          to={"/almoxarifado/configuracoes/funcionamento"}
+        />
       </div>
     </>
   );

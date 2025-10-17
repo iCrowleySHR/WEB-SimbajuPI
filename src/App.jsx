@@ -15,7 +15,6 @@ import BeneficiaryHome from "./pages/auth/beneficiary/Home";
 import NewBeneficiaryAccount from "./pages/auth/secretary/NewBeneficiaryAccount";
 import NewUbsAccount from "./pages/auth/secretary/NewUbsAccount";
 import NewWareAccount from "./pages/auth/secretary/NewWareAccount";
-import CancelWithdrawal from "./pages/auth/beneficiary/CancelWithdrawal";
 import BeneficiaryDetails from "./pages/auth/shared/BeneficiaryDetails";
 import ReschedulePickup from "./pages/auth/beneficiary/ReschedulePickup";
 import PrivateRoute from "./components/PrivateRoute";
@@ -34,6 +33,9 @@ import MyHistoryScheduling from "./pages/auth/beneficiary/MyHistoryScheduling";
 import ListBeneficiariesStatusUbs from "./pages/auth/secretary/ListBeneficiariesStatusUbs";
 import BeneficiaryStatusSecretary from "./pages/auth/secretary/BeneficiaryStatusSecretary";
 import BeneficiaryStatusUbs from "./pages/auth/ubs/BeneficiaryStatusUbs";
+import CancelScheduling from "./pages/auth/shared/CancelScheduling";
+import CancebleListScheduling from "./pages/auth/beneficiary/CancebleScheduling";
+
 
 function App() {
     return (
@@ -102,8 +104,9 @@ function App() {
                         <Route index element={<BeneficiaryHome />} />
                         <Route path="retirada/historico" element={<MyHistoryWithdrawal />} />
                         <Route path="agendamento/historico" element={<MyHistoryScheduling />} />
-                        <Route path="cancelar-retirada" element={<CancelWithdrawal />} />
-                        <Route path="reagendar-retirada" element={<ReschedulePickup />} />
+                        <Route path="agendamento/cancelaveis" element={<CancebleListScheduling />} />
+                        <Route path="agendamento/cancelar/:id" element={<CancelScheduling />} />
+                        <Route path="reagendar-agendamento" element={<ReschedulePickup />} />
                         <Route path="configuracoes" element={<BeneficiarySettings />} />
                     </Route>
                 </Route>

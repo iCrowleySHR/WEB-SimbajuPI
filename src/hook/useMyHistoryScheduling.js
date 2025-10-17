@@ -24,6 +24,7 @@ export default function useMyHistoryScheduling() {
 
 
             const formatted = data.map((item) => ({
+                id: item.id,
                 beneficiaryName: item.beneficiary?.user?.name || "-",
                 cpf: item.beneficiary?.cpf ? maskCpf(item.beneficiary.cpf) : "-",
                 dateTime: item.dateTime

@@ -1,6 +1,6 @@
 
 const translations = {
-  beneficiary: "Beneficiário",
+  beneficiary: "Beneficiario",
   ubs: "UBS",
   warehouse: "Almoxarifado",
   secretary: "Secretaria",

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getSchedulingById } from "../api/routers/scheduling"; // função da API
+import { getSchedulingById } from "../api/routers/scheduling";
 import { useLoading } from "../contexts/LoadingContext";
 import getErrorMessage from "../utils/getErrorMessage";
 

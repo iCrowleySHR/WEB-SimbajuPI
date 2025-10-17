@@ -53,12 +53,12 @@ export default function BeneficiaryHome() {
                     to="/beneficiario/retirada/historico"
                 />
                 <ActionButton
-                    title="Cancelar retirada"
-                    description="Cancele sua retirada."
+                    title="Cancelar Agendamento"
+                    description="Cancele seu agendamento."
                     iconClass="fas fa-xmark"
                     bgColor="bg-red-800"
                     hoverColor="hover:bg-red-900"
-                    to={"/beneficiario/cancelar-retirada"}
+                    to={"/beneficiario/agendamento/cancelaveis"}
                 />
             </div>
         </>

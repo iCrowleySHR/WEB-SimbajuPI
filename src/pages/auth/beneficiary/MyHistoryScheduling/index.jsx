@@ -2,11 +2,11 @@ import Title from "../../../../components/Title";
 import DynamicTable from "../../../../components/DynamicTable";
 import Alert from "../../../../components/Alert";
 import useMyHistoryScheduling from "../../../../hook/useMyHistoryScheduling";
-import formatDate from "../../../../utils/formatDate";
 
 export default function MyHistoryScheduling() {
     const { schedulings, error, message, refetch } = useMyHistoryScheduling();
     const columns = [
+        { label: "ID", accessor: "id" },
         { label: "Nome", accessor: "beneficiaryName" },
         { label: "CPF", accessor: "cpf" },
         { label: "Data e Hora", accessor: "dateTime" },
@@ -28,6 +28,7 @@ export default function MyHistoryScheduling() {
                 <DynamicTable
                     data={schedulings}
                     columns={columns}
+        
                 />
             </div>
 

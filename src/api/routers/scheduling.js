@@ -25,4 +25,8 @@ export const getMySchedulings = async () => {
     return response.data?.data || [];
 };
 
+export const cancelScheduling = async (id) => {
+    const response = await api.get(`/scheduling/cancel/${id}`);
+    return response.data?.data || [];
+};
 

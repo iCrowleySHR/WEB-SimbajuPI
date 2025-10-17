@@ -1,7 +1,9 @@
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 export default function BackPage({ label = "Voltar", to = null, className = "" }) {
     const navigate = useNavigate();
+    const [shouldScrollTop, setShouldScrollTop] = useState(false);
 
     const handleClick = () => {
         if (to) {
@@ -9,7 +11,15 @@ export default function BackPage({ label = "Voltar", to = null, className = "" }
         } else {
             navigate(-1);
         }
+        setShouldScrollTop(true); 
     };
+
+    useEffect(() => {
+        if (shouldScrollTop) {
+            window.scrollTo(0, 0);
+            setShouldScrollTop(false);
+        }
+    }, [shouldScrollTop]);
 
     return (
         <button

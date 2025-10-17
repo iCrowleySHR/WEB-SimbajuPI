@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getBeneficiaryById } from "../api/routers/beneficiary";
+import { getBeneficiaryById, getMyBeneficiaryData } from "../api/routers/beneficiary";
 import { useLoading } from "../contexts/LoadingContext";
 import getErrorMessage from "../utils/getErrorMessage";
 
@@ -15,7 +15,12 @@ export function useBeneficiaryDetail(beneficiaryId) {
       setMessage("");
       showLoading();
 
-      const response = await getBeneficiaryById(id);
+      let response;
+      if (id) {
+        response = await getBeneficiaryById(id);
+      } else {
+        response = await getMyBeneficiaryData();
+      }
 
       if (!response) {
         setMessage("Beneficiário não encontrado.");
@@ -32,8 +37,13 @@ export function useBeneficiaryDetail(beneficiaryId) {
   };
 
   useEffect(() => {
-    if (beneficiaryId) fetchBeneficiary(beneficiaryId);
+    fetchBeneficiary(beneficiaryId);
   }, [beneficiaryId]);
 
-  return { beneficiary, error, message, refetch: () => fetchBeneficiary(beneficiaryId) };
+  return { 
+    beneficiary, 
+    error, 
+    message, 
+    refetch: () => fetchBeneficiary(beneficiaryId) 
+  };
 }

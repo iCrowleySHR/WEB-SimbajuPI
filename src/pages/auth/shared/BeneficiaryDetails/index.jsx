@@ -21,8 +21,8 @@ export default function BeneficiaryDetails() {
         back="true"
       />
 
-            {message && <Alert type="success" message={message} />}
-            {error && <Alert type="error" message={error} />}
+      {message && <Alert type="success" message={message} />}
+      {error && <Alert type="error" message={error} />}
 
       {beneficiary && (
         <>

@@ -2,13 +2,15 @@ import ActionButton from "../../../../components/ActionButton";
 import BeneficiaryStatusCard from "../../../../components/BeneficiaryStatusCard";
 import StatsCard from "../../../../components/StatsCard";
 import Title from "../../../../components/Title";
+import { useUser } from "../../../../contexts/UserContext";
 
 export default function BeneficiaryHome() {
+    const {user} = useUser()
     const showNewBeneficiary = () => {
         console.log("Novo Beneficiário");
     };
 
-
+    console.log(user)
     const showReports = () => {
         console.log("Relatórios");
     };
@@ -59,6 +61,15 @@ export default function BeneficiaryHome() {
                     bgColor="bg-red-800"
                     hoverColor="hover:bg-red-900"
                     to={"/beneficiario/agendamento/cancelaveis"}
+                />
+
+                <ActionButton
+                    title="Seus dados"
+                    description="Veja seus dados e status."
+                    iconClass="fas fa-xmark"
+                    bgColor="bg-blue-600"
+                    hoverColor="hover:bg-blue-700"
+                    to={"/beneficiario/dados"}
                 />
             </div>
         </>

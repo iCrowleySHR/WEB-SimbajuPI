@@ -3,7 +3,7 @@ import DynamicTable from "../../../../components/DynamicTable";
 import Alert from "../../../../components/Alert";
 import translate from "../../../../utils/translate";
 import { useUser } from "../../../../contexts/UserContext";
-import useCancebleListScheduling from "../../../../hook/useCancebleListScheduling";
+import useCancebleListScheduling from "../../../../hook/useCancebleScheduling";
 
 export default function CancebleListScheduling() {
   const { schedulings, error, message, refetch } = useCancebleListScheduling();

@@ -103,6 +103,7 @@ function App() {
                     <Route path="/beneficiario" element={<PrivateRoute roles={['beneficiary']} />}>
                         <Route index element={<BeneficiaryHome />} />
                         <Route path="retirada/historico" element={<MyHistoryWithdrawal />} />
+                        <Route path="dados" element={<BeneficiaryDetails />} />
                         <Route path="agendamento/historico" element={<MyHistoryScheduling />} />
                         <Route path="agendamento/cancelaveis" element={<CancebleListScheduling />} />
                         <Route path="agendamento/cancelar/:id" element={<CancelScheduling />} />

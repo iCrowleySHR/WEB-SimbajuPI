@@ -15,7 +15,6 @@ export default function BeneficiaryDetailsComponent({ beneficiary }) {
 
       {user && (
         <div className="md:col-span-2">
-          <h2 className="text-lg font-semibold mb-3">Detalhes de Usuário do Beneficiário</h2>
           <UserDetailsComponent user={user} />
         </div>
       )}

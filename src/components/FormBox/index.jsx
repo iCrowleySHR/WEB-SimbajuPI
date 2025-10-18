@@ -155,11 +155,15 @@ export default function FormBox({
 
   return (
     <div className="bg-gradient-to-br from-white to-gray-50 rounded-3xl shadow-lg p-8 mb-8 border border-gray-100">
-      <div className="text-center mb-8">
-        {icon && <i className={`${icon} text-4xl text-${color}-600 mb-4`}></i>}
+      <div className="flex items-center mb-8">
+        {icon && (
+          <span className={`p-2 rounded-full bg-${color}-100 mr-5`}>
+            <i className={`${icon} text-2xl text-${color}-600`}></i>
+          </span>
+        )}
         <h2 className="text-3xl font-bold text-gray-900">{type}</h2>
-        <div className="w-20 h-1 bg-gradient-to-r from-gray-300 to-transparent mx-auto mt-4 rounded-full"></div>
       </div>
+
 
       <form onSubmit={handleSubmit} className="space-y-2">
         {fields.map(renderField)}

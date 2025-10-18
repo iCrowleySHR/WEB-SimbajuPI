@@ -16,7 +16,6 @@ import NewBeneficiaryAccount from "./pages/auth/secretary/NewBeneficiaryAccount"
 import NewUbsAccount from "./pages/auth/secretary/NewUbsAccount";
 import NewWareAccount from "./pages/auth/secretary/NewWareAccount";
 import BeneficiaryDetails from "./pages/auth/shared/BeneficiaryDetails";
-import ReschedulePickup from "./pages/auth/beneficiary/ReschedulePickup";
 import PrivateRoute from "./components/PrivateRoute";
 import BeneficiarySettings from "./pages/auth/beneficiary/BeneficiarySettings";
 import SchedulingDetails from "./pages/auth/shared/SchedulingDetails";

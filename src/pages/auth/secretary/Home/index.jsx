@@ -79,7 +79,7 @@ export default function SecretaryHome() {
           iconClass="fas fa-chart-bar"
           bgColor="bg-purple-600"
           hoverColor="hover:bg-purple-700"
-          onClick={showReports}
+          to={"/secretaria/relatorios"}
         />
         <ActionButton
           title="Criar Contas Administrativas"

@@ -24,7 +24,7 @@ export const UserProvider = ({ children }) => {
       setUser(response.data);
     } catch (err) {
       setUser(null);
-      localStorage.removeItem("token"); // evita loop infinito
+      localStorage.removeItem("token"); 
     } finally {
       setLoading(false);
       hideLoading();

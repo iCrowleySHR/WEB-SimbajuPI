@@ -37,6 +37,7 @@ import CancelScheduling from "./pages/auth/shared/CancelScheduling";
 import CancebleListScheduling from "./pages/auth/beneficiary/CancebleScheduling";
 import AusentScheduling from "./pages/auth/warehouse/AusentScheduling";
 import WarehouseConfig from "./pages/auth/warehouse/WarehouseConfig";
+import Reports from "./pages/auth/secretary/Reports";
 
 
 function App() {
@@ -70,6 +71,8 @@ function App() {
                         <Route path="beneficiario/status/suspensoes/ubs" element={<ListBeneficiariesStatusUbs />} />
 
                         <Route path="configuracoes" element={<GeneralSettings />} />
+
+                        <Route path="relatorios" element={<Reports />} />
 
                         <Route path="agendamento/lista" element={<HistoryScheduling />} />
                         <Route path="agendamento/detalhes/:id" element={<SchedulingDetails />} />

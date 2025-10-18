@@ -31,7 +31,7 @@ export default function ActionButton({
       `}
     >
 
-      <div className="absolute inset-0 opacity-10 bg-gradient-to-br from-white/40 to-transparent group-hover:opacity-20 transition-opacity"></div>
+      <div className="absolute inset-0 opacity-10 bg-gradient-to-br from-white/40 to-transparent group-hover:opacity-20 transition-opacity cursor-pointer"></div>
 
       <div className="p-3 bg-white/20 rounded-xl backdrop-blur-sm group-hover:scale-110 transition-transform duration-300">
         <i className={`${iconClass} text-2xl`}></i>

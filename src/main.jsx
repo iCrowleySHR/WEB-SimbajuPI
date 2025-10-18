@@ -13,6 +13,7 @@ function LoadingOverlayWrapper() {
   return <LoadingOverlay isLoading={isLoading} />;
 }
 
+
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <LoadingProvider>

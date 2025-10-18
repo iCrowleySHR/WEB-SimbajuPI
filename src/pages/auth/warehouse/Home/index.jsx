@@ -45,6 +45,7 @@ export default function WarehouseHome() {
           iconClass="fas fa-hand-holding"
           bgColor="bg-green-600"
           hoverColor="hover:bg-green-700"
+          to={"/almoxarifado/retirada/registrar"}
         />
 
         <ActionButton

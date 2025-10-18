@@ -10,11 +10,12 @@ export const getWithdrawalById = async (id) => {
     return response.data?.data || [];
 };
 
-
 export const getMyWithdrawals = async () => {
     const response = await api.get(`/withdrawal/my`);
     return response.data?.data || [];
 };
 
-
-
+export const storeWithdrawal = async (data) => {
+    const response = await api.post(`/withdrawal`, data);
+    return response.data?.data || [];
+};

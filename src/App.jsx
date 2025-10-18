@@ -38,6 +38,7 @@ import AusentScheduling from "./pages/auth/warehouse/AusentScheduling";
 import WarehouseConfig from "./pages/auth/warehouse/WarehouseConfig";
 import Reports from "./pages/auth/secretary/Reports";
 import MakeScheduling from "./pages/auth/shared/MakeScheduling";
+import MakeWithdrawal from "./pages/auth/warehouse/MakeWithdrawal";
 
 
 function App() {
@@ -98,6 +99,7 @@ function App() {
                         <Route path="beneficiario/detalhes/:id" element={<BeneficiaryDetails />} />
 
                         <Route path="retirada/lista" element={<HistoryWithdrawal />} />
+                        <Route path="retirada/registrar" element={<MakeWithdrawal />} />
                         <Route path="retirada/detalhes/:id" element={<WithdrawalDetails />} />
                     </Route>
 

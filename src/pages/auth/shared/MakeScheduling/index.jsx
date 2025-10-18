@@ -3,10 +3,13 @@ import { useScheduling } from "../../../../hook/useSchedulingForm";
 import { useUser } from "../../../../contexts/UserContext";
 import SchedulingForm from "../../../../components/SchedulingForm";
 import Title from "../../../../components/Title";
+import BusinessHours from "../../../../components/BusinessHours";
+import { useWarehouseConfig } from "../../../../hook/useWarehouseConfig";
 
 export default function MakeScheduling() {
   const { user } = useUser();
   const { id: urlId } = useParams(); 
+const { data } = useWarehouseConfig();
 
   const {
     beneficiaries,
@@ -39,6 +42,8 @@ export default function MakeScheduling() {
         message={message}
         handleSubmit={handleMakeScheduling}
       />
+
+        <BusinessHours data={data}  />
     </>
   );
 }

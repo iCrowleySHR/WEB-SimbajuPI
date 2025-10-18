@@ -18,11 +18,10 @@ export default function WarehouseConfig() {
                 subtitle="Configure os horários de funcionamento da unidade."
                 back={true}
             />
-<div className="mb-5">
-<BusinessHours data={data} onSelectDay={setSelectedDayId}  />
+            <div className="mb-5">
+                <BusinessHours data={data} onSelectDay={setSelectedDayId} />
+            </div>
 
-</div>
-            
             <BusinessHoursForm
                 schedule={data}
                 updateConfig={updateConfig}

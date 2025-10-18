@@ -12,6 +12,14 @@ export default function BeneficiaryDetailsComponent({ beneficiary }) {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+
+      {user && (
+        <div className="md:col-span-2">
+          <h2 className="text-lg font-semibold mb-3">Detalhes de Usuário do Beneficiário</h2>
+          <UserDetailsComponent user={user} />
+        </div>
+      )}
+
       <DetailField label="ID" value={beneficiary.id} />
       <DetailField label="Nome do Responsável" value={beneficiary.nameResponsible} />
       <DetailField label="CPF" value={maskCpf(beneficiary.cpf)} />
@@ -42,12 +50,7 @@ export default function BeneficiaryDetailsComponent({ beneficiary }) {
         value={beneficiary.deleted_at ? formatDate(beneficiary.deleted_at) : "Não"}
       />
 
-      {user && (
-        <div className="md:col-span-2">
-          <h2 className="text-lg font-semibold mb-3">Detalhes de Usuário do Beneficiário</h2>
-          <UserDetailsComponent user={user} />
-        </div>
-      )}
+
 
       {locate && (
         <div className="md:col-span-2">

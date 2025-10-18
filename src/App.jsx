@@ -38,6 +38,7 @@ import CancebleListScheduling from "./pages/auth/beneficiary/CancebleScheduling"
 import AusentScheduling from "./pages/auth/warehouse/AusentScheduling";
 import WarehouseConfig from "./pages/auth/warehouse/WarehouseConfig";
 import Reports from "./pages/auth/secretary/Reports";
+import MakeScheduling from "./pages/auth/shared/MakeScheduling";
 
 
 function App() {
@@ -86,13 +87,17 @@ function App() {
                         <Route index element={<WarehouseHome />} />
                         <Route path="configuracoes" element={<GeneralSettings />} />
                         <Route path="configuracoes/funcionamento" element={<WarehouseConfig />} />
+
                         <Route path="agendamento/hoje" element={<TodaySchedulings />} />
+                        <Route path="agendamento/criar/:id?" element={<MakeScheduling />} />
                         <Route path="agendamento/lista" element={<HistoryScheduling />} />
                         <Route path="agendamento/cancelar/:id" element={<CancelScheduling />} />
                         <Route path="agendamento/ausente/:id" element={<AusentScheduling />} />
                         <Route path="agendamento/detalhes/:id" element={<SchedulingDetails />} />
+
                         <Route path="beneficiario/lista" element={<AllBeneficiaries />} />
                         <Route path="beneficiario/detalhes/:id" element={<BeneficiaryDetails />} />
+
                         <Route path="retirada/lista" element={<HistoryWithdrawal />} />
                         <Route path="retirada/detalhes/:id" element={<WithdrawalDetails />} />
                     </Route>
@@ -101,6 +106,7 @@ function App() {
                     <Route path="/ubs"  element={<PrivateRoute roles={['ubs']} />}>
                         <Route index element={<UbsHome />} />
                         <Route path="configuracoes" element={<GeneralSettings />} />
+
                         <Route path="beneficiario/detalhes/:id" element={<BeneficiaryDetails />} />
                         <Route path="beneficiario/lista" element={<AllBeneficiaries />} />
                         <Route path="beneficiario/ultima-veriricacao" element={<SemiannualReassessment />} />
@@ -111,11 +117,14 @@ function App() {
                     <Route path="/beneficiario" element={<PrivateRoute roles={['beneficiary']} />}>
                         <Route index element={<BeneficiaryHome />} />
                         <Route path="retirada/historico" element={<MyHistoryWithdrawal />} />
+
                         <Route path="dados" element={<BeneficiaryDetails />} />
+
                         <Route path="agendamento/historico" element={<MyHistoryScheduling />} />
                         <Route path="agendamento/cancelaveis" element={<CancebleListScheduling />} />
                         <Route path="agendamento/cancelar/:id" element={<CancelScheduling />} />
                         <Route path="reagendar-agendamento" element={<ReschedulePickup />} />
+
                         <Route path="configuracoes" element={<BeneficiarySettings />} />
                     </Route>
                 </Route>

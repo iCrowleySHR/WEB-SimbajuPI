@@ -9,7 +9,7 @@ export default function LandingPage() {
   const features = [
     { icon: "fas fa-file-medical", title: "Solicitação", description: "Avaliação médica na UBS ou processo judicial para pacientes com necessidades especiais como AVC, tetraplegia, etc.", bgColor: "bg-blue-50", iconBg: "bg-blue-600" },
     { icon: "fas fa-user-check", title: "Cadastro", description: "Após aprovação, cadastro no sistema com envio de credenciais por e-mail para acesso do beneficiário.", bgColor: "bg-green-50", iconBg: "bg-green-600" },
-    { icon: "fas fa-calendar-alt", title: "Agendamento", description: "Agendamento automático das retiradas com notificações por WhatsApp e e-mail. Possibilidade de reagendamento.", bgColor: "bg-purple-50", iconBg: "bg-purple-600" },
+    { icon: "fas fa-calendar-alt", title: "Agendamento", description: "Agendamento automático das retiradas com notificações por e-mail. Possibilidade de reagendamento.", bgColor: "bg-purple-50", iconBg: "bg-purple-600" },
   ];
 
   const processSteps = [

@@ -1,5 +1,7 @@
-import React from "react";
+import { useState } from "react";
 import Alert from "../Alert";
+import Select from "react-select";
+import AutocompleteField from "../AutoComplete";
 
 export default function FormBox({
   type,
@@ -26,15 +28,17 @@ export default function FormBox({
     "w-full p-4 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:shadow-sm transition-all duration-200";
 
   const renderField = (field, index) => {
-    const fieldClass = `mb-6 p-4 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-200`;
+    const fieldClass =
+      "mb-6 p-4 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-200";
 
+    // ✅ Campo de checkbox
     if (field.type === "checkbox") {
       return (
         <div key={index} className={fieldClass}>
           <label className="flex items-center space-x-2">
             <input
               type="checkbox"
-              checked={field.checked} // ✅ usar checked
+              checked={field.checked}
               onChange={field.onChange}
               className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-400"
             />
@@ -44,17 +48,22 @@ export default function FormBox({
       );
     }
 
+    // ✅ Campo select normal
     if (field.type === "select") {
       return (
         <div key={index} className={fieldClass}>
-          <label className="block text-gray-800 font-semibold mb-3 text-sm">{field.label}</label>
+          <label className="block text-gray-800 font-semibold mb-3 text-sm">
+            {field.label}
+          </label>
           <select
             value={field.value}
             onChange={field.onChange}
             className={`${inputClass} focus:ring-${color}-400`}
             required={field.required !== false}
           >
-            <option value="" disabled>{field.placeholder || "Selecione"}</option>
+            <option value="" disabled>
+              {field.placeholder || "Selecione"}
+            </option>
             {field.options.map((opt, i) => (
               <option key={i} value={opt.value}>
                 {opt.label}
@@ -65,10 +74,17 @@ export default function FormBox({
       );
     }
 
+    if (field.type === "autocomplete") {
+      return <AutocompleteField key={index} field={field} value={field.value} onChange={field.onChange} color={color} />;
+    }
+
+    // ✅ Campo textarea
     if (field.type === "textarea") {
       return (
         <div key={index} className={fieldClass}>
-          <label className="block text-gray-800 font-semibold mb-3 text-sm">{field.label}</label>
+          <label className="block text-gray-800 font-semibold mb-3 text-sm">
+            {field.label}
+          </label>
           <textarea
             value={field.value}
             onChange={field.onChange}
@@ -80,10 +96,13 @@ export default function FormBox({
       );
     }
 
+    // ✅ Campo file
     if (field.type === "file") {
       return (
         <div key={index} className={fieldClass}>
-          <label className="block text-gray-800 font-semibold mb-3 text-sm">{field.label}</label>
+          <label className="block text-gray-800 font-semibold mb-3 text-sm">
+            {field.label}
+          </label>
           <input
             type="file"
             onChange={field.onChange}
@@ -95,9 +114,12 @@ export default function FormBox({
       );
     }
 
+    // ✅ Campo padrão (input normal)
     return (
       <div key={index} className={fieldClass}>
-        <label className="block text-gray-800 font-semibold mb-3 text-sm">{field.label}</label>
+        <label className="block text-gray-800 font-semibold mb-3 text-sm">
+          {field.label}
+        </label>
         <input
           type={field.type}
           value={field.value}
@@ -110,7 +132,6 @@ export default function FormBox({
       </div>
     );
   };
-
 
   const renderInfoBox = () => {
     if (!infoBox) return null;

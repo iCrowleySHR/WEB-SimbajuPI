@@ -26,17 +26,17 @@ export default function WarehouseHome() {
           value="0"
           iconClass="fas fa-exclamation-triangle"
           iconColor="#ab000b"
-          extra="fraldas distribuídas"
         />
       </div>
 
       <div className="grid md:grid-cols-3 gap-6 mb-10">
         <ActionButton
-          title="Primeiro Agendamento"
-          description="Registre o primeiro agendamento"
+          title="Marcar Agendamento"
+          description="Registre um agendamento para o beneficiário"
           iconClass="fas fa-plus"
           bgColor="bg-blue-600"
           hoverColor="hover:bg-blue-700"
+          to={"/almoxarifado/agendamento/criar"}
         />
 
         <ActionButton

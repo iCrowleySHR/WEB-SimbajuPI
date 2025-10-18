@@ -35,5 +35,11 @@ export const ausentScheduling = async (id) => {
     return response.data?.data || [];
 };
 
+export const makeScheduling = async (data) => {
+    const response = await api.post(`scheduling/store`, data);
+    return response.data?.data || [];
+};
+
+
 
 

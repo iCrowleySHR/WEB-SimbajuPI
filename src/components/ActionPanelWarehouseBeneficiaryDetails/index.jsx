@@ -6,7 +6,7 @@ export default function ActionPanelWarehouseBeneficiaryDetails({ beneficiary, re
 
   return (
     <ActionPanel
-      title="Ações do almoxarifado"
+      title="Ações do Almoxarifado"
       actions={[
         {
           label: "Criar Agendamento",

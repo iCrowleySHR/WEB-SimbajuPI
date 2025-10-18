@@ -121,9 +121,9 @@ function App() {
                         <Route path="dados" element={<BeneficiaryDetails />} />
 
                         <Route path="agendamento/historico" element={<MyHistoryScheduling />} />
+                        <Route path="agendamento/criar" element={<MakeScheduling />} />
                         <Route path="agendamento/cancelaveis" element={<CancebleListScheduling />} />
                         <Route path="agendamento/cancelar/:id" element={<CancelScheduling />} />
-                        <Route path="reagendar-agendamento" element={<ReschedulePickup />} />
 
                         <Route path="configuracoes" element={<BeneficiarySettings />} />
                     </Route>

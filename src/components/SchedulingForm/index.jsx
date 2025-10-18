@@ -8,6 +8,7 @@ export default function SchedulingForm(props) {
         time, setTime,
         id, setId,
         beneficiaries = [],
+        availableTimes = [],
         message,
         handleSubmit
     } = props;
@@ -19,7 +20,7 @@ export default function SchedulingForm(props) {
         fields.push({
             label: "Beneficiário",
             type: "autocomplete",
-            value: id, // passa só o id
+            value: id,
             onChange: (val) => setId(val),
             placeholder: "Pesquisar beneficiário...",
             initialLabel: selectedOption ? selectedOption.user.name : "",
@@ -44,9 +45,10 @@ export default function SchedulingForm(props) {
             label: "Hora do agendamento",
             value: time,
             onChange: e => setTime(e.target.value),
-            type: "time",
-            placeholder: "Selecione a hora"
-        },
+            type: "select",
+            placeholder: "Selecione o horário",
+            options: availableTimes.map(t => ({ value: t, label: t })),
+        }
     );
 
     return (

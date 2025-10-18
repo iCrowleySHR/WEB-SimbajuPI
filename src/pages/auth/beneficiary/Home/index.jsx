@@ -18,12 +18,12 @@ export default function BeneficiaryHome() {
 
             <div className="grid md:grid-cols-3 gap-6 mb-10">
                 <ActionButton
-                    title="Reagendar Retirada"
-                    description="Altere a data da sua próxima retirada."
+                    title="Criar Agendamento"
+                    description="Agende a sua retirda de fraldas."
                     iconClass="fas fa-calendar-alt"
                     bgColor="bg-blue-600"
                     hoverColor="hover:bg-blue-700"
-                    to={"/beneficiario/reagendar-retirada"}
+                    to={"/beneficiario/agendamento/criar"}
                 />
                 <ActionButton
                     title="Histórico de agendamentos"

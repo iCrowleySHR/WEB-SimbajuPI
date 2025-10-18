@@ -1,28 +1,34 @@
 import { useEffect, useState } from "react";
-import { makeScheduling } from "../api/routers/scheduling";
+import { getAllBeneficiaries, getMyBeneficiaryData } from "../api/routers/beneficiary";
+import { getAvailableFutureSchedules } from "../api/routers/scheduling";
 import { useLoading } from "../contexts/LoadingContext";
+import { makeScheduling } from "../api/routers/scheduling";
 import getErrorMessage from "../utils/getErrorMessage";
-import { getAllBeneficiaries } from "../api/routers/beneficiary";
 
-export function useScheduling(defaultId = null) {
+export function useSchedulingForm(userRole, defaultId = null) {
   const [beneficiaries, setBeneficiaries] = useState([]);
   const [id, setId] = useState(defaultId || "");
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
+  const [availableTimes, setAvailableTimes] = useState([]);
   const [message, setMessage] = useState(null);
-
   const { showLoading, hideLoading } = useLoading();
 
   useEffect(() => {
-    async function fetchBeneficiaries() {
+    async function fetchData() {
       showLoading();
       try {
-        const data = await getAllBeneficiaries();
-        setBeneficiaries(data);
-
-        if (defaultId) {
-          const found = data.find(b => String(b.id) === String(defaultId));
-          if (found) setId(found.id); 
+        if (userRole === "warehouse") {
+          const data = await getAllBeneficiaries();
+          setBeneficiaries(data);
+          if (defaultId) {
+            const found = data.find(b => String(b.id) === String(defaultId));
+            if (found) setId(found.id);
+          }
+        } else if (userRole === "beneficiary") {
+          const beneficiary = await getMyBeneficiaryData();
+          setId(beneficiary.id);
+          setBeneficiaries([beneficiary]);
         }
       } catch (error) {
         setMessage({ type: "error", text: getErrorMessage(error) });
@@ -30,21 +36,38 @@ export function useScheduling(defaultId = null) {
         hideLoading();
       }
     }
+    fetchData();
+  }, [userRole, defaultId]);
 
-    fetchBeneficiaries();
-  }, [defaultId]);
+  useEffect(() => {
+    if (!date) {
+      setAvailableTimes([]);
+      return;
+    }
+    async function fetchTimes() {
+      showLoading();
+      try {
+        const times = await getAvailableFutureSchedules(date);
+        setAvailableTimes(times);
+      } catch (error) {
+        setMessage({ type: "error", text: getErrorMessage(error) });
+      } finally {
+        hideLoading();
+      }
+    }
+    fetchTimes();
+  }, [date]);
 
   const handleMakeScheduling = async () => {
     if (!id || !date || !time) return;
-
     showLoading();
     try {
       const dateTime = `${date} ${time}:00`;
-      await makeScheduling({ beneficiaryId: id, dateTime }); 
+      await makeScheduling({ beneficiaryId: id, dateTime });
       setMessage({ type: "success", text: "Agendamento criado com sucesso!" });
-      setId("");
       setDate("");
       setTime("");
+      if (userRole !== "beneficiary") setId(""); 
     } catch (error) {
       setMessage({ type: "error", text: getErrorMessage(error) });
     } finally {
@@ -52,15 +75,5 @@ export function useScheduling(defaultId = null) {
     }
   };
 
-  return {
-    beneficiaries,
-    id,
-    setId,
-    date,
-    setDate,
-    time,
-    setTime,
-    message,
-    handleMakeScheduling,
-  };
+  return { beneficiaries, id, setId, date, setDate, time, setTime, availableTimes, message, handleMakeScheduling };
 }

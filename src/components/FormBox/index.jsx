@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Alert from "../Alert";
-import Select from "react-select";
 import AutocompleteField from "../AutoComplete";
 
 export default function FormBox({

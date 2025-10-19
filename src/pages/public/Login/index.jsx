@@ -37,7 +37,7 @@ export default function Login() {
                         <p className="text-gray-600 mt-2">Selecione seu tipo de acesso</p>
                     </div>
 
-                    <div className="grid md:grid-cols-2 gap-8">
+                    <div className="grid md:grid-cols-2 gap-8 justify-items-center">
                         <LoginBox
                             type="Acesso do Beneficiário"
                             icon="fas fa-user"
@@ -66,6 +66,7 @@ export default function Login() {
                             disabled={loading}
                         />
                     </div>
+
 
                     <div className="mt-8 text-center">
                         <Link to="/">

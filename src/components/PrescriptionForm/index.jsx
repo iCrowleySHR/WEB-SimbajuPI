@@ -40,7 +40,7 @@ export default function PrescriptionForm({
           required: true,
         },
         {
-          label: "Tempo de Prescrição (Dias)",
+          label: "Validade da Prescrição",
           type: "date",
           value: prescriptionTimeDays,
           onChange: (e) => setPrescriptionTimeDays(e.target.value),

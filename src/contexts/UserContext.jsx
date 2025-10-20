@@ -16,7 +16,7 @@ export const UserProvider = ({ children }) => {
     const token = localStorage.getItem("token");
     if (!token) {
       hideLoading();
-      navigate("/login");
+      navigate("/");
       return;
     }
 

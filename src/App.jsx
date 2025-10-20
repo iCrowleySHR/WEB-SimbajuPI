@@ -36,7 +36,7 @@ import CancelScheduling from "./pages/auth/shared/CancelScheduling";
 import CancebleListScheduling from "./pages/auth/beneficiary/CancebleScheduling";
 import AusentScheduling from "./pages/auth/warehouse/AusentScheduling";
 import WarehouseConfig from "./pages/auth/warehouse/WarehouseConfig";
-import Reports from "./pages/auth/secretary/Reports";
+import Reports from "./pages/auth/shared/Reports";
 import MakeScheduling from "./pages/auth/shared/MakeScheduling";
 import MakeWithdrawal from "./pages/auth/warehouse/MakeWithdrawal";
 
@@ -87,6 +87,8 @@ function App() {
                         <Route index element={<WarehouseHome />} />
                         <Route path="configuracoes" element={<GeneralSettings />} />
                         <Route path="configuracoes/funcionamento" element={<WarehouseConfig />} />
+
+                        <Route path="relatorios" element={<Reports />} />
 
                         <Route path="agendamento/hoje" element={<TodaySchedulings />} />
                         <Route path="agendamento/criar/:id?" element={<MakeScheduling />} />

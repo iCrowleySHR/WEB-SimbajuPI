@@ -56,7 +56,7 @@ export function useReport() {
       setMessage({ type: "success", text: "Relatório gerado com sucesso!" });
       resetFields();
     } catch (error) {
-      setMessage({ type: "error", text: getErrorMessage(error) });
+      setMessage({ type: "error", text: "Registro não encontrado ou erro interno." });
     } finally {
       hideLoading();
     }

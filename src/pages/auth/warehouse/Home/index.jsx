@@ -76,6 +76,15 @@ export default function WarehouseHome() {
         />
 
         <ActionButton
+          title="Relatórios"
+          description="Gerar relatórios e estatísticas."
+          iconClass="fas fa-chart-bar"
+          bgColor="bg-yellow-600"
+          hoverColor="hover:bg-yellow-700"
+          to={"/almoxarifado/relatorios"}
+        />
+
+        <ActionButton
           title="Histórico de agendamentos"
           description="Acompanhe a lista de todos os agendamentos."
           iconClass="fas fa-calendar-check"
@@ -92,6 +101,7 @@ export default function WarehouseHome() {
           hoverColor="hover:bg-purple-700"
           to={"/almoxarifado/configuracoes/funcionamento"}
         />
+
       </div>
     </>
   );

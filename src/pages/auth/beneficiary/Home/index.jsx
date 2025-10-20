@@ -53,7 +53,7 @@ export default function BeneficiaryHome() {
                 <ActionButton
                     title="Seus dados"
                     description="Veja seus dados e status."
-                    iconClass="fas fa-xmark"
+                    iconClass="fas fa-user"
                     bgColor="bg-blue-600"
                     hoverColor="hover:bg-blue-700"
                     to={"/beneficiario/dados"}

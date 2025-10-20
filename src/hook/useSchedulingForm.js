@@ -44,18 +44,21 @@ export function useSchedulingForm(userRole, defaultId = null) {
       setAvailableTimes([]);
       return;
     }
-    async function fetchTimes() {
+
+    const timeout = setTimeout(async () => {
       showLoading();
       try {
         const times = await getAvailableFutureSchedules(date);
         setAvailableTimes(times);
+         setMessage({ type: "success", text: "Data com horários disponíveis" });
       } catch (error) {
         setMessage({ type: "error", text: getErrorMessage(error) });
       } finally {
         hideLoading();
       }
-    }
-    fetchTimes();
+    }, 600); 
+
+    return () => clearTimeout(timeout);
   }, [date]);
 
   const handleMakeScheduling = async () => {
@@ -67,7 +70,7 @@ export function useSchedulingForm(userRole, defaultId = null) {
       setMessage({ type: "success", text: "Agendamento criado com sucesso!" });
       setDate("");
       setTime("");
-      if (userRole !== "beneficiary") setId(""); 
+      if (userRole !== "beneficiary") setId("");
     } catch (error) {
       setMessage({ type: "error", text: getErrorMessage(error) });
     } finally {

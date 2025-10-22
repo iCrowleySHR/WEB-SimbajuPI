@@ -30,3 +30,4 @@ Pode ser necessário para rodar comando `artisan`
 ```bash
 docker compose exec web sh  # Pode mudar de SH para Bash
 ```
+:)

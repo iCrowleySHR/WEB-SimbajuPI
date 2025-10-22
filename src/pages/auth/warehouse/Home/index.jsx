@@ -5,10 +5,12 @@ import Title from "../../../../components/Title";
 export default function WarehouseHome() {
   return (
     <>
-      <Title title={"Painel do Almoxarifado"} subtitle={"Controle de estoque e distribuição."} />
+      <Title
+        title={"Painel do Almoxarifado"}
+        subtitle={"Controle de estoque e distribuição."}
+      />
 
       <div className="grid md:grid-cols-3 gap-6 mb-8">
-
         <StatsCard
           title="Distribuídas Hoje"
           value="5"
@@ -40,68 +42,67 @@ export default function WarehouseHome() {
         />
 
         <ActionButton
-          title="Registrar Retirada e Próximo Agendamento"
-          description="Confirmar retirada de insumo do paciente e próxima retirada. "
-          iconClass="fas fa-hand-holding"
-          bgColor="bg-green-600"
-          hoverColor="hover:bg-green-700"
-          to={"/almoxarifado/retirada/registrar"}
-        />
-
-        <ActionButton
-          title="Histórico de retiradas"
-          description="Acompanhe a lista de retiradas"
-          iconClass="fas fa-plus"
-          bgColor="bg-blue-600"
-          hoverColor="hover:bg-blue-700"
-          to={"/almoxarifado/retirada/lista"}
-        />
-
-        <ActionButton
           title="Lista de Beneficiários Ativos"
           description="Confirmar retirada de insumo mediante a beneficio. "
           iconClass="fas fa-list"
-          bgColor="bg-yellow-600"
-          hoverColor="hover:bg-yellow-700"
+          bgColor="bg-green-600"
+          hoverColor="hover:bg-green-700"
           to={"/almoxarifado/beneficiario/lista"}
+        />
+
+        <ActionButton
+          title="Registrar Retirada e Próximo Agendamento"
+          description="Confirmar retirada de insumo do paciente e próxima retirada. "
+          iconClass="fas fa-hand-holding"
+          bgColor="bg-pink-600"
+          hoverColor="hover:bg-pink-700"
+          to={"/almoxarifado/retirada/registrar"}
         />
 
         <ActionButton
           title="Agendamento marcados para hoje"
           description="Acompanhe a lista de agendamento para hoje."
           iconClass="fas fa-hand-holding"
-          bgColor="bg-purple-600"
-          hoverColor="hover:bg-purple-700"
+          bgColor="bg-pink-600"
+          hoverColor="hover:bg-pink-700"
           to={"/almoxarifado/agendamento/hoje"}
         />
 
         <ActionButton
-          title="Relatórios"
-          description="Gerar relatórios e estatísticas."
-          iconClass="fas fa-chart-bar"
+          title="Histórico de retiradas"
+          description="Acompanhe a lista de retiradas"
+          iconClass="fas fa-history"
           bgColor="bg-yellow-600"
           hoverColor="hover:bg-yellow-700"
-          to={"/almoxarifado/relatorios"}
+          to={"/almoxarifado/retirada/lista"}
         />
 
         <ActionButton
           title="Histórico de agendamentos"
           description="Acompanhe a lista de todos os agendamentos."
           iconClass="fas fa-calendar-check"
-          bgColor="bg-blue-600"
-          hoverColor="hover:bg-blue-700"
+          bgColor="bg-yellow-800"
+          hoverColor="hover:bg-yellow-800"
           to={"/almoxarifado/agendamento/lista"}
+        />
+
+        <ActionButton
+          title="Relatórios"
+          description="Gerar relatórios e estatísticas."
+          iconClass="fas fa-chart-bar"
+          bgColor="bg-purple-600"
+          hoverColor="hover:bg-purple-700"
+          to={"/almoxarifado/relatorios"}
         />
 
         <ActionButton
           title="Configurações de funcionamento"
           description="Configure o horário de funcionamento da unidade."
-          iconClass="fas fa-calendar-check"
-          bgColor="bg-purple-600"
-          hoverColor="hover:bg-purple-700"
+          iconClass="fas fa-gears"
+          bgColor="bg-purple-800"
+          hoverColor="hover:bg-purple-900"
           to={"/almoxarifado/configuracoes/funcionamento"}
         />
-
       </div>
     </>
   );

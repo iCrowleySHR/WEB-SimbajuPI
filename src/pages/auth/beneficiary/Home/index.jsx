@@ -37,8 +37,8 @@ export default function BeneficiaryHome() {
                     title="Histórico de retiradas"
                     description="Veja suas retiradas anteriores."
                     iconClass="fas fa-history"
-                    bgColor="bg-green-600"
-                    hoverColor="hover:bg-green-700"
+                    bgColor="bg-yellow-600"
+                    hoverColor="hover:bg-yellow-700"
                     to="/beneficiario/retirada/historico"
                 />
                 <ActionButton
@@ -54,8 +54,8 @@ export default function BeneficiaryHome() {
                     title="Seus dados"
                     description="Veja seus dados e status."
                     iconClass="fas fa-user"
-                    bgColor="bg-blue-600"
-                    hoverColor="hover:bg-blue-700"
+                    bgColor="bg-purple-600"
+                    hoverColor="hover:bg-purple-700"
                     to={"/beneficiario/dados"}
                 />
             </div>

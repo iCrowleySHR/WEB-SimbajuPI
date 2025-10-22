@@ -7,18 +7,9 @@ import CreateAdminAccountModal from "../../../../components/Modal/CreateAdminAcc
 export default function SecretaryHome() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-
-  const showBeneficiaryList = () => {
-    console.log("Lista de Beneficiários");
-  };
-
   const showModalCreateAdminAccount = () => {
     setIsModalOpen(true);
   }
-
-  const showReports = () => {
-    console.log("Relatórios");
-  };
 
   return (
     <>
@@ -61,17 +52,25 @@ export default function SecretaryHome() {
           title="Novo Beneficiário"
           description="Cadastrar novo paciente no sistema."
           iconClass="fas fa-user-plus"
-          bgColor="bg-blue-600"
-          hoverColor="hover:bg-blue-700"
+          bgColor="bg-blue-400"
+          hoverColor="hover:bg-blue-500"
           to={"/secretaria/novo-beneficiario"}
         />
         <ActionButton
           title="Lista de Beneficiários"
           description="Visualizar e gerenciar cadastros."
           iconClass="fas fa-list"
-          bgColor="bg-green-600"
-          hoverColor="hover:bg-green-700"
+          bgColor="bg-blue-600"
+          hoverColor="hover:bg-blue-700"
           to={"/secretaria/beneficiario/lista"}
+        />
+        <ActionButton
+          title="Beneficiários desativados"
+          description="Acompanhe a lista de beneficiados desativados"
+          iconClass="fas fa-xmark"
+          bgColor="bg-blue-800"
+          hoverColor="hover:bg-blue-900"
+          to={"/secretaria/beneficiario/desativados"}
         />
         <ActionButton
           title="Relatórios"
@@ -101,35 +100,27 @@ export default function SecretaryHome() {
         <ActionButton
           title="Histórico de agendamentos"
           description="Acompanhe a lista de todos os agendamentos."
-          iconClass="fas fa-calendar-check"
-          bgColor="bg-blue-600"
-          hoverColor="hover:bg-blue-700"
+          iconClass="fas fa-history"
+          bgColor="bg-green-600"
+          hoverColor="hover:bg-green-700"
           to={"/secretaria/agendamento/lista"}
-        />
+          />
         <ActionButton
           title="Histórico de retiradas"
           description="Acompanhe a lista de retiradas"
-          iconClass="fas fa-plus"
-          bgColor="bg-blue-600"
-          hoverColor="hover:bg-blue-700"
+          iconClass="fas fa-calendar-check"
+          bgColor="bg-green-800"
+          hoverColor="hover:bg-green-900"
           to={"/secretaria/retirada/lista"}
         />
 
-        <ActionButton
-          title="Beneficiarios desativados"
-          description="Acompanhe a lista de beneficiados desativados"
-          iconClass="fas fa-plus"
-          bgColor="bg-red-600"
-          hoverColor="hover:bg-red-700"
-          to={"/secretaria/beneficiario/desativados"}
-        />
 
         <ActionButton
           title="Status da UBS"
           description="Acompanhe a lista de beneficiarios ativos com o status diferente de Ativado da UBS."
           iconClass="fas fa-plus"
-          bgColor="bg-pink-600"
-          hoverColor="hover:bg-pink-700"
+          bgColor="bg-pink-800"
+          hoverColor="hover:bg-pink-900"
           to={"/secretaria/beneficiario/status/suspensoes/ubs"}
         />
 

@@ -19,7 +19,7 @@ export default function BeneficiaryDetailsComponent({ beneficiary }) {
         </div>
       )}
 
-      <DetailField label="ID" value={beneficiary.id} />
+      {/* <DetailField label="ID" value={beneficiary.id} /> */}
       <DetailField label="Nome do Responsável" value={beneficiary.nameResponsible} />
       <DetailField label="CPF" value={maskCpf(beneficiary.cpf)} />
       <DetailField label="Email do Responsável" value={beneficiary.emailResponsible} />

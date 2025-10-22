@@ -43,7 +43,7 @@ export default function BeneficiaryHome() {
                 />
                 <ActionButton
                     title="Cancelar Agendamento"
-                    description="Cancele seu agendamento."
+                    description="Veja seu agendamento e cancele quando quiser."
                     iconClass="fas fa-xmark"
                     bgColor="bg-red-800"
                     hoverColor="hover:bg-red-900"

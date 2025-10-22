@@ -5,7 +5,7 @@ export default function StatusDetailsComponent({ status }) {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-      <DetailField label="ID" value={status.id} />
+      {/* <DetailField label="ID" value={status.id} /> */}
       <DetailField label="Status UBS" value={status.ubsStatus} />
       <DetailField
         label="Observação UBS"

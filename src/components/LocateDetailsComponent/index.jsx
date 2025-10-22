@@ -7,7 +7,7 @@ export default function LocationDetailsComponent({ locate }) {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-      <DetailField label="ID" value={locate.id} />
+      {/* <DetailField label="ID" value={locate.id} /> */}
       <DetailField label="CEP" value={maskCep(locate.cep)} />
       <DetailField label="Rua" value={`${locate.streetName}, ${locate.numberHouse}`} />
       <DetailField label="Bairro" value={locate.neighborhood} />

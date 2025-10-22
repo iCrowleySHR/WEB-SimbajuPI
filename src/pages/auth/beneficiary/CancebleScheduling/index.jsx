@@ -20,7 +20,7 @@ export default function CancebleListScheduling() {
     <>
       <Title
         title="Cancelar agendameto"
-        subtitle="Cancelar agendamento."
+        subtitle="Veja seu agendamento e cancele quando quiser."
         back="true"
       />
 

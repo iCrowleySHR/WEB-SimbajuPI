@@ -6,7 +6,7 @@ export default function UbsHome() {
   return (
     <>
 
-      <Title title={"Painel da UBS"} subtitle={"Gerencie beneficiários e os status."} />
+      <Title title={"UBS"} subtitle={"Gerencie beneficiários e os status."} />
 
       <div className="grid md:grid-cols-3 gap-6 mb-8">
         <StatsCard

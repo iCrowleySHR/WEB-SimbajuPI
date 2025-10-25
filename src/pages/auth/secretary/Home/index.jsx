@@ -15,7 +15,7 @@ export default function SecretaryHome() {
     <>
 
       {/* Título */}
-      <Title title={"Painel da Secretaria de Saúde"} subtitle={"Gerencie beneficiários e monitore o programa."} />
+      <Title title={"Secretaria de Saúde"} subtitle={"Gerencie beneficiários e monitore o programa."} />
 
       {/* Cards de Estatísticas */}
       <div className="grid md:grid-cols-4 gap-6 mb-8">

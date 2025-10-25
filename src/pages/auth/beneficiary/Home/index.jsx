@@ -7,7 +7,7 @@ export default function BeneficiaryHome() {
     return (
         <>
 
-            <Title title={"Painel do Beneficiário"} subtitle={"Gerencie seus agendamentos e acompanhe seu histórico"} />
+            <Title title={"Beneficiário"} subtitle={"Gerencie seus agendamentos e acompanhe seu histórico"} />
 
             <BeneficiaryStatusCard
                 status="Ativo"

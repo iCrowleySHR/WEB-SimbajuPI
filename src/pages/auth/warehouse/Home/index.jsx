@@ -6,7 +6,7 @@ export default function WarehouseHome() {
   return (
     <>
       <Title
-        title={"Painel do Almoxarifado"}
+        title={"Almoxarifado"}
         subtitle={"Controle de estoque e distribuição."}
       />
 

@@ -7,7 +7,7 @@ export default function WarehouseHome() {
     <>
       <Title
         title={"Almoxarifado"}
-        subtitle={"Controle de estoque e distribuição."}
+        subtitle={"Controle de agendamentos, retiradas e relatórios."}
       />
 
       <div className="grid md:grid-cols-3 gap-6 mb-8">

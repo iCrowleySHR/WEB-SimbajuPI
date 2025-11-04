@@ -73,6 +73,7 @@ export function useSchedulingForm(userRole, defaultId = null) {
       if (userRole !== "beneficiary") setId("");
     } catch (error) {
       setMessage({ type: "error", text: getErrorMessage(error) });
+      console.error(error);
     } finally {
       hideLoading();
     }

@@ -21,7 +21,7 @@ export function useCreateUbs() {
 
     try {
       await createUbs({ name: fullName, email });
-      setMessage({ type: "success", text: "Conta de almoxarifado cadastrada com sucesso!" });
+      setMessage({ type: "success", text: "Conta de UBS cadastrada com sucesso!" });
 
       setFullName("");
       setEmail("");

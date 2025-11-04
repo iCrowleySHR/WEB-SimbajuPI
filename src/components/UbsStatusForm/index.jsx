@@ -17,7 +17,7 @@ export default function UbsStatusForm({
 
   return (
     <FormBox
-      type="Atualizar Status Secretaria"
+      type="Atualizar Status UBS"
       icon="fas fa-file-alt"
       color="blue"
       onSubmit={handleStatusUpdate}

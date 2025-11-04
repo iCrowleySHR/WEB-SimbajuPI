@@ -114,7 +114,6 @@ export default function SecretaryHome() {
           to={"/secretaria/retirada/lista"}
         />
 
-
         <ActionButton
           title="Status da UBS"
           description="Acompanhe a lista de beneficiarios ativos com o status diferente de Ativado da UBS."

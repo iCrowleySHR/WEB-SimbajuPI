@@ -81,8 +81,8 @@ export default function WarehouseHome() {
           title="Histórico de agendamentos"
           description="Acompanhe a lista de todos os agendamentos."
           iconClass="fas fa-calendar-check"
-          bgColor="bg-yellow-800"
-          hoverColor="hover:bg-yellow-800"
+          bgColor="bg-green-600"
+          hoverColor="hover:bg-green-800"
           to={"/almoxarifado/agendamento/lista"}
         />
 

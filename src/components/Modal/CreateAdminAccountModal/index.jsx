@@ -45,8 +45,7 @@ export default function CreateAdminAccountModal({ isOpen, onClose }) {
             description="Conta para distribuição e gestão de benefícios"
             iconClass="fas fa-warehouse"
             bgColor="bg-green-500"
-            textColor="text-white"
-            iconColor="text-white"
+            hoverColor="hover:bg-green-700"
             to="/secretaria/novo-almoxarifado"
           />
 
@@ -55,8 +54,7 @@ export default function CreateAdminAccountModal({ isOpen, onClose }) {
             description="Unidade Básica de Saúde"
             iconClass="fas fa-hospital"
             bgColor="bg-blue-500"
-            textColor="text-white"
-            iconColor="text-white"
+            hoverColor="hover:bg-blue-700"
             to="/secretaria/novo-ubs"
           />
         </div>

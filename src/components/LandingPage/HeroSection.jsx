@@ -3,7 +3,7 @@ import Logo from "../Logo";
 
 export default function HeroSection() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-blue-700 via-blue-800 to-indigo-900 text-white py-24">
+    <section className="relative overflow-hidden bg-gradient-to-br from-blue-700 via-blue-800 to-indigo-900 text-white py-55">
       {/* Luz de fundo animada */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(255,255,255,0.1),transparent_70%)]"></div>
 
@@ -29,7 +29,7 @@ export default function HeroSection() {
               hover:bg-gradient-to-r hover:from-blue-100 hover:to-blue-50
               hover:shadow-xl hover:-translate-y-0.5
               transition-all duration-300
-              focus:outline-none focus:ring-4 focus:ring-blue-300/40
+              focus:outline-none focus:ring-4 focus:ring-blue-300/40 cursor-pointer
             "
           >
             <i className="fas fa-sign-in-alt mr-2"></i>

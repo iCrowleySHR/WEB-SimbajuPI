@@ -1,5 +1,7 @@
 import ActionButton from "../../../../components/ActionButton";
+import ContainerActionButton from "../../../../components/ContainerActionButton";
 import StatsCard from "../../../../components/StatsCard";
+import SubtitleHome from "../../../../components/SubtitleHome";
 import Title from "../../../../components/Title";
 
 export default function UbsHome() {
@@ -8,7 +10,7 @@ export default function UbsHome() {
 
       <Title title={"UBS"} subtitle={"Gerencie beneficiários e os status."} />
 
-      <div className="grid md:grid-cols-3 gap-6 mb-8">
+      <div className="grid md:grid-cols-3 gap-6 mb-8 hidden">
         <StatsCard
           title="Pacientes da UBS"
           value="64"
@@ -30,7 +32,10 @@ export default function UbsHome() {
       </div>
 
       {/* Botões de Ação */}
-      <div className="grid md:grid-cols-3 gap-6 mb-10">
+      <SubtitleHome>
+        Beneficiários
+      </SubtitleHome>
+      <ContainerActionButton>
         <ActionButton
           title="Lista de beneficiarios ativos"
           description="Veja todos os beneficiarios cadastrados."
@@ -39,7 +44,12 @@ export default function UbsHome() {
           hoverColor="hover:bg-blue-700"
           to={"/ubs/beneficiario/lista"}
         />
+      </ContainerActionButton>
 
+      <SubtitleHome>
+        Reavaliações
+      </SubtitleHome>
+      <ContainerActionButton>
         <ActionButton
           title="Reavaliação semestral"
           description="Valide os benefícios dos pacientes, efetuando a reavaliação semestral."
@@ -48,8 +58,8 @@ export default function UbsHome() {
           hoverColor="hover:bg-pink-700"
           to={"/ubs/beneficiario/ultima-veriricacao"}
         />
+      </ContainerActionButton>
 
-      </div>
     </>
   );
 }

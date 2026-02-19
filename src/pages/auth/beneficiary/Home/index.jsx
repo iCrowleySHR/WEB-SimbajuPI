@@ -1,5 +1,7 @@
 import ActionButton from "../../../../components/ActionButton";
 import BeneficiaryStatusCard from "../../../../components/BeneficiaryStatusCard";
+import ContainerActionButton from "../../../../components/ContainerActionButton";
+import SubtitleHome from "../../../../components/SubtitleHome";
 import Title from "../../../../components/Title";
 
 export default function BeneficiaryHome() {
@@ -9,14 +11,15 @@ export default function BeneficiaryHome() {
 
             <Title title={"Beneficiário"} subtitle={"Gerencie seus agendamentos e acompanhe seu histórico"} />
 
-            <BeneficiaryStatusCard
+            {/* <BeneficiaryStatusCard
                 status="Ativo"
                 nextPickup="15/12/2024"
                 quantity={120}
                 unit="Fraldas/mês"
-            />
+            /> */}
 
-            <div className="grid md:grid-cols-3 gap-6 mb-10">
+            <SubtitleHome>Agendamentos</SubtitleHome>
+            <ContainerActionButton>
                 <ActionButton
                     title="Criar Agendamento"
                     description="Agende a sua retirda de fraldas."
@@ -34,14 +37,6 @@ export default function BeneficiaryHome() {
                     to="/beneficiario/agendamento/historico"
                 />
                 <ActionButton
-                    title="Histórico de retiradas"
-                    description="Veja suas retiradas anteriores."
-                    iconClass="fas fa-history"
-                    bgColor="bg-yellow-600"
-                    hoverColor="hover:bg-yellow-700"
-                    to="/beneficiario/retirada/historico"
-                />
-                <ActionButton
                     title="Cancelar Agendamento"
                     description="Veja seu agendamento e cancele quando quiser."
                     iconClass="fas fa-xmark"
@@ -50,6 +45,22 @@ export default function BeneficiaryHome() {
                     to={"/beneficiario/agendamento/cancelaveis"}
                 />
 
+            </ContainerActionButton>
+
+            <SubtitleHome>Retiradas</SubtitleHome>
+            <ContainerActionButton>
+                <ActionButton
+                    title="Histórico de retiradas"
+                    description="Veja suas retiradas anteriores."
+                    iconClass="fas fa-history"
+                    bgColor="bg-yellow-600"
+                    hoverColor="hover:bg-yellow-700"
+                    to="/beneficiario/retirada/historico"
+                />
+            </ContainerActionButton>
+
+            <SubtitleHome>Informações da Conta</SubtitleHome>
+            <ContainerActionButton>
                 <ActionButton
                     title="Seus dados"
                     description="Veja seus dados e status."
@@ -58,7 +69,7 @@ export default function BeneficiaryHome() {
                     hoverColor="hover:bg-purple-700"
                     to={"/beneficiario/dados"}
                 />
-            </div>
+            </ContainerActionButton>
         </>
     );
 }

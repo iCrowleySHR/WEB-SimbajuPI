@@ -94,7 +94,7 @@ export default function FirstAccessModal({
                 className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 bg-gray-50 focus:bg-white"
                 required
               />
-              <i className={`absolute right-3 top-3 text-gray-400 ${isBeneficiary ? 'fas fa-id-card' : 'fas fa-envelope'}`}></i>
+              <i className={`absolute right-3 top-4 text-gray-400 ${isBeneficiary ? 'fas fa-id-card' : 'fas fa-envelope'}`}></i>
             </div>
           </div>
 
@@ -113,7 +113,7 @@ export default function FirstAccessModal({
                 className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 bg-gray-50 focus:bg-white"
                 required
               />
-              <i className="fas fa-key absolute right-3 top-3 text-gray-400"></i>
+              <i className="fas fa-key absolute right-3 top-4 text-gray-400"></i>
             </div>
           </div>
 
@@ -132,7 +132,7 @@ export default function FirstAccessModal({
                 className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 bg-gray-50 focus:bg-white"
                 required
               />
-              <i className="fas fa-lock absolute right-3 top-3 text-gray-400"></i>
+              <i className="fas fa-lock absolute right-3 top-4 text-gray-400"></i>
             </div>
             
             {/* Password Strength Meter */}
@@ -181,7 +181,7 @@ export default function FirstAccessModal({
                 newPasswordConfirmation && newPassword === newPasswordConfirmation
                   ? 'fa-check text-green-500'
                   : 'fa-lock text-gray-400'
-              } absolute right-3 top-3`}></i>
+              } absolute right-3 top-4`}></i>
             </div>
             {newPasswordConfirmation && newPassword !== newPasswordConfirmation && (
               <p className="text-red-600 text-xs flex items-center">

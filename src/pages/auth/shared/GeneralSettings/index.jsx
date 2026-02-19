@@ -29,12 +29,12 @@ export default function GeneralSettings() {
 
       <UserInfo user={user} />
 
-      <EmailForm
-        email={email}
-        setEmail={setEmail}
-        handleEmailUpdate={handleEmailUpdate}
-        messageEmail={messageEmail}
-      />
+        <EmailForm
+          email={email}
+          setEmail={setEmail}
+          handleEmailUpdate={handleEmailUpdate}
+          messageEmail={messageEmail}
+        />
 
       {!showPasswordForm ? (
         <div className="text-center mt-4">

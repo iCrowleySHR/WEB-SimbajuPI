@@ -11,6 +11,7 @@ export default function Login() {
     const { user, loading } = useUser();
     const [showModalBeneficiary, setShowModalBeneficiary] = useState(false);
     const [showModalStaff, setShowModalStaff] = useState(false);
+    const [activeTab, setActiveTab] = useState('beneficiary'); // 'beneficiary' ou 'staff'
 
     // --- Login Hook ---
     const {
@@ -29,7 +30,7 @@ export default function Login() {
 
     return (
         <>
-            <div className="container mx-auto px-4 py-12">
+            <div className="container mx-auto px-4 py-12 pb-59 pt-27 ">
                 <div className="max-w-4xl mx-auto">
                     <div className="text-center mb-8">
                         <i className="fas fa-user-circle text-6xl text-blue-600 mb-4"></i>
@@ -37,36 +38,69 @@ export default function Login() {
                         <p className="text-gray-600 mt-2">Selecione seu tipo de acesso</p>
                     </div>
 
-                    <div className="grid md:grid-cols-2 gap-8 justify-items-center">
-                        <LoginBox
-                            type="Acesso do Beneficiário"
-                            icon="fas fa-user"
-                            color="blue"
-                            fields={[
-                                { label: "CPF", value: cpf, onChange: e => setCpf(maskCpf(e.target.value)), type: "text", placeholder: "000.000.000-00" },
-                                { label: "Senha", value: password, onChange: e => setPassword(e.target.value), type: "password", placeholder: "Digite sua senha" },
-                            ]}
-                            message={{ type: beneficiaryType, text: beneficiaryMessage }}
-                            onSubmit={submitBeneficiary}
-                            onFirstAccessClick={() => setShowModalBeneficiary(true)}
-                            disabled={loading}
-                        />
-
-                        <LoginBox
-                            type="Acesso Administrativo"
-                            icon="fas fa-user-tie"
-                            color="green"
-                            fields={[
-                                { label: "Email", value: email, onChange: e => setEmail(e.target.value), type: "email", placeholder: "seu@email.com" },
-                                { label: "Senha", value: staffPassword, onChange: e => setStaffPassword(e.target.value), type: "password", placeholder: "Digite sua senha" },
-                            ]}
-                            message={{ type: staffType, text: staffMessage }}
-                            onSubmit={submitStaff}
-                            onFirstAccessClick={() => setShowModalStaff(true)}
-                            disabled={loading}
-                        />
+                    {/* Tabs para selecionar o tipo de acesso */}
+                    <div className="flex justify-center mb-6">
+                        <div className="inline-flex rounded-md shadow-sm" role="group">
+                            <button
+                                type="button"
+                                onClick={() => setActiveTab('beneficiary')}
+                                className={`px-6 py-3 text-sm font-medium rounded-l-lg border ${
+                                    activeTab === 'beneficiary'
+                                        ? 'bg-blue-600 text-white border-blue-600'
+                                        : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
+                                }`}
+                                disabled={loading}
+                            >
+                                <i className="fas fa-user mr-2"></i>
+                                Acesso Beneficiário
+                            </button>
+                            <button
+                                type="button"
+                                onClick={() => setActiveTab('staff')}
+                                className={`px-6 py-3 text-sm font-medium rounded-r-lg border-t border-b border-r ${
+                                    activeTab === 'staff'
+                                        ? 'bg-green-600 text-white border-green-600'
+                                        : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
+                                }`}
+                                disabled={loading}
+                            >
+                                <i className="fas fa-user-tie mr-2"></i>
+                                Acesso Administrativo
+                            </button>
+                        </div>
                     </div>
 
+                    <div className="flex justify-center">
+                        {activeTab === 'beneficiary' ? (
+                            <LoginBox
+                                type="Acesso Beneficiário"
+                                icon="fas fa-user"
+                                color="blue"
+                                fields={[
+                                    { label: "CPF", value: cpf, onChange: e => setCpf(maskCpf(e.target.value)), type: "text", placeholder: "000.000.000-00" },
+                                    { label: "Senha", value: password, onChange: e => setPassword(e.target.value), type: "password", placeholder: "Digite sua senha" },
+                                ]}
+                                message={{ type: beneficiaryType, text: beneficiaryMessage }}
+                                onSubmit={submitBeneficiary}
+                                onFirstAccessClick={() => setShowModalBeneficiary(true)}
+                                disabled={loading}
+                            />
+                        ) : (
+                            <LoginBox
+                                type="Acesso Administrativo"
+                                icon="fas fa-user-tie"
+                                color="green"
+                                fields={[
+                                    { label: "Email", value: email, onChange: e => setEmail(e.target.value), type: "email", placeholder: "seu@email.com" },
+                                    { label: "Senha", value: staffPassword, onChange: e => setStaffPassword(e.target.value), type: "password", placeholder: "Digite sua senha" },
+                                ]}
+                                message={{ type: staffType, text: staffMessage }}
+                                onSubmit={submitStaff}
+                                onFirstAccessClick={() => setShowModalStaff(true)}
+                                disabled={loading}
+                            />
+                        )}
+                    </div>
 
                     <div className="mt-8 text-center">
                         <Link to="/">

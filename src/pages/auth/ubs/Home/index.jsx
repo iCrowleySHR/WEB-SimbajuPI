@@ -1,14 +1,52 @@
+import { useState } from "react";
 import ActionButton from "../../../../components/ActionButton";
 import ContainerActionButton from "../../../../components/ContainerActionButton";
 import StatsCard from "../../../../components/StatsCard";
 import SubtitleHome from "../../../../components/SubtitleHome";
 import Title from "../../../../components/Title";
+import SearchBarHome from "../../../../components/SearchBarHome";
+import { ubsActions } from "../../../../constants/ubsActions";
 
 export default function UbsHome() {
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const filterActions = () => {
+    if (!searchTerm.trim()) {
+      return ubsActions;
+    }
+
+    const lowerSearchTerm = searchTerm.toLowerCase();
+
+    return ubsActions
+      .map((category) => ({
+        ...category,
+        items: category.items.filter(
+          (item) =>
+            item.title.toLowerCase().includes(lowerSearchTerm) ||
+            item.description.toLowerCase().includes(lowerSearchTerm)
+        ),
+      }))
+      .filter((category) => category.items.length > 0);
+  };
+
+  const filteredActions = filterActions();
+
+  const totalResults = filteredActions.reduce(
+    (acc, category) => acc + category.items.length,
+    0
+  );
+
   return (
     <>
-
       <Title title={"UBS"} subtitle={"Gerencie beneficiários e os status."} />
+
+      {/* 🔎 Search reutilizável */}
+      <SearchBarHome
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        onClear={() => setSearchTerm("")}
+        resultCount={totalResults}
+      />
 
       <div className="grid md:grid-cols-3 gap-6 mb-8 hidden">
         <StatsCard
@@ -31,35 +69,42 @@ export default function UbsHome() {
         />
       </div>
 
-      {/* Botões de Ação */}
-      <SubtitleHome>
-        Beneficiários
-      </SubtitleHome>
-      <ContainerActionButton>
-        <ActionButton
-          title="Lista de beneficiarios ativos"
-          description="Veja todos os beneficiarios cadastrados."
-          iconClass="fas fa-user-plus"
-          bgColor="bg-blue-600"
-          hoverColor="hover:bg-blue-700"
-          to={"/ubs/beneficiario/lista"}
-        />
-      </ContainerActionButton>
-
-      <SubtitleHome>
-        Reavaliações
-      </SubtitleHome>
-      <ContainerActionButton>
-        <ActionButton
-          title="Reavaliação semestral"
-          description="Valide os benefícios dos pacientes, efetuando a reavaliação semestral."
-          iconClass="fa fa-users"
-          bgColor="bg-pink-600"
-          hoverColor="hover:bg-pink-700"
-          to={"/ubs/beneficiario/ultima-veriricacao"}
-        />
-      </ContainerActionButton>
-
+      {filteredActions.length > 0 ? (
+        filteredActions.map((category, index) => (
+          <div key={index}>
+            <SubtitleHome>{category.category}</SubtitleHome>
+            <ContainerActionButton>
+              {category.items.map((item, itemIndex) => (
+                <ActionButton
+                  key={itemIndex}
+                  title={item.title}
+                  description={item.description}
+                  iconClass={item.iconClass}
+                  bgColor={item.bgColor}
+                  hoverColor={item.hoverColor}
+                  to={item.to}
+                />
+              ))}
+            </ContainerActionButton>
+          </div>
+        ))
+      ) : (
+        <div className="text-center py-12">
+          <i className="fas fa-search text-5xl text-gray-300 mb-4"></i>
+          <h3 className="text-lg font-medium text-gray-900 mb-2">
+            Nenhum resultado encontrado
+          </h3>
+          <p className="text-gray-600">
+            Tente buscar por termos diferentes ou mais genéricos.
+          </p>
+          <button
+            onClick={() => setSearchTerm("")}
+            className="mt-4 text-blue-600 hover:text-blue-800 font-medium"
+          >
+            Limpar pesquisa
+          </button>
+        </div>
+      )}
     </>
   );
 }

@@ -84,7 +84,7 @@ export default function WithdrawalForm({
 
   return (
     <FormBox
-      type="Registrar Retirada"
+      type="Registrar Retirada dos Pacotes"
       icon="fas fa-hand-holding"
       color="green"
       onSubmit={handleSubmit}

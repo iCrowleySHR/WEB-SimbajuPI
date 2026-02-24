@@ -25,7 +25,7 @@ export default function TodaySchedulings() {
   return (
     <>
       <Title
-        title="Agendamentos de Hoje"
+        title="Agendamentos marcados para hoje"
         subtitle="Veja os agendamentos marcados para o dia de hoje."
         back="true"
       />

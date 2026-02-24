@@ -19,7 +19,7 @@ export const warehouseActions = [
         to: "/almoxarifado/agendamento/lista",
       },
       {
-        title: "Agendamento marcados para hoje",
+        title: "Agendamentos marcados para hoje",
         description: "Acompanhe a lista de agendamento para hoje.",
         iconClass: "fas fa-hand-holding",
         bgColor: "bg-pink-600",

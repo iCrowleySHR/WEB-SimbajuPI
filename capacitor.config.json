@@ -1,0 +1,10 @@
+{
+  "appId": "com.sistemadedistribuicaodefraldas",
+  "appName": "sistemadedistribuicaodefraldas",
+  "webDir": "dist",
+  "server": {
+    "androidScheme": "http",
+    "cleartext": true,
+    "hostname": "localhost"
+  }
+}

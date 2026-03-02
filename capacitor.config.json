@@ -1,6 +1,6 @@
 {
   "appId": "com.sistemadedistribuicaodefraldas",
-  "appName": "sistemadedistribuicaodefraldas",
+  "appName": "Sistema de Distribuição de Fraldas",
   "webDir": "dist",
   "server": {
     "androidScheme": "http",

@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">sistemadedistribuicaodefraldas</string>
-    <string name="title_activity_main">sistemadedistribuicaodefraldas</string>
+    <string name="app_name">Sistema de Distribuição de Fraldas</string>
+    <string name="title_activity_main">Sistema de Distribuição de Fraldas</string>
     <string name="package_name">com.sistemadedistribuicaodefraldas</string>
     <string name="custom_url_scheme">com.sistemadedistribuicaodefraldas</string>
 </resources>

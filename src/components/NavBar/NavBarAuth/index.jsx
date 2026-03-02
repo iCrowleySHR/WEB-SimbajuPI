@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import Logo from "../../../components/Logo";
 import { useAuth } from "../../../hook/useAuth";
 import { useUser } from "../../../contexts/UserContext";
@@ -13,6 +13,7 @@ export default function NavBarAuth() {
   const { user } = useUser();
   const { showLoading, hideLoading } = useLoading();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [userLoaded, setUserLoaded] = useState(false);
 
@@ -26,20 +27,30 @@ export default function NavBarAuth() {
     }
   }, [user, userLoaded, showLoading, hideLoading]);
 
-  const toggleMenu = () => setIsOpen(!isOpen);
+  // fecha o menu quando muda de rota
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location.pathname]);
+
+  const toggleMenu = () => setIsOpen(prev => !prev);
 
   const handleLogout = () => {
     logout();
     navigate("/");
   };
 
-  if (!userLoaded) return null; 
+  if (!userLoaded) return null;
 
-  const configRoute = user?.role ? `${routeTable(user.role)}/configuracoes` : "/configuracoes";
-  const homeRoute = user?.role ? `/${translate(user.role).toLowerCase()}` : "/";
+  const configRoute = user?.role
+    ? `${routeTable(user.role)}/configuracoes`
+    : "/configuracoes";
+
+  const homeRoute = user?.role
+    ? `/${translate(user.role).toLowerCase()}`
+    : "/";
 
   return (
-    <header className="bg-white shadow-md border-b border-gray-200">
+    <header className="bg-white shadow-md border-b border-gray-200 pt-6 md:pt-0">
       <div className="max-w-9/10 mx-auto px-4 py-3 flex justify-between items-center">
         <Link to={homeRoute} className="flex items-center space-x-3">
           <Logo size={40} />
@@ -55,6 +66,7 @@ export default function NavBarAuth() {
           >
             Configurações
           </Link>
+
           <button
             onClick={handleLogout}
             className="px-3 py-2 rounded-lg text-red-600 hover:text-red-500 hover:bg-red-50 transition-colors font-medium"
@@ -77,16 +89,13 @@ export default function NavBarAuth() {
         <div className="md:hidden bg-white border-t border-gray-200 shadow-lg">
           <Link
             to={configRoute}
-            onClick={() => setIsOpen(false)}
             className="block px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors font-medium"
           >
             Configurações
           </Link>
+
           <button
-            onClick={() => {
-              handleLogout();
-              setIsOpen(false);
-            }}
+            onClick={handleLogout}
             className="w-full text-left px-4 py-3 text-red-600 hover:bg-red-50 hover:text-red-500 transition-colors font-medium"
           >
             Sair

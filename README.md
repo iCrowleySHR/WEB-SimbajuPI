@@ -31,3 +31,11 @@ Pode ser necessário para rodar comando `artisan`
 docker compose exec web sh  # Pode mudar de SH para Bash
 ```
 :)
+
+
+## Compilar para android
+ ```bash
+    npm run build
+    npx cap sync
+    npx cap open android
+ ```

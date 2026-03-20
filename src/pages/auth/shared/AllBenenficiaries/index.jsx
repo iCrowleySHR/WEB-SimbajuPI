@@ -1,18 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Title from "../../../../components/Title";
 import DynamicTable from "../../../../components/DynamicTable";
 import useAllBeneficiaries from "../../../../hook/useAllBeneficiaries";
 import SearchInputBeneficiary from "../../../../components/SearchInputBeneficiary";
-import { filterByNameOrCpf } from "../../../../utils/filterByNameOrCpf";
 import { useUser } from "../../../../contexts/UserContext";
 import translate from "../../../../utils/translate";
 import Alert from "../../../../components/Alert";
 import Pagination from "../../../../components/Pagination";
 
 export default function AllBeneficiaries() {
-  const [currentPage, setCurrentPage] = useState(1);
-  const { beneficiaries, meta, error, message, refetch } = useAllBeneficiaries(currentPage);
+  const [debouncedSearch, setDebouncedSearch] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const { beneficiaries, meta, error, message, refetch } = useAllBeneficiaries(currentPage, debouncedSearch);
   const { user } = useUser();
 
   const columns = [
@@ -23,7 +23,14 @@ export default function AllBeneficiaries() {
     { label: "Tipo de benefício", accessor: "typeBenefit" },
   ];
 
-  const filteredBeneficiaries = filterByNameOrCpf(beneficiaries, searchTerm);
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setDebouncedSearch(searchTerm);
+      setCurrentPage(1);
+    }, 500);
+
+    return () => clearTimeout(timeout);
+  }, [searchTerm]);
 
   return (
     <>
@@ -44,7 +51,7 @@ export default function AllBeneficiaries() {
 
       <div className="mt-4">
         <DynamicTable
-          data={filteredBeneficiaries}
+          data={beneficiaries}
           columns={columns}
           actions={[
             {

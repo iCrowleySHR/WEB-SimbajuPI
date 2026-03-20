@@ -20,6 +20,17 @@ export const getAllBeneficiaries = async (page = 1) => {
   return response.data; 
 };
 
+export const searchBeneficiaries = async (search, page = 1) => {
+  const response = await api.get(`/beneficiary/allbeneficiares/search`, {
+    params: {
+      search,
+      page,
+    },
+  });
+
+  return response.data;
+};
+
 export const getBeneficiaryById = async (id) => {
   const response = await api.get(`/beneficiary/show/${id}`,);
   return response.data?.data || [];

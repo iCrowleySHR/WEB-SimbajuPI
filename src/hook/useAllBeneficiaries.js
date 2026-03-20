@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
-import { getAllBeneficiaries } from "../api/routers/beneficiary";
+import { 
+  getAllBeneficiaries, 
+  searchBeneficiaries 
+} from "../api/routers/beneficiary";
 import { useLoading } from "../contexts/LoadingContext";
 import getErrorMessage from "../utils/getErrorMessage";
 import { maskCpf } from "../utils/mask";
 
-export default function useAllBeneficiaries(page = 1) {
+export default function useAllBeneficiaries(page = 1, searchTerm = "") {
   const { showLoading, hideLoading } = useLoading();
 
   const [beneficiaries, setBeneficiaries] = useState([]);
@@ -18,12 +21,18 @@ export default function useAllBeneficiaries(page = 1) {
       setMessage("");
       showLoading();
 
-      const response = await getAllBeneficiaries(page);
+      let response;
+
+      if (searchTerm) {
+        response = await searchBeneficiaries(searchTerm, page);
+      } else {
+        response = await getAllBeneficiaries(page);
+      }
 
       const data = response?.data || [];
 
       if (data.length === 0) {
-        setMessage("Nenhum beneficiário encontrado.");
+        setError("Nenhum beneficiário encontrado.");
       }
 
       const formatted = data.map((item) => ({
@@ -35,7 +44,7 @@ export default function useAllBeneficiaries(page = 1) {
       }));
 
       setBeneficiaries(formatted);
-      setMeta(response.meta || {}); 
+      setMeta(response.meta || {});
     } catch (err) {
       setError(getErrorMessage(err));
     } finally {
@@ -45,7 +54,7 @@ export default function useAllBeneficiaries(page = 1) {
 
   useEffect(() => {
     fetchAllBeneficiaries();
-  }, [page]); 
+  }, [page, searchTerm]); 
 
   return {
     beneficiaries,

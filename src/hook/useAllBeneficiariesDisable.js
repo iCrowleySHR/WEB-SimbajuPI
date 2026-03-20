@@ -2,12 +2,13 @@ import { useState, useEffect } from "react";
 import {
   activedBeneficiaryById,
   getAllBeneficiariesDisabled,
+  searchBeneficiariesDisabled,
 } from "../api/routers/beneficiary";
 import { useLoading } from "../contexts/LoadingContext";
 import getErrorMessage from "../utils/getErrorMessage";
 import { maskCpf } from "../utils/mask";
 
-export default function useAllBeneficiariesDisabled(page = 1) {
+export default function useAllBeneficiariesDisabled(page = 1, search = "") {
   const { showLoading, hideLoading } = useLoading();
 
   const [beneficiaries, setBeneficiaries] = useState([]);
@@ -21,9 +22,14 @@ export default function useAllBeneficiariesDisabled(page = 1) {
       setMessage("");
       showLoading();
 
-      const response = await getAllBeneficiariesDisabled(page);
+      // 🔥 decide qual API usar
+      const response = search
+        ? await searchBeneficiariesDisabled(search, page)
+        : await getAllBeneficiariesDisabled(page);
 
       const data = response?.data || [];
+
+      console.log(data)
 
       if (data.length === 0) {
         setMessage("Nenhum beneficiário encontrado.");
@@ -66,7 +72,7 @@ export default function useAllBeneficiariesDisabled(page = 1) {
 
   useEffect(() => {
     fetchAllBeneficiariesDisabled();
-  }, [page]); 
+  }, [page, search]); // 🔥 importante
 
   return {
     beneficiaries,

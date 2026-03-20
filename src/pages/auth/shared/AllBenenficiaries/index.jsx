@@ -6,11 +6,12 @@ import SearchInputBeneficiary from "../../../../components/SearchInputBeneficiar
 import { useUser } from "../../../../contexts/UserContext";
 import translate from "../../../../utils/translate";
 import Alert from "../../../../components/Alert";
+import useDebounce from "../../../../hook/useDebounce";
 import Pagination from "../../../../components/Pagination";
 
 export default function AllBeneficiaries() {
-  const [debouncedSearch, setDebouncedSearch] = useState("");
-  const [searchTerm, setSearchTerm] = useState("");
+const [searchTerm, setSearchTerm] = useState("");
+const debouncedSearch = useDebounce(searchTerm, 500);
   const [currentPage, setCurrentPage] = useState(1);
   const { beneficiaries, meta, error, message, refetch } = useAllBeneficiaries(currentPage, debouncedSearch);
   const { user } = useUser();
@@ -23,14 +24,6 @@ export default function AllBeneficiaries() {
     { label: "Tipo de benefício", accessor: "typeBenefit" },
   ];
 
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setDebouncedSearch(searchTerm);
-      setCurrentPage(1);
-    }, 500);
-
-    return () => clearTimeout(timeout);
-  }, [searchTerm]);
 
   return (
     <>
@@ -45,7 +38,10 @@ export default function AllBeneficiaries() {
 
       <SearchInputBeneficiary
         value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
+        onChange={(e) => {
+          setSearchTerm(e.target.value);
+          setCurrentPage(1); 
+        }}
         placeholder="Pesquisar por nome ou CPF..."
       />
 

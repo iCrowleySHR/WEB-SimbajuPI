@@ -2,16 +2,17 @@ import { useState } from "react";
 import Title from "../../../../components/Title";
 import DynamicTable from "../../../../components/DynamicTable";
 import SearchInputBeneficiary from "../../../../components/SearchInputBeneficiary";
-import { filterByNameOrCpf } from "../../../../utils/filterByNameOrCpf";
 import { useUser } from "../../../../contexts/UserContext";
 import Alert from "../../../../components/Alert";
 import Pagination from "../../../../components/Pagination";
+import useDebounce from "../../../../hook/useDebounce";
 import useAllBeneficiariesDisabled from "../../../../hook/useAllBeneficiariesDisable";
 
 export default function BeneficiariesDisabled() {
   const [currentPage, setCurrentPage] = useState(1);
-  const { beneficiaries, meta, error, message, refetch, handleActivated } = useAllBeneficiariesDisabled(currentPage);
   const [searchTerm, setSearchTerm] = useState("");
+  const debouncedSearch = useDebounce(searchTerm, 500);
+  const { beneficiaries, meta, error, message, refetch, handleActivated } = useAllBeneficiariesDisabled(currentPage, debouncedSearch);
   const { user } = useUser();
 
   const columns = [
@@ -22,7 +23,6 @@ export default function BeneficiariesDisabled() {
     { label: "Tipo de benefício", accessor: "typeBenefit" },
   ];
 
-  let filtered = filterByNameOrCpf(beneficiaries, searchTerm);
 
   return (
     <>
@@ -34,7 +34,10 @@ export default function BeneficiariesDisabled() {
 
       <SearchInputBeneficiary
         value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
+        onChange={(e) => {
+          setSearchTerm(e.target.value);
+          setCurrentPage(1); // 🔥 importante
+        }}
         placeholder="Pesquisar por nome ou CPF..."
       />
 
@@ -44,7 +47,7 @@ export default function BeneficiariesDisabled() {
 
       <div className="mt-4">
         <DynamicTable
-          data={filtered}
+          data={beneficiaries}
           columns={columns}
           actions={[
             {

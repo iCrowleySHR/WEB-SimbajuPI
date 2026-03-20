@@ -64,5 +64,15 @@ export const getAllBeneficiariesDisabled = async (page = 1) => {
   return response.data; 
 };
 
+export const searchBeneficiariesDisabled = async (search, page = 1) => {
+  const response = await api.get(`/beneficiary/list/deactivated/search`, {
+    params: {
+      search,
+      page,
+    },
+  });
+
+  return response.data;
+};
 
 

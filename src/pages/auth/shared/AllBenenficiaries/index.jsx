@@ -7,9 +7,11 @@ import { filterByNameOrCpf } from "../../../../utils/filterByNameOrCpf";
 import { useUser } from "../../../../contexts/UserContext";
 import translate from "../../../../utils/translate";
 import Alert from "../../../../components/Alert";
+import Pagination from "../../../../components/Pagination";
 
 export default function AllBeneficiaries() {
-  const { beneficiaries, error, message, refetch } = useAllBeneficiaries();
+  const [currentPage, setCurrentPage] = useState(1);
+  const { beneficiaries, meta, error, message, refetch } = useAllBeneficiaries(currentPage);
   const [searchTerm, setSearchTerm] = useState("");
   const { user } = useUser();
 
@@ -31,8 +33,8 @@ export default function AllBeneficiaries() {
         back="true"
       />
 
-            {message && <Alert type="success" message={message} />}
-            {error && <Alert type="error" message={error} />}
+      {message && <Alert type="success" message={message} />}
+      {error && <Alert type="error" message={error} />}
 
       <SearchInputBeneficiary
         value={searchTerm}
@@ -52,6 +54,12 @@ export default function AllBeneficiaries() {
           ]}
         />
       </div>
+
+      <Pagination
+        currentPage={currentPage}
+        lastPage={meta?.last_page || 1}
+        onPageChange={setCurrentPage}
+      />
 
       <div className="text-center mt-6">
         <button

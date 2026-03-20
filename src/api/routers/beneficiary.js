@@ -15,10 +15,10 @@ export const updateResponsibleData = async (userData) => {
   return response.data;
 }
 
-export const getAllBeneficiaries = async () => {
-  const response = await api.get("/beneficiary/allbeneficiares",);
-  return response.data?.data || [];
-}
+export const getAllBeneficiaries = async (page = 1) => {
+  const response = await api.get(`/beneficiary/allbeneficiares?page=${page}`);
+  return response.data; 
+};
 
 export const getBeneficiaryById = async (id) => {
   const response = await api.get(`/beneficiary/show/${id}`,);

@@ -4,9 +4,11 @@ import { useLoading } from "../contexts/LoadingContext";
 import getErrorMessage from "../utils/getErrorMessage";
 import { maskCpf } from "../utils/mask";
 
-export default function useAllBeneficiaries() {
+export default function useAllBeneficiaries(page = 1) {
   const { showLoading, hideLoading } = useLoading();
+
   const [beneficiaries, setBeneficiaries] = useState([]);
+  const [meta, setMeta] = useState({});
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
 
@@ -16,7 +18,9 @@ export default function useAllBeneficiaries() {
       setMessage("");
       showLoading();
 
-      const data = await getAllBeneficiaries() || [];
+      const response = await getAllBeneficiaries(page);
+
+      const data = response?.data || [];
 
       if (data.length === 0) {
         setMessage("Nenhum beneficiário encontrado.");
@@ -31,6 +35,7 @@ export default function useAllBeneficiaries() {
       }));
 
       setBeneficiaries(formatted);
+      setMeta(response.meta || {}); 
     } catch (err) {
       setError(getErrorMessage(err));
     } finally {
@@ -40,7 +45,13 @@ export default function useAllBeneficiaries() {
 
   useEffect(() => {
     fetchAllBeneficiaries();
-  }, []);
+  }, [page]); 
 
-  return { beneficiaries, error, message, refetch: fetchAllBeneficiaries };
+  return {
+    beneficiaries,
+    meta,
+    error,
+    message,
+    refetch: fetchAllBeneficiaries,
+  };
 }

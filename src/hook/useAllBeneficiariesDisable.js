@@ -1,12 +1,17 @@
 import { useState, useEffect } from "react";
-import { activedBeneficiaryById, getAllBeneficiariesDisabled } from "../api/routers/beneficiary";
+import {
+  activedBeneficiaryById,
+  getAllBeneficiariesDisabled,
+} from "../api/routers/beneficiary";
 import { useLoading } from "../contexts/LoadingContext";
 import getErrorMessage from "../utils/getErrorMessage";
 import { maskCpf } from "../utils/mask";
 
-export default function useAllBeneficiariesDisabled() {
+export default function useAllBeneficiariesDisabled(page = 1) {
   const { showLoading, hideLoading } = useLoading();
+
   const [beneficiaries, setBeneficiaries] = useState([]);
+  const [meta, setMeta] = useState({});
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
 
@@ -16,7 +21,9 @@ export default function useAllBeneficiariesDisabled() {
       setMessage("");
       showLoading();
 
-      const data = await getAllBeneficiariesDisabled() || [];
+      const response = await getAllBeneficiariesDisabled(page);
+
+      const data = response?.data || [];
 
       if (data.length === 0) {
         setMessage("Nenhum beneficiário encontrado.");
@@ -31,24 +38,24 @@ export default function useAllBeneficiariesDisabled() {
       }));
 
       setBeneficiaries(formatted);
+      setMeta(response.meta || {});
     } catch (err) {
       setError(getErrorMessage(err));
     } finally {
       hideLoading();
     }
   };
+
   const handleActivated = async (id) => {
     try {
       setError("");
       setMessage("");
       showLoading();
 
-      const response = await activedBeneficiaryById(id);
+      await activedBeneficiaryById(id);
 
       setMessage("Conta reativada com sucesso!");
-      setBeneficiaries((prev) =>
-        prev.map((b) => (b.id === id ? response : b))
-      );
+
       await fetchAllBeneficiariesDisabled();
     } catch (err) {
       setError(getErrorMessage(err));
@@ -59,7 +66,14 @@ export default function useAllBeneficiariesDisabled() {
 
   useEffect(() => {
     fetchAllBeneficiariesDisabled();
-  }, []);
+  }, [page]); 
 
-  return { beneficiaries, error, message, refetch: fetchAllBeneficiariesDisabled, handleActivated };
+  return {
+    beneficiaries,
+    meta,
+    error,
+    message,
+    refetch: fetchAllBeneficiariesDisabled,
+    handleActivated,
+  };
 }

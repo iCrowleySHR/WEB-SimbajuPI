@@ -5,10 +5,12 @@ import SearchInputBeneficiary from "../../../../components/SearchInputBeneficiar
 import { filterByNameOrCpf } from "../../../../utils/filterByNameOrCpf";
 import { useUser } from "../../../../contexts/UserContext";
 import Alert from "../../../../components/Alert";
+import Pagination from "../../../../components/Pagination";
 import useAllBeneficiariesDisabled from "../../../../hook/useAllBeneficiariesDisable";
 
 export default function BeneficiariesDisabled() {
-  const { beneficiaries, error, message, refetch, handleActivated } = useAllBeneficiariesDisabled();
+  const [currentPage, setCurrentPage] = useState(1);
+  const { beneficiaries, meta, error, message, refetch, handleActivated } = useAllBeneficiariesDisabled(currentPage);
   const [searchTerm, setSearchTerm] = useState("");
   const { user } = useUser();
 
@@ -58,8 +60,13 @@ export default function BeneficiariesDisabled() {
             },
           ]}
         />
-
       </div>
+
+      <Pagination
+        currentPage={currentPage}
+        lastPage={meta?.last_page || 1}
+        onPageChange={setCurrentPage}
+      />
 
       <div className="text-center mt-6">
         <button

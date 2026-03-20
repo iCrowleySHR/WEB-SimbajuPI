@@ -56,11 +56,13 @@ export const activedBeneficiaryById = async (id) => {
   return response.data?.data || [];
 }
 
-export const getAllBeneficiariesDisabled = async () => {
-  const response = await api.get(`beneficiary/list/deactivated`);
-  return response.data?.data || [];
-}
+export const getAllBeneficiariesDisabled = async (page = 1) => {
+  const response = await api.get(
+    `/beneficiary/list/deactivated?page=${page}`
+  );
 
+  return response.data; 
+};
 
 
 

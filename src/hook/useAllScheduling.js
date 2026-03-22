@@ -1,12 +1,17 @@
 import { useEffect, useState } from "react";
-import { getAllSchedulings, getSchedulingsFilters } from "../api/routers/scheduling";
+import {
+  getAllSchedulings,
+  getSchedulingsFilters,
+} from "../api/routers/scheduling";
 import { useLoading } from "../contexts/LoadingContext";
 import getErrorMessage from "../utils/getErrorMessage";
 import { maskCpf } from "../utils/mask";
 
-export default function useAllScheduling(status = "Todos") {
+export default function useAllScheduling(page = 1, status = "Todos") {
   const { showLoading, hideLoading } = useLoading();
+
   const [schedulings, setSchedulings] = useState([]);
+  const [meta, setMeta] = useState({});
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
 
@@ -16,12 +21,15 @@ export default function useAllScheduling(status = "Todos") {
       setMessage("");
       showLoading();
 
-      let data = [];
+      let response;
+
       if (status === "Todos") {
-        data = await getAllSchedulings() || [];
+        response = await getAllSchedulings(page);
       } else {
-        data = await getSchedulingsFilters(status) || [];
+        response = await getSchedulingsFilters(status, page);
       }
+
+      const data = response?.data || [];
 
       if (data.length === 0) {
         setMessage("Nenhum agendamento encontrado.");
@@ -30,16 +38,21 @@ export default function useAllScheduling(status = "Todos") {
       const formatted = data.map((item) => ({
         id: item.id,
         beneficiaryName: item.beneficiary?.user?.name || "-",
-        cpf: item.beneficiary?.cpf ? maskCpf(item.beneficiary.cpf) : "-",
-        dateTime: new Date(item.dateTime).toLocaleString("pt-BR", {
-          dateStyle: "short",
-          timeStyle: "short",
-        }),
+        cpf: item.beneficiary?.cpf
+          ? maskCpf(item.beneficiary.cpf)
+          : "-",
+        dateTime: item.dateTime
+          ? new Date(item.dateTime).toLocaleString("pt-BR", {
+              dateStyle: "short",
+              timeStyle: "short",
+            })
+          : "-",
         status: item.schedulingStatus,
         warehouse: item.userWarehouse?.name || "-",
       }));
 
       setSchedulings(formatted);
+      setMeta(response?.meta || {});
     } catch (err) {
       setError(getErrorMessage(err));
     } finally {
@@ -49,7 +62,13 @@ export default function useAllScheduling(status = "Todos") {
 
   useEffect(() => {
     fetchAllSchedulings();
-  }, [status]);
+  }, [page, status]); // 🔥 importante
 
-  return { schedulings, error, message, refetch: fetchAllSchedulings };
+  return {
+    schedulings,
+    meta,
+    error,
+    message,
+    refetch: fetchAllSchedulings,
+  };
 }

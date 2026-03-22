@@ -5,14 +5,14 @@ export const getTodaySchedulings = async () => {
     return response.data?.data || [];
 };
 
-export const getAllSchedulings = async () => {
-    const response = await api.get("/scheduling");
-    return response.data?.data || [];
+export const getAllSchedulings = async (page = 1) => {
+    const response = await api.get(`/scheduling?page=${page}`);
+    return response.data; 
 };
 
-export const getSchedulingsFilters = async (status) => {
-    const response = await api.get(`/scheduling/status/${status}`);
-    return response.data?.data || [];
+export const getSchedulingsFilters = async (status = "Todos", page = 1) => {
+    const response = await api.get(`/scheduling/status/${status}?page=${page}`);
+    return response.data; 
 };
 
 export const getSchedulingById = async (id) => {

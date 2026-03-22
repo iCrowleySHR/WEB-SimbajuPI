@@ -6,6 +6,7 @@ import { filterByNameOrCpf } from "../../../../utils/filterByNameOrCpf";
 import SearchInputBeneficiary from "../../../../components/SearchInputBeneficiary";
 import StatusFilter from "../../../../components/StatusFilters";
 import { useUser } from "../../../../contexts/UserContext";
+import Pagination from "../../../../components/Pagination";
 import translate from "../../../../utils/translate";
 import Alert from "../../../../components/Alert";
 
@@ -13,7 +14,9 @@ export default function HistoryScheduling() {
   const [filterStatus, setFilterStatus] = useState("Todos");
   const [searchTerm, setSearchTerm] = useState("");
 
-  const { schedulings, error, message, refetch } = useAllScheduling(filterStatus);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const { schedulings, meta, error, message, refetch } = useAllScheduling(currentPage, filterStatus);
   const { user } = useUser();
 
   const columns = [
@@ -45,22 +48,28 @@ export default function HistoryScheduling() {
       <StatusFilter
         statuses={statuses}
         currentStatus={filterStatus}
-        onChange={setFilterStatus}
+        onChange={(status) => {
+          setFilterStatus(status);
+          setCurrentPage(1);
+        }}
       />
 
       <SearchInputBeneficiary
         value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
+        onChange={(e) => {
+          setSearchTerm(e.target.value);
+          setCurrentPage(1);
+        }}
         placeholder="Pesquisar por nome ou CPF..."
       />
 
 
-            {message && <Alert type="success" message={message} />}
-            {error && <Alert type="error" message={error} />}
+      {message && <Alert type="success" message={message} />}
+      {error && <Alert type="error" message={error} />}
 
       <div className="mt-4">
         <DynamicTable
-          data={filtered}
+          data={schedulings}
           columns={columns}
           actions={[
             {
@@ -70,6 +79,12 @@ export default function HistoryScheduling() {
           ]}
         />
       </div>
+
+      <Pagination
+        currentPage={currentPage}
+        lastPage={meta?.last_page || 1}
+        onPageChange={setCurrentPage}
+      />
 
       <div className="text-center mt-6">
         <button

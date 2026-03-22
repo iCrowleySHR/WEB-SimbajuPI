@@ -2,12 +2,13 @@ import { useEffect, useState } from "react";
 import {
   getAllSchedulings,
   getSchedulingsFilters,
+  searchSchedulings,
 } from "../api/routers/scheduling";
 import { useLoading } from "../contexts/LoadingContext";
 import getErrorMessage from "../utils/getErrorMessage";
 import { maskCpf } from "../utils/mask";
 
-export default function useAllScheduling(page = 1, status = "Todos") {
+export default function useAllScheduling(page = 1, status = "Todos", search = "") {
   const { showLoading, hideLoading } = useLoading();
 
   const [schedulings, setSchedulings] = useState([]);
@@ -23,7 +24,10 @@ export default function useAllScheduling(page = 1, status = "Todos") {
 
       let response;
 
-      if (status === "Todos") {
+
+      if (search) {
+        response = await searchSchedulings(search, page);
+      } else if (status === "Todos") {
         response = await getAllSchedulings(page);
       } else {
         response = await getSchedulingsFilters(status, page);
@@ -43,9 +47,9 @@ export default function useAllScheduling(page = 1, status = "Todos") {
           : "-",
         dateTime: item.dateTime
           ? new Date(item.dateTime).toLocaleString("pt-BR", {
-              dateStyle: "short",
-              timeStyle: "short",
-            })
+            dateStyle: "short",
+            timeStyle: "short",
+          })
           : "-",
         status: item.schedulingStatus,
         warehouse: item.userWarehouse?.name || "-",
@@ -62,7 +66,7 @@ export default function useAllScheduling(page = 1, status = "Todos") {
 
   useEffect(() => {
     fetchAllSchedulings();
-  }, [page, status]); // 🔥 importante
+  }, [page, status, search]); // 🔥 importante
 
   return {
     schedulings,

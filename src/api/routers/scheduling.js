@@ -15,6 +15,17 @@ export const getSchedulingsFilters = async (status = "Todos", page = 1) => {
     return response.data; 
 };
 
+export const searchSchedulings = async (search, page = 1) => {
+  const response = await api.get(`/scheduling/search`, {
+    params: {
+      search,
+      page,
+    },
+  });
+
+  return response.data;
+};
+
 export const getSchedulingById = async (id) => {
     const response = await api.get(`/scheduling/show/${id}`);
     return response.data?.data || [];

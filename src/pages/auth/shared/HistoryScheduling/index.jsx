@@ -2,7 +2,7 @@ import { useState } from "react";
 import Title from "../../../../components/Title";
 import DynamicTable from "../../../../components/DynamicTable";
 import useAllScheduling from "../../../../hook/useAllScheduling";
-import { filterByNameOrCpf } from "../../../../utils/filterByNameOrCpf";
+import useDebounce from "../../../../hook/useDebounce";
 import SearchInputBeneficiary from "../../../../components/SearchInputBeneficiary";
 import StatusFilter from "../../../../components/StatusFilters";
 import { useUser } from "../../../../contexts/UserContext";
@@ -13,10 +13,10 @@ import Alert from "../../../../components/Alert";
 export default function HistoryScheduling() {
   const [filterStatus, setFilterStatus] = useState("Todos");
   const [searchTerm, setSearchTerm] = useState("");
-
+  const debouncedSearch = useDebounce(searchTerm, 500);
   const [currentPage, setCurrentPage] = useState(1);
 
-  const { schedulings, meta, error, message, refetch } = useAllScheduling(currentPage, filterStatus);
+  const { schedulings, meta, error, message, refetch } = useAllScheduling(currentPage, filterStatus, debouncedSearch);
   const { user } = useUser();
 
   const columns = [
@@ -29,13 +29,6 @@ export default function HistoryScheduling() {
   ];
 
   const statuses = ["Todos", "Agendado", "Concluido", "Ausente", "Cancelado"];
-
-  let filtered = schedulings.filter(
-    (item) => filterStatus === "Todos" || item.status === filterStatus
-  );
-
-  filtered = filterByNameOrCpf(filtered, searchTerm);
-
 
   return (
     <>

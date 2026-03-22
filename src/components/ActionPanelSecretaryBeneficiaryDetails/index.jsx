@@ -33,6 +33,18 @@ export default function ActionPanelSecretaryBeneficiaryDetails({ beneficiary, re
           icon: "fa-solid fa-rotate-right",
           onClick: refetch,
         },
+        {
+          label: "Ver Histórico de Retiradas",
+          color: "green",
+          icon: "fa-solid fa-box",
+          onClick: () => navigate(`/secretaria/retirada/lista/${beneficiary.cpf}`),
+        },
+        {
+          label: "Ver Histórico de Agendamentos",
+          color: "orange",
+          icon: "fa-solid fa-calendar-check",
+          onClick: () => navigate(`/secretaria/agendamento/lista/${beneficiary.cpf}`),
+        },
       ]}
     />
   );

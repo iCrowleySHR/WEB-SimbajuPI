@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
 
 export default function DynamicTable({ data = [], columns = [], actions }) {
-  if (!data || data.length === 0) {
-    return (
-      <div className="p-6 text-center text-gray-500 bg-gray-50 rounded-lg shadow-sm">
-        Nenhum dado disponível
-      </div>
-    );
-  }
+  // if (!data || data.length === 0) {
+  //   return (
+  //     <div className="p-6 text-center text-gray-500 bg-gray-50 rounded-lg shadow-sm">
+  //       Nenhum dado disponível
+  //     </div>
+  //   );
+  // }
 
   const getNestedValue = (obj, path) => {
     return path.split(".").reduce((acc, key) => {

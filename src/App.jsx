@@ -76,9 +76,11 @@ function App() {
                         <Route path="relatorios" element={<Reports />} />
 
                         <Route path="agendamento/lista" element={<HistoryScheduling />} />
+                        <Route path="agendamento/lista/:search" element={<HistoryScheduling />} />
                         <Route path="agendamento/detalhes/:id" element={<SchedulingDetails />} />
 
                         <Route path="retirada/lista" element={<HistoryWithdrawal />} />
+                        <Route path="retirada/lista/:search" element={<HistoryWithdrawal />} />
                         <Route path="retirada/detalhes/:id" element={<WithdrawalDetails />} />
                     </Route>
 
@@ -93,6 +95,7 @@ function App() {
                         <Route path="agendamento/hoje" element={<TodaySchedulings />} />
                         <Route path="agendamento/criar/:id?" element={<MakeScheduling />} />
                         <Route path="agendamento/lista" element={<HistoryScheduling />} />
+                        <Route path="agendamento/lista/:search" element={<HistoryScheduling />} />
                         <Route path="agendamento/cancelar/:id" element={<CancelScheduling />} />
                         <Route path="agendamento/ausente/:id" element={<AusentScheduling />} />
                         <Route path="agendamento/detalhes/:id" element={<SchedulingDetails />} />
@@ -101,6 +104,7 @@ function App() {
                         <Route path="beneficiario/detalhes/:id" element={<BeneficiaryDetails />} />
 
                         <Route path="retirada/lista" element={<HistoryWithdrawal />} />
+                        <Route path="retirada/lista/:search" element={<HistoryWithdrawal />} />
                         <Route path="retirada/registrar" element={<MakeWithdrawal />} />
                         <Route path="retirada/detalhes/:id" element={<WithdrawalDetails />} />
                     </Route>

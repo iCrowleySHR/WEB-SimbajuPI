@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Title from "../../../../components/Title";
 import DynamicTable from "../../../../components/DynamicTable";
 import useAllScheduling from "../../../../hook/useAllScheduling";
@@ -9,8 +9,10 @@ import { useUser } from "../../../../contexts/UserContext";
 import Pagination from "../../../../components/Pagination";
 import translate from "../../../../utils/translate";
 import Alert from "../../../../components/Alert";
+import { useParams } from "react-router-dom";
 
 export default function HistoryScheduling() {
+  const { search } = useParams();
   const [filterStatus, setFilterStatus] = useState("Todos");
   const [searchTerm, setSearchTerm] = useState("");
   const debouncedSearch = useDebounce(searchTerm, 500);
@@ -29,6 +31,13 @@ export default function HistoryScheduling() {
   ];
 
   const statuses = ["Todos", "Agendado", "Concluido", "Ausente", "Cancelado"];
+
+  useEffect(() => {
+  if (search) {
+    setSearchTerm(search);
+    setCurrentPage(1);
+  }
+}, [search])
 
   return (
     <>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Title from "../../../../components/Title";
 import DynamicTable from "../../../../components/DynamicTable";
 import useAllWithdrawals from "../../../../hook/useAllWithdrawals";
@@ -8,8 +8,10 @@ import translate from "../../../../utils/translate";
 import useDebounce from "../../../../hook/useDebounce";
 import Pagination from "../../../../components/Pagination";
 import Alert from "../../../../components/Alert";
+import { useParams } from "react-router-dom";
 
 export default function HistoryWithdrawal() {
+  const { search } = useParams();
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const debouncedSearch = useDebounce(searchTerm, 500);
@@ -23,6 +25,13 @@ export default function HistoryWithdrawal() {
     { label: "Data e Hora da retirada", accessor: "dateTimeWithdrawal" },
     { label: "Data e Hora do agendamento", accessor: "dateTimeScheduling" },
   ];
+
+  useEffect(() => {
+  if (search) {
+    setSearchTerm(search);
+    setCurrentPage(1);
+  }
+}, [search]);
 
   return (
     <>

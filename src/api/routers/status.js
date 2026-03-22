@@ -11,9 +11,9 @@ export const updateUbsStatus = async (id, data) => {
 }
 
 
-export const suspensionsUbs = async () => {
-  const response = await api.post(`/status/suspensions/ubs`,);
-  return response.data?.data || [];
+export const suspensionsUbs = async (page = 1) => {
+  const response = await api.get(`/status/suspensions/ubs?page=${page}`);
+  return response.data;
 }
 
 export const uploadFileSecretary = async (id, formData) => {

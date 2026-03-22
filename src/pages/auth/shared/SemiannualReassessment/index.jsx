@@ -24,7 +24,6 @@ export default function SemiannualReassessment() {
     { label: "Status Secretaria", accessor: "secretaryStatus" },
   ];
 
-
   return (
     <>
       <Title

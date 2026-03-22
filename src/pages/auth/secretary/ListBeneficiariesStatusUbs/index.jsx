@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Pagination from "../../../../components/Pagination";
 import Title from "../../../../components/Title";
 import DynamicTable from "../../../../components/DynamicTable";
 import SearchInputBeneficiary from "../../../../components/SearchInputBeneficiary";
@@ -9,7 +10,8 @@ import translate from "../../../../utils/translate";
 import { useUser } from "../../../../contexts/UserContext";
 
 export default function ListBeneficiariesStatusUbs() {
-    const { beneficiaries, error, message, refetch } = useListBeneficiariesStatusUbs();
+    const [currentPage, setCurrentPage] = useState(1);
+    const { beneficiaries, error, message, refetch, meta  } = useListBeneficiariesStatusUbs(currentPage);
     const [searchTerm, setSearchTerm] = useState("");
     const { user } = useUser();
 
@@ -34,7 +36,10 @@ export default function ListBeneficiariesStatusUbs() {
 
             <SearchInputBeneficiary
                 value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
+                  onChange={(e) => {
+                    setSearchTerm(e.target.value);
+                    setCurrentPage(1); 
+                }}
                 placeholder="Pesquisar por nome ou CPF..."
             />
 
@@ -59,6 +64,12 @@ export default function ListBeneficiariesStatusUbs() {
                 />
 
             </div>
+
+            <Pagination
+                currentPage={currentPage}
+                lastPage={meta?.last_page || 1}
+                onPageChange={setCurrentPage}
+            />
 
             <div className="text-center mt-6">
                 <button

@@ -41,6 +41,17 @@ export const getLastCheck = async (page = 1) => {
   return response.data;
 }
 
+export const searchLastCheck = async (search, page = 1) => {
+  const response = await api.get(`/beneficiary/lastcheck/search`, {
+    params: {
+      search,
+      page,
+    },
+  });
+
+  return response.data;
+};
+
 export const updatePrescription = async (id, data) => {
   const response = await api.patch(`/beneficiary/secretary/update/${id}`, data);
   return response.data?.data || [];

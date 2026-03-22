@@ -3,16 +3,17 @@ import Title from "../../../../components/Title";
 import useAllLastCheck from "../../../../hook/useAllLastCheck";
 import { useUser } from "../../../../contexts/UserContext";
 import Pagination from "../../../../components/Pagination";
-import { filterByNameOrCpf } from "../../../../utils/filterByNameOrCpf";
 import SearchInputBeneficiary from "../../../../components/SearchInputBeneficiary";
 import DynamicTable from "../../../../components/DynamicTable";
 import translate from "../../../../utils/translate";
 import Alert from "../../../../components/Alert";
+import useDebounce from "../../../../hook/useDebounce";
 
 export default function SemiannualReassessment() {
   const [currentPage, setCurrentPage] = useState(1);
-  const { beneficiaries, error, message, refetch, meta  } = useAllLastCheck(currentPage);
   const [searchTerm, setSearchTerm] = useState("");
+  const debouncedSearch = useDebounce(searchTerm.trim(), 500);
+  const { beneficiaries, error, message, refetch, meta  } = useAllLastCheck(currentPage, debouncedSearch);
   const { user } = useUser();
 
   const columns = [
@@ -23,7 +24,7 @@ export default function SemiannualReassessment() {
     { label: "Status Secretaria", accessor: "secretaryStatus" },
   ];
 
-  const filteredBeneficiaries = filterByNameOrCpf(beneficiaries, searchTerm);
+
   return (
     <>
       <Title
@@ -36,13 +37,16 @@ export default function SemiannualReassessment() {
 
       <SearchInputBeneficiary
         value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
+        onChange={(e) => {
+          setSearchTerm(e.target.value);
+          setCurrentPage(1);
+        }}
         placeholder="Pesquisar por nome ou CPF..."
       />
 
       <div className="mt-4">
         <DynamicTable
-          data={filteredBeneficiaries}
+          data={beneficiaries}
           columns={columns}
           actions={[
             {

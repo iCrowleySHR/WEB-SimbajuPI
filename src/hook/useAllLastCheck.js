@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import { getLastCheck } from "../api/routers/beneficiary";
+import { getLastCheck, searchLastCheck } from "../api/routers/beneficiary";
 import { useLoading } from "../contexts/LoadingContext";
 import getErrorMessage from "../utils/getErrorMessage";
 import { maskCpf } from "../utils/mask";
 
-export default function useAllLastCheck(page = 1) {
+export default function useAllLastCheck(page = 1, search = ""){
   const { showLoading, hideLoading } = useLoading();
 
   const [beneficiaries, setBeneficiaries] = useState([]);
@@ -18,7 +18,13 @@ export default function useAllLastCheck(page = 1) {
       setMessage("");
       showLoading();
 
-      const response = await getLastCheck(page);
+      let response;
+
+      if (search) {
+        response = await searchLastCheck(search, page);
+      } else {
+        response = await getLastCheck(page);
+      }
 
       const data = response?.data || [];
 
@@ -50,7 +56,7 @@ export default function useAllLastCheck(page = 1) {
 
   useEffect(() => {
     fetchAllLastCheck();
-  }, [page]); // 🔥 importante
+  }, [page, search]); // 🔥 importante
 
   return {
     beneficiaries,

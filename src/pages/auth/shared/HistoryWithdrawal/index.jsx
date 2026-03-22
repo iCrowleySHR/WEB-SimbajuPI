@@ -1,18 +1,21 @@
 import { useState } from "react";
 import Title from "../../../../components/Title";
 import DynamicTable from "../../../../components/DynamicTable";
-import useAllWitdrawals from "../../../../hook/useAllWithdrawals";
+import useAllWithdrawals from "../../../../hook/useAllWithdrawals";
 import SearchInputBeneficiary from "../../../../components/SearchInputBeneficiary";
-import { filterByNameOrCpf } from "../../../../utils/filterByNameOrCpf";
-import { filterByDateRange } from "../../../../utils/filterByDateRange";
 import { useUser } from "../../../../contexts/UserContext";
 import translate from "../../../../utils/translate";
+import useDebounce from "../../../../hook/useDebounce";
+import Pagination from "../../../../components/Pagination";
 import Alert from "../../../../components/Alert";
 
 export default function HistoryWithdrawal() {
   const [searchTerm, setSearchTerm] = useState("");
-  const { withdrawals, error, message, refetch } = useAllWitdrawals();
+  const [currentPage, setCurrentPage] = useState(1);
+  const debouncedSearch = useDebounce(searchTerm, 500);
+  const { withdrawals, meta, error, message, refetch } = useAllWithdrawals(currentPage, debouncedSearch);
   const { user } = useUser();
+
   const columns = [
     { label: "ID", accessor: "id" },
     { label: "Beneficiário", accessor: "beneficiaryName" },
@@ -20,9 +23,6 @@ export default function HistoryWithdrawal() {
     { label: "Data e Hora da retirada", accessor: "dateTimeWithdrawal" },
     { label: "Data e Hora do agendamento", accessor: "dateTimeScheduling" },
   ];
-
-  let filtered = filterByNameOrCpf(withdrawals, searchTerm);
-
 
   return (
     <>
@@ -34,17 +34,20 @@ export default function HistoryWithdrawal() {
 
       <SearchInputBeneficiary
         value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
+        onChange={(e) => {
+          setSearchTerm(e.target.value);
+          setCurrentPage(1); 
+        }}
         placeholder="Pesquisar por nome ou CPF..."
       />
 
 
-            {message && <Alert type="success" message={message} />}
-            {error && <Alert type="error" message={error} />}
+      {message && <Alert type="success" message={message} />}
+      {error && <Alert type="error" message={error} />}
 
       <div className="mt-4">
         <DynamicTable
-          data={filtered}
+          data={withdrawals}
           columns={columns}
           actions={[
             {
@@ -54,6 +57,12 @@ export default function HistoryWithdrawal() {
           ]}
         />
       </div>
+
+      <Pagination
+        currentPage={currentPage}
+        lastPage={meta?.last_page || 1}
+        onPageChange={setCurrentPage}
+      />
 
       <div className="text-center mt-6">
         <button

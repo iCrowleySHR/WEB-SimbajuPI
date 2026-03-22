@@ -21,9 +21,9 @@ export const getWithdrawalById = async (id) => {
     return response.data?.data || [];
 };
 
-export const getMyWithdrawals = async () => {
-    const response = await api.get(`/withdrawal/my`);
-    return response.data?.data || [];
+export const getMyWithdrawals = async (page = 1) => {
+    const response = await api.get(`/withdrawal/my?page=${page}`);
+    return response.data; 
 };
 
 export const storeWithdrawal = async (data) => {

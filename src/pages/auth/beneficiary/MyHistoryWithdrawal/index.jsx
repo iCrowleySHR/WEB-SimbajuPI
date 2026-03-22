@@ -1,10 +1,14 @@
+import { useState } from "react";
 import Title from "../../../../components/Title";
 import DynamicTable from "../../../../components/DynamicTable";
 import Alert from "../../../../components/Alert";
+import Pagination from "../../../../components/Pagination";
 import useMyHistoryWithdrawls from "../../../../hook/useMyHistoryWithdrawls";
 
 export default function MyHistoryWithdrawal() {
-    const { withdrawals, error, message, refetch } = useMyHistoryWithdrawls();
+    const [currentPage, setCurrentPage] = useState(1);
+    const { withdrawals, meta, error, message, refetch } = useMyHistoryWithdrawls(currentPage);
+
     const columns = [
         { label: "Beneficiário", accessor: "beneficiaryName" },
         { label: "CPF", accessor: "cpf" },
@@ -31,6 +35,11 @@ export default function MyHistoryWithdrawal() {
                     columns={columns}
                 />
             </div>
+            <Pagination
+                currentPage={currentPage}
+                lastPage={meta?.last_page || 1}
+                onPageChange={setCurrentPage}
+            />
 
             <div className="text-center mt-6">
                 <button

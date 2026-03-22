@@ -16,6 +16,17 @@ export const suspensionsUbs = async (page = 1) => {
   return response.data;
 }
 
+export const searchSuspensionsUbs = async (search, page = 1) => {
+  const response = await api.get(`/status/suspensions/ubs/search`, {
+    params: {
+      search,
+      page,
+    },
+  });
+
+  return response.data;
+};
+
 export const uploadFileSecretary = async (id, formData) => {
   const response = await api.post(
     `/status/documentions/secretary/${id}`,

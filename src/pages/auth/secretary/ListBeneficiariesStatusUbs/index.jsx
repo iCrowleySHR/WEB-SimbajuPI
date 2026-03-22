@@ -3,16 +3,18 @@ import Pagination from "../../../../components/Pagination";
 import Title from "../../../../components/Title";
 import DynamicTable from "../../../../components/DynamicTable";
 import SearchInputBeneficiary from "../../../../components/SearchInputBeneficiary";
-import { filterByNameOrCpf } from "../../../../utils/filterByNameOrCpf";
 import Alert from "../../../../components/Alert";
 import useListBeneficiariesStatusUbs from "../../../../hook/useListBeneficiariesStatusUbs";
 import translate from "../../../../utils/translate";
+import useDebounce from "../../../../hook/useDebounce";
 import { useUser } from "../../../../contexts/UserContext";
 
 export default function ListBeneficiariesStatusUbs() {
     const [currentPage, setCurrentPage] = useState(1);
-    const { beneficiaries, error, message, refetch, meta  } = useListBeneficiariesStatusUbs(currentPage);
     const [searchTerm, setSearchTerm] = useState("");
+    const debouncedSearch = useDebounce(searchTerm, 500);
+    const { beneficiaries, error, message, refetch, meta  } = useListBeneficiariesStatusUbs(currentPage, debouncedSearch);
+
     const { user } = useUser();
 
     const columns = [
@@ -24,7 +26,7 @@ export default function ListBeneficiariesStatusUbs() {
         { label: "Status da UBS", accessor: "ubsStatus" },
     ];
 
-    let filtered = filterByNameOrCpf(beneficiaries, searchTerm);
+
 
     return (
         <>
@@ -49,7 +51,7 @@ export default function ListBeneficiariesStatusUbs() {
 
             <div className="mt-4">
                 <DynamicTable
-                    data={filtered}
+                    data={beneficiaries}
                     columns={columns}
                     actions={[
                         {

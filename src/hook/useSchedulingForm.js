@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { getAllBeneficiaries, getMyBeneficiaryData } from "../api/routers/beneficiary";
-import { getAvailableFutureSchedules } from "../api/routers/scheduling";
+import { getAvailableFutureSchedules, makeScheduling } from "../api/routers/scheduling";
 import { useLoading } from "../contexts/LoadingContext";
-import { makeScheduling } from "../api/routers/scheduling";
 import getErrorMessage from "../utils/getErrorMessage";
 
 export function useSchedulingForm(userRole, defaultId = null) {
@@ -15,14 +14,27 @@ export function useSchedulingForm(userRole, defaultId = null) {
   const { showLoading, hideLoading } = useLoading();
 
   useEffect(() => {
-    async function fetchData() {
+    async function fetchAllBeneficiaries() {
       showLoading();
       try {
         if (userRole === "warehouse") {
-          const data = await getAllBeneficiaries();
-          setBeneficiaries(data);
+          let allBeneficiaries = [];
+          let page = 1;
+          let totalPages = 1;
+
+          // Busca todas as páginas
+          do {
+            const response = await getAllBeneficiaries(page);
+            allBeneficiaries = [...allBeneficiaries, ...response.data];
+            totalPages = response.meta.last_page;
+            page++;
+          } while (page <= totalPages);
+
+          setBeneficiaries(allBeneficiaries);
+
+          // seleciona o defaultId, se existir
           if (defaultId) {
-            const found = data.find(b => String(b.id) === String(defaultId));
+            const found = allBeneficiaries.find(b => String(b.id) === String(defaultId));
             if (found) setId(found.id);
           }
         } else if (userRole === "beneficiary") {
@@ -36,7 +48,8 @@ export function useSchedulingForm(userRole, defaultId = null) {
         hideLoading();
       }
     }
-    fetchData();
+
+    fetchAllBeneficiaries();
   }, [userRole, defaultId]);
 
   useEffect(() => {
@@ -50,13 +63,13 @@ export function useSchedulingForm(userRole, defaultId = null) {
       try {
         const times = await getAvailableFutureSchedules(date);
         setAvailableTimes(times);
-         setMessage({ type: "success", text: "Data com horários disponíveis" });
+        setMessage({ type: "success", text: "Data com horários disponíveis" });
       } catch (error) {
         setMessage({ type: "error", text: getErrorMessage(error) });
       } finally {
         hideLoading();
       }
-    }, 600); 
+    }, 600);
 
     return () => clearTimeout(timeout);
   }, [date]);

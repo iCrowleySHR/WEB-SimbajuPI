@@ -36,9 +36,9 @@ export const getBeneficiaryById = async (id) => {
   return response.data?.data || [];
 }
 
-export const getLastCheck = async () => {
-  const response = await api.get(`/beneficiary/lastcheck`,);
-  return response.data?.data || [];
+export const getLastCheck = async (page = 1) => {
+  const response = await api.get(`/beneficiary/lastcheck?page=${page}`);
+  return response.data;
 }
 
 export const updatePrescription = async (id, data) => {

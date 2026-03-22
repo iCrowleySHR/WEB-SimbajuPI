@@ -2,6 +2,7 @@ import { useState } from "react";
 import Title from "../../../../components/Title";
 import useAllLastCheck from "../../../../hook/useAllLastCheck";
 import { useUser } from "../../../../contexts/UserContext";
+import Pagination from "../../../../components/Pagination";
 import { filterByNameOrCpf } from "../../../../utils/filterByNameOrCpf";
 import SearchInputBeneficiary from "../../../../components/SearchInputBeneficiary";
 import DynamicTable from "../../../../components/DynamicTable";
@@ -9,7 +10,8 @@ import translate from "../../../../utils/translate";
 import Alert from "../../../../components/Alert";
 
 export default function SemiannualReassessment() {
-  const { beneficiaries, error, message, refetch } = useAllLastCheck();
+  const [currentPage, setCurrentPage] = useState(1);
+  const { beneficiaries, error, message, refetch, meta  } = useAllLastCheck(currentPage);
   const [searchTerm, setSearchTerm] = useState("");
   const { user } = useUser();
 
@@ -50,6 +52,12 @@ export default function SemiannualReassessment() {
           ]}
         />
       </div>
+
+      <Pagination
+        currentPage={currentPage}
+        lastPage={meta?.last_page || 1}
+        onPageChange={setCurrentPage}
+      />
 
       <div className="text-center mt-6">
         <button

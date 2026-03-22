@@ -31,9 +31,9 @@ export const getSchedulingById = async (id) => {
     return response.data?.data || [];
 };
 
-export const getMySchedulings = async () => {
-    const response = await api.get(`/scheduling/my`);
-    return response.data?.data || [];
+export const getMySchedulings = async (page = 1) => {
+    const response = await api.get(`/scheduling/my?page=${page}`);
+    return response.data;
 };
 
 export const getAvailableFutureSchedules = async (date) => {

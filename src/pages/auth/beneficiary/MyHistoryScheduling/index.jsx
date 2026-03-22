@@ -1,10 +1,13 @@
 import Title from "../../../../components/Title";
+import { useState } from "react";
+import Pagination from "../../../../components/Pagination";
 import DynamicTable from "../../../../components/DynamicTable";
 import Alert from "../../../../components/Alert";
 import useMyHistoryScheduling from "../../../../hook/useMyHistoryScheduling";
 
 export default function MyHistoryScheduling() {
-    const { schedulings, error, message, refetch } = useMyHistoryScheduling();
+    const [currentPage, setCurrentPage] = useState(1);
+    const { schedulings, error, message, refetch, meta  } = useMyHistoryScheduling(currentPage);
     const columns = [
         { label: "ID", accessor: "id" },
         { label: "Nome", accessor: "beneficiaryName" },
@@ -28,9 +31,14 @@ export default function MyHistoryScheduling() {
                 <DynamicTable
                     data={schedulings}
                     columns={columns}
-        
                 />
             </div>
+
+            <Pagination
+                currentPage={currentPage}
+                lastPage={meta?.last_page || 1}
+                onPageChange={setCurrentPage}
+            />
 
             <div className="text-center mt-6">
                 <button

@@ -4,48 +4,61 @@ import getErrorMessage from "../utils/getErrorMessage";
 import { getMySchedulings } from "../api/routers/scheduling";
 import { maskCpf } from "../utils/mask";
 
-export default function useMyHistoryScheduling() {
-    const { showLoading, hideLoading } = useLoading();
-    const [schedulings, setSchedulings] = useState([]);
-    const [error, setError] = useState("");
-    const [message, setMessage] = useState("");
+export default function useMyHistoryScheduling(page = 1) {
+  const { showLoading, hideLoading } = useLoading();
 
-    const fetchMySchedulings = async () => {
-        try {
-            setError("");
-            setMessage("");
-            showLoading();
+  const [schedulings, setSchedulings] = useState([]);
+  const [meta, setMeta] = useState({});
+  const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
 
-            const data = await getMySchedulings() || [];
+  const fetchMySchedulings = async () => {
+    try {
+      setError("");
+      setMessage("");
+      showLoading();
 
-            if (data.length === 0) {
-                setMessage("Nenhum registro encontrado.");
-            }
+      const response = await getMySchedulings(page);
 
+      const data = response?.data || [];
 
-            const formatted = data.map((item) => ({
-                id: item.id,
-                beneficiaryName: item.beneficiary?.user?.name || "-",
-                cpf: item.beneficiary?.cpf ? maskCpf(item.beneficiary.cpf) : "-",
-                dateTime: item.dateTime
-                    ? new Date(item.dateTime).toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short" })
-                    : "-",
-                schedulingStatus: item.schedulingStatus,
+      if (data.length === 0) {
+        setMessage("Nenhum registro encontrado.");
+      }
 
-            }));
+      const formatted = data.map((item) => ({
+        id: item.id,
+        beneficiaryName: item.beneficiary?.user?.name || "-",
+        cpf: item.beneficiary?.cpf
+          ? maskCpf(item.beneficiary.cpf)
+          : "-",
+        dateTime: item.dateTime
+          ? new Date(item.dateTime).toLocaleString("pt-BR", {
+              dateStyle: "short",
+              timeStyle: "short",
+            })
+          : "-",
+        schedulingStatus: item.schedulingStatus,
+      }));
 
+      setSchedulings(formatted);
+      setMeta(response?.meta || {});
+    } catch (err) {
+      setError(getErrorMessage(err));
+    } finally {
+      hideLoading();
+    }
+  };
 
-            setSchedulings(formatted);
-        } catch (err) {
-            setError(getErrorMessage(err));
-        } finally {
-            hideLoading();
-        }
-    };
+  useEffect(() => {
+    fetchMySchedulings();
+  }, [page]); // 🔥 importante
 
-    useEffect(() => {
-        fetchMySchedulings();
-    }, []);
-
-    return { schedulings, error, message, refetch: fetchMySchedulings };
+  return {
+    schedulings,
+    meta,
+    error,
+    message,
+    refetch: fetchMySchedulings,
+  };
 }

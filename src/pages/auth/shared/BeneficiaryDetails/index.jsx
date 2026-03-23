@@ -47,7 +47,7 @@ export default function BeneficiaryDetails() {
             />
           )}
 
-          <BeneficiaryDetailsComponent beneficiary={beneficiary} />
+          <BeneficiaryDetailsComponent beneficiary={beneficiary} showDetails={true} />
         </>
       )}
     </>

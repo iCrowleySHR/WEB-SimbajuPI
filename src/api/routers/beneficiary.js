@@ -17,6 +17,7 @@ export const updateResponsibleData = async (userData) => {
 
 export const getAllBeneficiaries = async (page = 1) => {
   const response = await api.get(`/beneficiary/allbeneficiares?page=${page}`);
+  console.log(response)
   return response.data; 
 };
 

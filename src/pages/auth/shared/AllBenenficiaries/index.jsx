@@ -33,9 +33,6 @@ const debouncedSearch = useDebounce(searchTerm, 500);
         back="true"
       />
 
-      {message && <Alert type="success" message={message} />}
-      {error && <Alert type="error" message={error} />}
-
       <SearchInputBeneficiary
         value={searchTerm}
         onChange={(e) => {
@@ -44,6 +41,9 @@ const debouncedSearch = useDebounce(searchTerm, 500);
         }}
         placeholder="Pesquisar por nome ou CPF..."
       />
+
+      {message && <Alert type="success" message={message} />}
+      {error && <Alert type="error" message={error} />}
 
       <div className="mt-4">
         <DynamicTable

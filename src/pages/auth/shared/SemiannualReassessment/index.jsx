@@ -31,8 +31,6 @@ export default function SemiannualReassessment() {
         subtitle="Valide os benefícios dos pacientes, efetuando a reavaliação semestral."
         back
       />
-      {message && <Alert type="success" message={message} />}
-      {error && <Alert type="error" message={error} />}
 
       <SearchInputBeneficiary
         value={searchTerm}
@@ -42,6 +40,9 @@ export default function SemiannualReassessment() {
         }}
         placeholder="Pesquisar por nome ou CPF..."
       />
+
+      {message && <Alert type="success" message={message} />}
+      {error && <Alert type="error" message={error} />}
 
       <div className="mt-4">
         <DynamicTable

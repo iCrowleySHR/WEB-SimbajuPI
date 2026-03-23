@@ -19,7 +19,7 @@ export default function WithdrawalDetails() {
             {message && <Alert type="success" message={message} />}
             {error && <Alert type="error" message={error} />}
 
-      {withdrawal && <WithdrawalDetailsComponent withdrawal={withdrawal} />}
+      {withdrawal && <WithdrawalDetailsComponent withdrawal={withdrawal} showDetails={true} />}
 
       <div className="text-center mt-6">
         <button

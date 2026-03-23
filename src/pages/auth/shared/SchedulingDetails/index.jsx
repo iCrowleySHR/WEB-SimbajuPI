@@ -26,7 +26,7 @@ export default function SchedulingDetails() {
               refetch={refetch}
             />
           )}
-          <SchedulingDetailsComponent scheduling={scheduling} />
+          <SchedulingDetailsComponent scheduling={scheduling} showDetails={true} />
         </>
       )}
 

@@ -26,6 +26,12 @@ export default function ActionPanelWarehouseBeneficiaryDetails({ beneficiary, re
           icon: "fa-solid fa-calendar-check",
           onClick: () => navigate(`/almoxarifado/agendamento/lista/${beneficiary.cpf}`),
         },
+          {
+          label: "Gerar PDF",
+          color: "red",
+          icon: "fa-solid fa-file-pdf",
+          onClick: () => navigate(`/almoxarifado/beneficiario/pdf/${beneficiary.id}`),
+        },
       ]}
     />
   );

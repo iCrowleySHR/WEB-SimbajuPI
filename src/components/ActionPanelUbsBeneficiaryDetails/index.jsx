@@ -16,10 +16,10 @@ export default function ActionPanelUbsBeneficiaryDetails({ beneficiary, refetch 
           onClick: () => navigate(`/ubs/beneficiario/editar/status/${beneficiary.id}`),
         },
         {
-          label: "Atualizar Dados",
-          color: "blue",
-          icon: "fa-solid fa-rotate-right",
-          onClick: refetch,
+          label: "Gerar PDF",
+          color: "red",
+          icon: "fa-solid fa-file-pdf",
+          onClick: () => navigate(`/ubs/beneficiario/pdf/${beneficiary.id}`),
         },
       ]}
     />

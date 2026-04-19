@@ -39,6 +39,7 @@ import WarehouseConfig from "./pages/auth/warehouse/WarehouseConfig";
 import Reports from "./pages/auth/shared/Reports";
 import MakeScheduling from "./pages/auth/shared/MakeScheduling";
 import MakeWithdrawal from "./pages/auth/warehouse/MakeWithdrawal";
+import BeneficiaryPdfPage from "./pages/auth/shared/BeneficiaryPdfPage";
 
 
 function App() {
@@ -70,6 +71,7 @@ function App() {
                         <Route path="beneficiario/editar/status/:id" element={<BeneficiaryStatusSecretary />} />
                         <Route path="beneficiario/desativados" element={<BeneficiariesDisabled />} />
                         <Route path="beneficiario/status/suspensoes/ubs" element={<ListBeneficiariesStatusUbs />} />
+                        <Route path="beneficiario/pdf/:id" element={<BeneficiaryPdfPage  />} />
 
                         <Route path="configuracoes" element={<GeneralSettings />} />
 
@@ -102,6 +104,7 @@ function App() {
 
                         <Route path="beneficiario/lista" element={<AllBeneficiaries />} />
                         <Route path="beneficiario/detalhes/:id" element={<BeneficiaryDetails />} />
+                        <Route path="beneficiario/pdf/:id" element={<BeneficiaryPdfPage  />} />
 
                         <Route path="retirada/lista" element={<HistoryWithdrawal />} />
                         <Route path="retirada/lista/:search" element={<HistoryWithdrawal />} />
@@ -118,6 +121,7 @@ function App() {
                         <Route path="beneficiario/lista" element={<AllBeneficiaries />} />
                         <Route path="beneficiario/ultima-veriricacao" element={<SemiannualReassessment />} />
                         <Route path="beneficiario/editar/status/:id" element={<BeneficiaryStatusUbs />} />
+                        <Route path="beneficiario/pdf/:id" element={<BeneficiaryPdfPage  />} />
                     </Route>
 
                     {/* Beneficiário */}

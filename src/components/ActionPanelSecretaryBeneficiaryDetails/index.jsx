@@ -28,10 +28,10 @@ export default function ActionPanelSecretaryBeneficiaryDetails({ beneficiary, re
           onClick: () => navigate(`/secretaria/beneficiario/desabilitar-conta/${beneficiary.id}`),
         },
         {
-          label: "Atualizar Dados",
-          color: "blue",
-          icon: "fa-solid fa-rotate-right",
-          onClick: refetch,
+          label: "Gerar PDF",
+          color: "red",
+          icon: "fa-solid fa-file-pdf",
+          onClick: () => navigate(`/secretaria/beneficiario/pdf/${beneficiary.id}`),
         },
         {
           label: "Ver Histórico de Retiradas",

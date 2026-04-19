@@ -33,7 +33,7 @@ export default function DetailField({ label, value, colSpan = 1, icon }) {
             {label}
           </p>
           <p className="text-base font-semibold text-gray-800 truncate">
-            {value}
+            {value || "-"}
           </p>
         </div>
       </div>

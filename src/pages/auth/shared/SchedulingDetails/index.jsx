@@ -3,7 +3,6 @@ import Title from "../../../../components/Title";
 import { useParams } from "react-router-dom";
 import { useSchedulingDetail } from "../../../../hook/useSchedulingDetails";
 import Alert from "../../../../components/Alert";
-import ActionPanelWarehouseSchedulingDetails from "../../../../components/ActionPanelWarehouseSchedulingDetails";
 import { useUser } from "../../../../contexts/UserContext";
 import ActionPanelSchedulingDetails from "../../../../components/ActionPanelSchedulingDetails";
 

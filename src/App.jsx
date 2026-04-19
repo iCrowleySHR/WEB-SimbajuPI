@@ -41,6 +41,7 @@ import MakeScheduling from "./pages/auth/shared/MakeScheduling";
 import MakeWithdrawal from "./pages/auth/warehouse/MakeWithdrawal";
 import BeneficiaryPdfPage from "./pages/auth/shared/BeneficiaryPdfPage";
 import SchedulingPdfPage from "./pages/auth/shared/SchedulingPdfPage";
+import WithdrawalPdfPage from "./pages/auth/shared/WithdrawalPdfPage";
 
 
 function App() {
@@ -86,6 +87,7 @@ function App() {
                         <Route path="retirada/lista" element={<HistoryWithdrawal />} />
                         <Route path="retirada/lista/:search" element={<HistoryWithdrawal />} />
                         <Route path="retirada/detalhes/:id" element={<WithdrawalDetails />} />
+                        <Route path="retirada/pdf/:id" element={<WithdrawalPdfPage />} />
                     </Route>
 
                     {/* Almoxarifado */}
@@ -113,6 +115,7 @@ function App() {
                         <Route path="retirada/lista/:search" element={<HistoryWithdrawal />} />
                         <Route path="retirada/registrar" element={<MakeWithdrawal />} />
                         <Route path="retirada/detalhes/:id" element={<WithdrawalDetails />} />
+                        <Route path="retirada/pdf/:id" element={<WithdrawalPdfPage />} />
                     </Route>
 
                     {/* UBS */}

@@ -17,7 +17,6 @@ export function useWithdrawalDetails(withdrawalId) {
       showLoading();
 
       const response = await getWithdrawalById(id) || [];
-
       setWithdrawal(response);
 
     } catch (err) {

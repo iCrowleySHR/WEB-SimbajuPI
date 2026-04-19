@@ -1,11 +1,12 @@
-import WithdrawalDetailsComponent from "../../../../components/WithdrawalDetailsComponent"; 
+import WithdrawalDetailsComponent from "../../../../components/WithdrawalDetailsComponent";
 import Title from "../../../../components/Title";
 import { useParams } from "react-router-dom";
 import { useWithdrawalDetails } from "../../../../hook/useWithdrawalDetails";
 import Alert from "../../../../components/Alert";
+import ActionPanelWithdrawalDetails from "../../../../components/ActionPanelWithdrawalDetails";
 
 export default function WithdrawalDetails() {
-  const { id } = useParams(); 
+  const { id } = useParams();
   const { withdrawal, error, message, refetch } = useWithdrawalDetails(id);
 
   return (
@@ -16,10 +17,19 @@ export default function WithdrawalDetails() {
         back="true"
       />
 
-            {message && <Alert type="success" message={message} />}
-            {error && <Alert type="error" message={error} />}
+      {message && <Alert type="success" message={message} />}
+      {error && <Alert type="error" message={error} />}
 
-      {withdrawal && <WithdrawalDetailsComponent withdrawal={withdrawal} showDetails={true} />}
+      {withdrawal &&
+        <>
+          <ActionPanelWithdrawalDetails
+            withdrawal={withdrawal}
+            refetch={refetch}
+          />
+          <WithdrawalDetailsComponent withdrawal={withdrawal} showDetails={true}
+
+          />
+          </>}
 
       <div className="text-center mt-6">
         <button

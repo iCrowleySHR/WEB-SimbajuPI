@@ -9,6 +9,7 @@ export default function SchedulingDetailsComponent({ scheduling, showDetails = f
   const { beneficiary, userWarehouse } = scheduling;
   const [isOpen, setIsOpen] = useState(showDetails);
 
+
   const fields = [
     { label: "ID", value: scheduling.id },
     { label: "Data e Hora", value: formatDate(scheduling.dateTime) },

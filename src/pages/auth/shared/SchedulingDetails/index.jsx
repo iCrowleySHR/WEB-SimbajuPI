@@ -5,6 +5,7 @@ import { useSchedulingDetail } from "../../../../hook/useSchedulingDetails";
 import Alert from "../../../../components/Alert";
 import ActionPanelWarehouseSchedulingDetails from "../../../../components/ActionPanelWarehouseSchedulingDetails";
 import { useUser } from "../../../../contexts/UserContext";
+import ActionPanelSchedulingDetails from "../../../../components/ActionPanelSchedulingDetails";
 
 export default function SchedulingDetails() {
   const { id } = useParams();
@@ -13,6 +14,7 @@ export default function SchedulingDetails() {
 
   return (
     <>
+    
       <Title title="Detalhes do Agendamento" subtitle="Veja todas as informações do agendamento." back="true" />
 
       {message && <Alert type="success" message={message} />}
@@ -20,12 +22,11 @@ export default function SchedulingDetails() {
 
       {scheduling && (
         <>
-          {user?.role === "warehouse" && scheduling?.schedulingStatus === "Agendado" && (
-            <ActionPanelWarehouseSchedulingDetails
-              scheduling={scheduling}
-              refetch={refetch}
-            />
-          )}
+          <ActionPanelSchedulingDetails
+            scheduling={scheduling}
+            refetch={refetch}
+          />
+
           <SchedulingDetailsComponent scheduling={scheduling} showDetails={true} />
         </>
       )}

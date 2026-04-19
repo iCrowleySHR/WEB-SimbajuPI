@@ -40,6 +40,7 @@ import Reports from "./pages/auth/shared/Reports";
 import MakeScheduling from "./pages/auth/shared/MakeScheduling";
 import MakeWithdrawal from "./pages/auth/warehouse/MakeWithdrawal";
 import BeneficiaryPdfPage from "./pages/auth/shared/BeneficiaryPdfPage";
+import SchedulingPdfPage from "./pages/auth/shared/SchedulingPdfPage";
 
 
 function App() {
@@ -80,6 +81,7 @@ function App() {
                         <Route path="agendamento/lista" element={<HistoryScheduling />} />
                         <Route path="agendamento/lista/:search" element={<HistoryScheduling />} />
                         <Route path="agendamento/detalhes/:id" element={<SchedulingDetails />} />
+                        <Route path="agendamento/pdf/:id" element={<SchedulingPdfPage />} />
 
                         <Route path="retirada/lista" element={<HistoryWithdrawal />} />
                         <Route path="retirada/lista/:search" element={<HistoryWithdrawal />} />
@@ -101,6 +103,7 @@ function App() {
                         <Route path="agendamento/cancelar/:id" element={<CancelScheduling />} />
                         <Route path="agendamento/ausente/:id" element={<AusentScheduling />} />
                         <Route path="agendamento/detalhes/:id" element={<SchedulingDetails />} />
+                        <Route path="agendamento/pdf/:id" element={<SchedulingPdfPage />} />
 
                         <Route path="beneficiario/lista" element={<AllBeneficiaries />} />
                         <Route path="beneficiario/detalhes/:id" element={<BeneficiaryDetails />} />

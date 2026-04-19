@@ -1,47 +1,70 @@
-import BeneficiaryDetailsComponent from "../BeneficiaryDetailsComponent";
-import UserDetailsComponent from "../UserDetailsComponent";
+import { useState } from "react";
 import DetailField from "../DetailsField/DetailField";
-import formatDate from "../../utils/formatDate";
+import UserDetailsComponent from "../UserDetailsComponent";
+import SchedulingDetailsComponent from "../SchedulingDetailsComponent";
 import CollapsibleSection from "../CollapsibleSection";
+import formatDate from "../../utils/formatDate";
 
-export default function SchedulingDetailsComponent({ scheduling, showDetails = false }) {
-  const { beneficiary, userWarehouse } = scheduling;
+export default function WithdrawalDetailsComponent({ withdrawal, showDetails = false }) {
+  if (!withdrawal) return null;
 
-  const fields = [
-    { label: "ID", value: scheduling.id },
-    { label: "Data e Hora", value: formatDate(scheduling.dateTime) },
-    { label: "Status", value: scheduling.schedulingStatus },
-    { label: "Criado em", value: formatDate(scheduling.created_at) },
-    { label: "Atualizado em", value: formatDate(scheduling.updated_at) },
-    {
-      label: "Apagado em",
-      value: scheduling.deleted_at ? formatDate(scheduling.deleted_at) : "Não",
-    },
-  ];
+  const { scheduling, userWarehouse } = withdrawal;
 
   return (
     <CollapsibleSection
-      title="Detalhes do Agendamento"
-      accent="blue"
+      title="Detalhes da Retirada"
+      accent="orange"
       defaultOpen={showDetails}
     >
-      <div className="flex flex-col gap-6">
+      <div className="space-y-6">
 
         {/* Dados principais */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {fields.map((field, i) => (
-            <DetailField key={i} label={field.label} value={field.value} />
-          ))}
+        <div>
+          <h2 className="text-lg font-semibold mb-3">
+            Informações da Retirada
+          </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <DetailField label="ID" value={withdrawal.id} />
+            <DetailField
+              label="Data e Hora da Retirada"
+              value={formatDate(withdrawal.dateTime)}
+            />
+            <DetailField label="Marca" value={withdrawal.brand} />
+            <DetailField label="Tipo de Fralda" value={withdrawal.typeDiaper} />
+            <DetailField label="Quantidade de Fraldas" value={withdrawal.quantityDiapers} />
+            <DetailField label="Quantidade de Pacotes" value={withdrawal.quantityPackage} />
+            <DetailField label="Criado em" value={formatDate(withdrawal.created_at)} />
+            <DetailField label="Atualizado em" value={formatDate(withdrawal.updated_at)} />
+            <DetailField
+              label="Apagado em"
+              value={withdrawal.deleted_at ? formatDate(withdrawal.deleted_at) : "Não"}
+            />
+            <DetailField
+              label="Responsável pela Retirada"
+              value={withdrawal.responsibleWithdrawal || "-"}
+            />
+          </div>
         </div>
 
         {/* Responsável */}
         {userWarehouse && (
-          <UserDetailsComponent user={userWarehouse} showDetails />
+          <div>
+            <h2 className="text-lg font-semibold mb-3">
+              Responsável do Almoxarifado
+            </h2>
+            <UserDetailsComponent user={userWarehouse} />
+          </div>
         )}
 
-        {/* Beneficiário */}
-        {beneficiary && (
-          <BeneficiaryDetailsComponent beneficiary={beneficiary} />
+        {/* Agendamento vinculado */}
+        {scheduling && (
+          <div>
+            <h2 className="text-lg font-semibold mb-3">
+              Agendamento Relacionado
+            </h2>
+            <SchedulingDetailsComponent scheduling={scheduling} />
+          </div>
         )}
 
       </div>

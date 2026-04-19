@@ -4,10 +4,8 @@ import { useBeneficiaryDetail } from "../../../../hook/useBeneficiaryDetails";
 import BeneficiaryDetailsComponent from "../../../../components/BeneficiaryDetailsComponent";
 
 import { useUser } from "../../../../contexts/UserContext";
-import ActionPanelSecretaryBeneficiaryDetails from "../../../../components/ActionPanelSecretaryBeneficiaryDetails";
 import Alert from "../../../../components/Alert";
-import ActionPanelUbsBeneficiaryDetails from "../../../../components/ActionPanelUbsBeneficiaryDetails";
-import ActionPanelWarehouseBeneficiaryDetails from "../../../../components/ActionPanelWarehouseBeneficiaryDetails";
+import ActionPanelBeneficiaryDetails from "../../../../components/ActionPanelBeneficiaryDetails";
 
 export default function BeneficiaryDetails() {
   const { id } = useParams();
@@ -27,26 +25,7 @@ export default function BeneficiaryDetails() {
 
       {beneficiary && (
         <>
-          {user?.role === "secretary" && (
-            <ActionPanelSecretaryBeneficiaryDetails
-              beneficiary={beneficiary}
-              refetch={refetch}
-            />
-          )}
-          {user?.role === "ubs" && (
-            <ActionPanelUbsBeneficiaryDetails
-              beneficiary={beneficiary}
-              refetch={refetch}
-            />
-          )}
-
-          {user?.role === "warehouse" && (
-            <ActionPanelWarehouseBeneficiaryDetails
-              beneficiary={beneficiary}
-              refetch={refetch}
-            />
-          )}
-
+          <ActionPanelBeneficiaryDetails beneficiary={beneficiary} refetch={refetch} />
           <BeneficiaryDetailsComponent beneficiary={beneficiary} showDetails={true} />
         </>
       )}

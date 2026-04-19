@@ -5,50 +5,59 @@ import { getMySchedulings } from "../api/routers/scheduling";
 import { maskCpf } from "../utils/mask";
 
 export default function useCancebleListScheduling() {
-    const { showLoading, hideLoading } = useLoading();
-    const [schedulings, setSchedulings] = useState([]);
-    const [error, setError] = useState("");
-    const [message, setMessage] = useState("");
+  const { showLoading, hideLoading } = useLoading();
+  const [schedulings, setSchedulings] = useState([]);
+  const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
 
-    const cancellableStatuses = ["agendado"];
+  const cancellableStatuses = ["agendado"];
 
-    const fetchMySchedulings = async () => {
-        try {
-            setError("");
-            setMessage("");
-            showLoading();
+  const fetchMySchedulings = async () => {
+    try {
+      setError("");
+      setMessage("");
+      showLoading();
 
-            const data = await getMySchedulings() || [];
+      const response = await getMySchedulings();
 
-            const filtered = data.filter(item =>
-                cancellableStatuses.includes(item.schedulingStatus?.trim().toLowerCase())
-            );
+      const data = Array.isArray(response)
+        ? response
+        : response?.data ?? [];
 
-            if (filtered.length === 0) {
-                setMessage("Nenhum registro encontrado.");
-            }
+      const filtered = data.filter((item) =>
+        cancellableStatuses.includes(
+          item.schedulingStatus?.trim().toLowerCase()
+        )
+      );
 
-            const formatted = filtered.map((item) => ({
-                id: item.id,
-                beneficiaryName: item.beneficiary?.user?.name || "-",
-                cpf: item.beneficiary?.cpf ? maskCpf(item.beneficiary.cpf) : "-",
-                dateTime: item.dateTime
-                    ? new Date(item.dateTime).toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short" })
-                    : "-",
-                schedulingStatus: item.schedulingStatus,
-            }));
+      if (filtered.length === 0) {
+        setMessage("Nenhum registro encontrado.");
+      }
 
-            setSchedulings(formatted);
-        } catch (err) {
-            setError(getErrorMessage(err));
-        } finally {
-            hideLoading();
-        }
-    };
+      const formatted = filtered.map((item) => ({
+        id: item.id,
+        beneficiaryName: item.beneficiary?.user?.name || "-",
+        cpf: item.beneficiary?.cpf ? maskCpf(item.beneficiary.cpf) : "-",
+        dateTime: item.dateTime
+          ? new Date(item.dateTime).toLocaleString("pt-BR", {
+              dateStyle: "short",
+              timeStyle: "short",
+            })
+          : "-",
+        schedulingStatus: item.schedulingStatus,
+      }));
 
-    useEffect(() => {
-        fetchMySchedulings();
-    }, []);
+      setSchedulings(formatted);
+    } catch (err) {
+      setError(getErrorMessage(err));
+    } finally {
+      hideLoading();
+    }
+  };
 
-    return { schedulings, error, message, refetch: fetchMySchedulings };
+  useEffect(() => {
+    fetchMySchedulings();
+  }, []);
+
+  return { schedulings, error, message, refetch: fetchMySchedulings };
 }

@@ -211,7 +211,7 @@ export default function SchedulingPdfPage() {
       doc.setFont("helvetica", "normal");
       doc.setFontSize(8);
       doc.setTextColor(...COLORS.gray600);
-      doc.text("Sistema de Beneficiários", 21, pageHeight - 10);
+      doc.text("Sistema de Distruibuição de Fraldas", 21, pageHeight - 10);
       doc.text(`Página ${i} de ${totalPages}`, pageWidth - 14, pageHeight - 10, { align: "right" });
     }
 

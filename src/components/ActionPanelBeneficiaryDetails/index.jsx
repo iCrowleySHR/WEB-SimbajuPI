@@ -7,7 +7,7 @@ export default function ActionPanelBeneficiaryDetails({ beneficiary, refetch }) 
   const navigate = useNavigate();
   const { user } = useUser();
 
-  const role = user?.role; // <-- NÃO traduzir aqui
+  const role = user?.role; 
 
   const actionsByRole = {
     warehouse: [

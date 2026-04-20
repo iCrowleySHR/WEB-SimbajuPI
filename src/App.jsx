@@ -139,8 +139,13 @@ function App() {
 
                         <Route path="agendamento/historico" element={<MyHistoryScheduling />} />
                         <Route path="agendamento/criar" element={<MakeScheduling />} />
+                        <Route path="agendamento/detalhes/:id" element={<SchedulingDetails />} />
                         <Route path="agendamento/cancelaveis" element={<CancebleListScheduling />} />
                         <Route path="agendamento/cancelar/:id" element={<CancelScheduling />} />
+                        <Route path="agendamento/pdf/:id" element={<SchedulingPdfPage />} />
+
+                        <Route path="retirada/detalhes/:id" element={<WithdrawalDetails />} />
+                        <Route path="retirada/pdf/:id" element={<WithdrawalPdfPage />} />
 
                         <Route path="configuracoes" element={<BeneficiarySettings />} />
                     </Route>

@@ -4,8 +4,10 @@ import Alert from "../../../../components/Alert";
 import { useSchedulingDetail } from "../../../../hook/useSchedulingDetails";
 import SchedulingDetailsComponent from "../../../../components/SchedulingDetailsComponent";
 import { useCancelScheduling } from "../../../../hook/useCancelScheduling";
+import { useUser } from "../../../../contexts/UserContext";
 
 export default function CancelScheduling() {
+    
   const { id } = useParams();
   const {
     scheduling,
@@ -20,6 +22,15 @@ export default function CancelScheduling() {
     message: cancelMessage,
   } = useCancelScheduling(id, refetch);
 
+    const { user } = useUser();
+  
+    const role = user?.role;
+  
+    const roleRoutes = {
+      warehouse: "almoxarifado",
+      beneficiary: "beneficiario"
+    };
+  
   return (
     <>
       <Title
@@ -64,7 +75,7 @@ export default function CancelScheduling() {
               </button>
 
               <Link
-                to={`/almoxarifado/agendamento/detalhes/${id}`}
+                to={`/${roleRoutes[role]}/agendamento/detalhes/${id}`}
                 className="px-5 py-2.5 bg-gray-50 hover:bg-gray-100 active:scale-[0.99] text-gray-600 text-sm font-medium rounded-lg border border-gray-200 transition-all duration-150 flex items-center gap-2"
               >
                 <i className="fas fa-calendar-alt text-xs" />

@@ -32,7 +32,13 @@ export default function MyHistoryWithdrawal() {
             <div className="mt-4">
                 <DynamicTable
                     data={withdrawals}
-                    columns={columns}
+                    columns={columns}                    
+                    actions={[
+                        {
+                            label: "Ver detalhes",
+                            getPath: (row) => `/beneficiario/retirada/detalhes/${row.id}`,
+                        },
+                    ]}
                 />
             </div>
             <Pagination

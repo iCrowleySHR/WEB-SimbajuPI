@@ -7,7 +7,7 @@ import useMyHistoryScheduling from "../../../../hook/useMyHistoryScheduling";
 
 export default function MyHistoryScheduling() {
     const [currentPage, setCurrentPage] = useState(1);
-    const { schedulings, error, message, refetch, meta  } = useMyHistoryScheduling(currentPage);
+    const { schedulings, error, message, refetch, meta } = useMyHistoryScheduling(currentPage);
     const columns = [
         { label: "ID", accessor: "id" },
         { label: "Nome", accessor: "beneficiaryName" },
@@ -31,6 +31,12 @@ export default function MyHistoryScheduling() {
                 <DynamicTable
                     data={schedulings}
                     columns={columns}
+                    actions={[
+                        {
+                            label: "Ver detalhes",
+                            getPath: (row) => `/beneficiario/agendamento/detalhes/${row.id}`,
+                        },
+                    ]}
                 />
             </div>
 

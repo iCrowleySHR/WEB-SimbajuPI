@@ -11,6 +11,7 @@ export default function ActionPanelWithdrawalDetails({ withdrawal }) {
   const roleRoutes = {
     warehouse: "almoxarifado",
     secretary: "secretaria",
+    beneficiary: "beneficiario",
   };
 
   const routeRole = roleRoutes[role];
@@ -18,8 +19,9 @@ export default function ActionPanelWithdrawalDetails({ withdrawal }) {
   const scheduling = withdrawal?.scheduling;
   const beneficiary = scheduling?.beneficiary;
 
-  const actions = [
+  const allActions = [
     {
+      key: "beneficiario",
       label: "Ver detalhes do Beneficiário",
       color: "blue",
       icon: "fa-solid fa-user",
@@ -27,12 +29,15 @@ export default function ActionPanelWithdrawalDetails({ withdrawal }) {
         navigate(`/${routeRole}/beneficiario/detalhes/${beneficiary?.id}`),
     },
     {
+      key: "pdf",
       label: "Gerar PDF",
       color: "red",
       icon: "fa-solid fa-file-pdf",
-      onClick: () => navigate(`/${routeRole}/retirada/pdf/${withdrawal?.id}`),
+      onClick: () =>
+        navigate(`/${routeRole}/retirada/pdf/${withdrawal?.id}`),
     },
     {
+      key: "history-withdrawal",
       label: "Ver Histórico de Retiradas",
       color: "green",
       icon: "fa-solid fa-box",
@@ -40,6 +45,7 @@ export default function ActionPanelWithdrawalDetails({ withdrawal }) {
         navigate(`/${routeRole}/retirada/lista/${beneficiary?.cpf}`),
     },
     {
+      key: "history-scheduling",
       label: "Ver Histórico de Agendamentos",
       color: "orange",
       icon: "fa-solid fa-calendar-check",
@@ -47,6 +53,11 @@ export default function ActionPanelWithdrawalDetails({ withdrawal }) {
         navigate(`/${routeRole}/agendamento/lista/${beneficiary?.cpf}`),
     },
   ];
+
+  const actions =
+    role === "beneficiary"
+      ? allActions.filter((a) => a.key === "pdf")
+      : allActions;
 
   return <ActionPanel title="Ações" actions={actions} />;
 }

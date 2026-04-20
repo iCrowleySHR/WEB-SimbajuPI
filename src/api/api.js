@@ -25,7 +25,7 @@ api.interceptors.response.use(
     if (
       error.response &&
       (error.response.status === 401 ||
-        error.response.data?.message === "unauthenticated")
+        error.response.data?.message === "Unauthenticated.")
     ) {
       console.warn("Sessão expirada. Fazendo logout...");
 

@@ -102,8 +102,10 @@ export default function ActionPanelBeneficiaryDetails({ beneficiary, refetch }) 
       },
     ],
   };
-
+  const actions = actionsByRole[role] || [];
+  if (!actions.length) return null;
   return (
+
     <ActionPanel
       title={`Ações da ${translate(role)}`}
       actions={actionsByRole[role] || []}

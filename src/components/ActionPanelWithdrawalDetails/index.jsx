@@ -59,5 +59,7 @@ export default function ActionPanelWithdrawalDetails({ withdrawal }) {
       ? allActions.filter((a) => a.key === "pdf")
       : allActions;
 
+  if (!actions.length) return null;
+
   return <ActionPanel title="Ações" actions={actions} />;
 }

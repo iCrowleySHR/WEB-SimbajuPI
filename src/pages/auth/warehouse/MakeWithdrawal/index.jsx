@@ -8,8 +8,8 @@ export default function MakeWithdrawal() {
   return (
     <>
       <Title
-        title="Registrar Retirada"
-        subtitle="Registrar retirada de insumos do paciente."
+        title="Registro de Retirada de Pacotes"
+        subtitle="Realize o registro da retirada de insumos do paciente."
         back="true"
       />
 

@@ -1,13 +1,27 @@
+import { useUser } from "../../contexts/UserContext";
+
 export default function BusinessHours({ data = [], onSelectDay }) {
+  const { user } = useUser();
+  const role = user?.role;
+
   return (
     <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
       <div className="flex flex-col gap-1 mb-5 text-center">
         <h2 className="text-2xl font-bold text-gray-900">
           Horários de Funcionamento
         </h2>
-        <p className="text-sm text-gray-500">
-          Clique em um dia para visualizar ou editar
-        </p>
+
+        {role === "warehouse" && (
+          <p className="text-sm text-gray-500">
+            Clique em um dia para visualizar ou editar.
+          </p>
+        )}
+
+        {role === "beneficiary" && (
+          <p className="text-sm text-gray-500">
+            Veja os dias disponíveis para atendimento.
+          </p>
+        )}
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-7 gap-3">

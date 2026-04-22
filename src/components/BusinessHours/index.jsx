@@ -1,28 +1,76 @@
 export default function BusinessHours({ data = [], onSelectDay }) {
   return (
-    <div className="bg-white shadow-lg rounded-2xl p-6">
-      <h2 className="text-xl font-bold text-gray-800 text-center mb-4">
-        Horários de Funcionamento
-      </h2>
+    <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
+      <div className="flex flex-col gap-1 mb-5 text-center">
+        <h2 className="text-2xl font-bold text-gray-900">
+          Horários de Funcionamento
+        </h2>
+        <p className="text-sm text-gray-500">
+          Clique em um dia para visualizar ou editar
+        </p>
+      </div>
 
-      <div className="flex flex-wrap gap-3 justify-center">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-7 gap-3">
         {data.map(({ id, dayWeek, openTime, closeTime, isActive }) => (
-          <div
+          <button
             key={id}
-            onClick={() => onSelectDay && onSelectDay(id)}
-            className={`cursor-pointer flex flex-col justify-center items-center p-3 rounded-lg transition-colors w-28 sm:w-32 md:w-36 ${
-              isActive
-                ? "bg-green-100 text-green-800 font-semibold"
-                : "hover:bg-gray-50 text-gray-700"
-            }`}
+            type="button"
+            onClick={() => onSelectDay?.(id)}
+            className={`
+              group relative flex flex-col items-center justify-center
+              rounded-2xl border transition-all duration-200
+              hover:shadow-md hover:-translate-y-[2px]
+              focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500
+              p-4 pt-10
+              ${
+                isActive
+                  ? "bg-green-50 border-green-200 shadow-sm"
+                  : "bg-gray-50 border-gray-200 hover:bg-white"
+              }
+            `}
           >
-            <span className="font-medium">{dayWeek}</span>
-            {isActive && (
-              <span className="text-sm text-center">
-                {openTime} - {closeTime} <span className="ml-1">(Aberto)</span>
-              </span>
-            )}
-          </div>
+            {/* Badge status */}
+            <div
+              className={`
+                absolute top-3 right-3 px-2 py-0.5 rounded-full text-[11px] font-semibold
+                ${
+                  isActive
+                    ? "bg-green-200 text-green-900"
+                    : "bg-gray-200 text-gray-600"
+                }
+              `}
+            >
+              {isActive ? "Aberto" : "Fechado"}
+            </div>
+
+            <span
+              className={`
+                text-base font-bold tracking-wide
+                ${
+                  isActive
+                    ? "text-green-800"
+                    : "text-gray-800 group-hover:text-gray-900"
+                }
+              `}
+            >
+              {dayWeek}
+            </span>
+
+            <span
+              className={`
+                mt-2 text-sm text-center
+                ${isActive ? "text-green-700" : "text-gray-500"}
+              `}
+            >
+              {openTime && closeTime ? (
+                <>
+                  {openTime} <span className="mx-1">—</span> {closeTime}
+                </>
+              ) : (
+                "Sem horário"
+              )}
+            </span>
+          </button>
         ))}
       </div>
     </div>

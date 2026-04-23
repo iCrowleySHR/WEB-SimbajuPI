@@ -7,7 +7,8 @@ export default function LoginBox({
     fields, 
     message, 
     onSubmit, 
-    onFirstAccessClick 
+    onFirstAccessClick,
+    forgotPasswordLink // NOVO
 }) {
     const colorConfig = {
         blue: {
@@ -55,7 +56,7 @@ export default function LoginBox({
     const config = colorConfig[color] || colorConfig.blue;
 
     return (
-        <div className="bg-white rounded-3xl shadow-lg p-8 w-full max-w-md border border-gray-200">
+        <div className="relative bg-white rounded-3xl shadow-lg p-8 w-full max-w-md border border-gray-200">
             {/* Header */}
             <div className="mb-6">
                 <div className="flex items-center space-x-4 mb-3">
@@ -88,7 +89,7 @@ export default function LoginBox({
                             placeholder={placeholder}
                             value={value}
                             onChange={onChange}
-                            className={`w-full px-4 py-3 text-base border-2 border-gray-200 rounded-lg transition ${config.focus} focus:border-${color}-500 focus:ring-2 focus:ring-${color}-200 bg-white placeholder:text-gray-400 text-gray-800`}
+                            className={`w-full px-4 py-3 text-base border-2 border-gray-200 rounded-lg transition ${config.focus} bg-white placeholder:text-gray-400 text-gray-800`}
                         />
                     </div>
                 ))}
@@ -108,15 +109,27 @@ export default function LoginBox({
                     <i className="fas fa-sign-in-alt text-sm"></i>
                     <span>Entrar</span>
                 </button>
+
+                {/* Forgot password */}
+                {forgotPasswordLink && (
+                    <div className="">
+                        <a
+                            href={forgotPasswordLink}
+                            className={`text-sm font-medium ${config.text} hover:underline`}
+                        >
+                            Esqueci minha senha
+                        </a>
+                    </div>
+                )}
             </form>
 
             {/* Footer */}
-            <div className="mt-6 pt-4">
+            <div className="mt-3 pt-4">
                 <div className="border-t border-gray-200 mb-4"></div>
                 
                 <button 
                     onClick={onFirstAccessClick} 
-                    className={`w-full ${config.text} hover:${config.text} font-medium text-sm flex items-center justify-center space-x-2 py-2 rounded-lg hover:bg-gray-50 transition`}
+                    className={`w-full ${config.text} font-medium text-sm flex items-center justify-center space-x-2 py-2 rounded-lg hover:bg-gray-50 transition`}
                 >
                     <i className="fas fa-user-plus"></i>
                     <span>Primeiro acesso? Clique aqui</span>

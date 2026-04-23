@@ -42,6 +42,9 @@ import MakeWithdrawal from "./pages/auth/warehouse/MakeWithdrawal";
 import BeneficiaryPdfPage from "./pages/auth/shared/BeneficiaryPdfPage";
 import SchedulingPdfPage from "./pages/auth/shared/SchedulingPdfPage";
 import WithdrawalPdfPage from "./pages/auth/shared/WithdrawalPdfPage";
+import SendTokenPassword from "./pages/public/SendTokenPassword";
+import ResetPassword from "./pages/public/ResetPassword";
+import ResetPasswordLayout from "./components/Layout/ResetPasswordLayout";
 
 
 function App() {
@@ -53,6 +56,11 @@ function App() {
                     <Route path="/" element={<LandingPage />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="*" element={<NotFound />} />
+                </Route>
+
+                <Route element={<ResetPasswordLayout />}>
+                    <Route path="/email/token" element={<SendTokenPassword />} />
+                    <Route path="/reset-password" element={<ResetPassword />} />
                 </Route>
 
                 {/* Rotas privadas */}

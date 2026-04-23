@@ -84,6 +84,7 @@ export default function Login() {
                                 onSubmit={submitBeneficiary}
                                 onFirstAccessClick={() => setShowModalBeneficiary(true)}
                                 disabled={loading}
+                                forgotPasswordLink="/email/token"
                             />
                         ) : (
                             <LoginBox
@@ -98,6 +99,7 @@ export default function Login() {
                                 onSubmit={submitStaff}
                                 onFirstAccessClick={() => setShowModalStaff(true)}
                                 disabled={loading}
+                                forgotPasswordLink="/email/token"
                             />
                         )}
                     </div>

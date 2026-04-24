@@ -15,9 +15,15 @@ export const updateResponsibleData = async (userData) => {
   return response.data;
 }
 
-export const getAllBeneficiaries = async (page = 1) => {
-  const response = await api.get(`/beneficiary/allbeneficiares?page=${page}`);
-  return response.data; 
+export const getAllBeneficiaries = async (page = 1, typeBenefit = "") => {
+  let url = `/beneficiary/allbeneficiares?page=${page}`;
+
+  if (typeBenefit) {
+    url += `&typeBenefit=${typeBenefit}`;
+  }
+
+  const response = await api.get(url);
+  return response.data;
 };
 
 export const searchBeneficiaries = async (search, page = 1) => {

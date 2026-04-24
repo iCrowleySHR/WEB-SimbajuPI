@@ -7,7 +7,7 @@ import { useLoading } from "../contexts/LoadingContext";
 import getErrorMessage from "../utils/getErrorMessage";
 import { maskCpf } from "../utils/mask";
 
-export default function useAllBeneficiaries(page = 1, searchTerm = "") {
+export default function useAllBeneficiaries(page = 1, searchTerm = "", typeBenefit = "") {
   const { showLoading, hideLoading } = useLoading();
 
   const [beneficiaries, setBeneficiaries] = useState([]);
@@ -26,7 +26,7 @@ export default function useAllBeneficiaries(page = 1, searchTerm = "") {
       if (searchTerm) {
         response = await searchBeneficiaries(searchTerm, page);
       } else {
-        response = await getAllBeneficiaries(page);
+        response = await getAllBeneficiaries(page, typeBenefit);
       }
 
       const data = response?.data || [];
@@ -54,7 +54,7 @@ export default function useAllBeneficiaries(page = 1, searchTerm = "") {
 
   useEffect(() => {
     fetchAllBeneficiaries();
-  }, [page, searchTerm]); 
+  }, [page, searchTerm, typeBenefit]);
 
   return {
     beneficiaries,

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Title from "../../../../components/Title";
 import DynamicTable from "../../../../components/DynamicTable";
 import useAllBeneficiaries from "../../../../hook/useAllBeneficiaries";
@@ -8,12 +8,20 @@ import translate from "../../../../utils/translate";
 import Alert from "../../../../components/Alert";
 import useDebounce from "../../../../hook/useDebounce";
 import Pagination from "../../../../components/Pagination";
+import TypeBenefitFilter from "../../../../components/TypeBenefitFilter";
 
 export default function AllBeneficiaries() {
-const [searchTerm, setSearchTerm] = useState("");
-const debouncedSearch = useDebounce(searchTerm, 500);
+  const [searchTerm, setSearchTerm] = useState("");
+  const debouncedSearch = useDebounce(searchTerm, 500);
+
+  const [typeBenefit, setTypeBenefit] = useState("Todos");
   const [currentPage, setCurrentPage] = useState(1);
-  const { beneficiaries, meta, error, message, refetch } = useAllBeneficiaries(currentPage, debouncedSearch);
+
+  const filterValue = typeBenefit === "Todos" ? "" : typeBenefit;
+
+  const { beneficiaries, meta, error, message, refetch } =
+    useAllBeneficiaries(currentPage, debouncedSearch, filterValue);
+
   const { user } = useUser();
 
   const columns = [
@@ -24,7 +32,6 @@ const debouncedSearch = useDebounce(searchTerm, 500);
     { label: "Tipo de benefício", accessor: "typeBenefit" },
   ];
 
-
   return (
     <>
       <Title
@@ -33,11 +40,20 @@ const debouncedSearch = useDebounce(searchTerm, 500);
         back="true"
       />
 
+      <TypeBenefitFilter
+        types={["Todos", "Administrativo", "Judicial"]}
+        currentType={typeBenefit}
+        onChange={(value) => {
+          setTypeBenefit(value);
+          setCurrentPage(1);
+        }}
+      />
+
       <SearchInputBeneficiary
         value={searchTerm}
         onChange={(e) => {
           setSearchTerm(e.target.value);
-          setCurrentPage(1); 
+          setCurrentPage(1);
         }}
         placeholder="Pesquisar por nome ou CPF..."
       />
@@ -52,7 +68,8 @@ const debouncedSearch = useDebounce(searchTerm, 500);
           actions={[
             {
               label: "Ver detalhes",
-              getPath: (row) => `/${translate(user.role).toLowerCase()}/beneficiario/detalhes/${row.id}`,
+              getPath: (row) =>
+                `/${translate(user.role).toLowerCase()}/beneficiario/detalhes/${row.id}`,
             },
           ]}
         />

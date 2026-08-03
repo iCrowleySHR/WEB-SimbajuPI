@@ -45,6 +45,9 @@ import WithdrawalPdfPage from "./pages/auth/shared/WithdrawalPdfPage";
 import SendTokenPassword from "./pages/public/SendTokenPassword";
 import ResetPassword from "./pages/public/ResetPassword";
 import ResetPasswordLayout from "./components/Layout/ResetPasswordLayout";
+import ListWarehouse from "./pages/auth/secretary/ListWarehouse";
+import UserDetails from "./pages/auth/secretary/UserDetails";
+import ListUbs from "./pages/auth/secretary/ListUbs";
 
 
 function App() {
@@ -91,6 +94,11 @@ function App() {
                         <Route path="agendamento/lista/:search" element={<HistoryScheduling />} />
                         <Route path="agendamento/detalhes/:id" element={<SchedulingDetails />} />
                         <Route path="agendamento/pdf/:id" element={<SchedulingPdfPage />} />
+
+                        <Route path="almoxarifado/lista" element={<ListWarehouse />} />
+                        <Route path="ubs/lista" element={<ListUbs />} />
+
+                        <Route path="usuario/detalhes/:id" element={<UserDetails />} />
 
                         <Route path="retirada/lista" element={<HistoryWithdrawal />} />
                         <Route path="retirada/lista/:search" element={<HistoryWithdrawal />} />

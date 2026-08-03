@@ -5,6 +5,11 @@ export const getMyData = async () => {
   return response.data;
 };
 
+export const getUserById = async (id) => {
+  const response = await api.get(`/users/show/${id}`);
+  return response.data?.data;
+};
+
 export const updateUser = async (userData) => {
   const response = await api.patch("/users/update", userData);
   return response.data;
@@ -20,3 +25,24 @@ export const createUbs = async (data) => {
   return response.data;
 };
 
+export const getAllWarehouse = async (search, page = 1) => {
+  const response = await api.get(`/users/allwarehouse`, {
+    params: {
+      search,
+      page,
+    },
+  });
+
+  return response.data;
+};
+
+export const getAllUbs = async (search, page = 1) => {
+  const response = await api.get(`/users/allubs`, {
+    params: {
+      search,
+      page,
+    },
+  });
+
+  return response.data;
+};

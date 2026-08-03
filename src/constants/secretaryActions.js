@@ -68,6 +68,27 @@ export const secretaryActions = (showModalCreateAdminAccount) => [
     ],
   },
   {
+    category: "Contas",
+    items: [
+      {
+        title: "Contas de Almoxarifado",
+        description: "Veja as contas cadastradas com o tipo de perfil Almoxarifado.",
+        iconClass: "fas fa-person",
+        bgColor: "bg-cyan-600",
+        hoverColor: "hover:bg-cyan-700",
+        to: "/secretaria/almoxarifado/lista",
+      },
+      {
+        title: "Contas de UBS",
+        description: "Veja as contas cadastradas com o tipo de perfil UBS.",
+        iconClass: "fas fa-plus",
+        bgColor: "bg-amber-700",
+        hoverColor: "hover:bg-amber-900",
+        to: "/secretaria/ubs/lista",
+      },
+    ],
+  },
+  {
     category: "Funções Administrativas",
     items: [
       {

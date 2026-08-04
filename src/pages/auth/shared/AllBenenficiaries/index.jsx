@@ -40,14 +40,16 @@ export default function AllBeneficiaries() {
         back="true"
       />
 
-      <TypeBenefitFilter
-        types={["Todos", "Administrativo", "Judicial"]}
-        currentType={typeBenefit}
-        onChange={(value) => {
-          setTypeBenefit(value);
-          setCurrentPage(1);
-        }}
-      />
+      {user.role !== "ubs" && (
+        <TypeBenefitFilter
+          types={["Todos", "Administrativo", "Judicial"]}
+          currentType={typeBenefit}
+          onChange={(value) => {
+            setTypeBenefit(value);
+            setCurrentPage(1);
+          }}
+        />
+      )}
 
       <SearchInputBeneficiary
         value={searchTerm}

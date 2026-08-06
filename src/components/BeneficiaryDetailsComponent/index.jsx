@@ -5,17 +5,20 @@ import LocationDetailsComponent from "../LocateDetailsComponent";
 import StatusDetailsComponent from "../StatusDetailsComponent";
 import formatDate from "../../utils/formatDate";
 import CollapsibleSection from "../CollapsibleSection";
+import UbsDetailsComponent from "../UbsDetailsComponent";
 
 export default function BeneficiaryDetailsComponent({ beneficiary, showDetails = false }) {
   const locate = beneficiary?.location;
   const status = beneficiary?.status;
   const user   = beneficiary?.user;
+  const ubs   = beneficiary?.ubs;
 
   return (
     <CollapsibleSection title="Detalhes do Beneficiário" accent="purple" defaultOpen={showDetails}>
       <div className="flex flex-col gap-4">
 
         {user && <UserDetailsComponent user={user} showDetails={true} />}
+        {ubs && <UbsDetailsComponent user={ubs} showDetails={true} />}
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <DetailField label="Nome do Responsável"      value={beneficiary.nameResponsible} />

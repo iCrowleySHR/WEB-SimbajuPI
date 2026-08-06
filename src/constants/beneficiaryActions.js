@@ -52,6 +52,14 @@ export const beneficiaryActions = [
         hoverColor: "hover:bg-purple-700",
         to: "/beneficiario/dados",
       },
+            {
+        title: "UBS Responsável",
+        description: "Veja os dados da sua UBS Responsável.",
+        iconClass: "fas fa-plus",
+        bgColor: "bg-blue-600",
+        hoverColor: "hover:bg-blue-700",
+        to: "/beneficiario/ubs",
+      },
     ],
   },
 ];

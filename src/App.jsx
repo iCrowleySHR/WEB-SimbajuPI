@@ -48,6 +48,7 @@ import ResetPasswordLayout from "./components/Layout/ResetPasswordLayout";
 import ListWarehouse from "./pages/auth/secretary/ListWarehouse";
 import UserDetails from "./pages/auth/secretary/UserDetails";
 import ListUbs from "./pages/auth/secretary/ListUbs";
+import UbsData from "./pages/auth/beneficiary/UbsData";
 
 
 function App() {
@@ -152,6 +153,8 @@ function App() {
                         <Route path="retirada/historico" element={<MyHistoryWithdrawal />} />
 
                         <Route path="dados" element={<BeneficiaryDetails />} />
+
+                        <Route path="ubs" element={<UbsData />} />
 
                         <Route path="agendamento/historico" element={<MyHistoryScheduling />} />
                         <Route path="agendamento/criar" element={<MakeScheduling />} />

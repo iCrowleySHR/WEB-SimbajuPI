@@ -82,7 +82,7 @@ export default function ListUbs() {
             {
               label: "Ver detalhes",
               getPath: (row) =>
-                `/${translate(user.role).toLowerCase()}/usuario/detalhes/${row.id}`,
+                `/${translate(user.role).toLowerCase()}/ubs/detalhes/${row.id}`,
             },
           ]}
         />

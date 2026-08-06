@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getAllUbs } from "../api/routers/user";
+import { getAllUbs } from "../api/routers/ubs";
 import { useLoading } from "../contexts/LoadingContext";
 import getErrorMessage from "../utils/getErrorMessage";
 import translate from "../utils/translate";
@@ -28,9 +28,9 @@ export default function useAllUbs(page = 1, searchTerm = "") {
 
       const formatted = data.map((item) => ({
         id: item.id,
-        name: item.name || "-",
-        email: item.email || "-",
-        role: translate(item.role) || "-",
+        name: item.user?.name || "-",
+        email: item.user?.email || "-",
+        role: translate(item.user?.role) || "-",
       }));
 
       setUbsUsers(formatted);

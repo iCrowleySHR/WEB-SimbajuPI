@@ -36,13 +36,3 @@ export const getAllWarehouse = async (search, page = 1) => {
   return response.data;
 };
 
-export const getAllUbs = async (search, page = 1) => {
-  const response = await api.get(`/users/allubs`, {
-    params: {
-      search,
-      page,
-    },
-  });
-
-  return response.data;
-};

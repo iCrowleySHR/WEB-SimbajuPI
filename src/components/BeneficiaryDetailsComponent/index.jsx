@@ -18,7 +18,7 @@ export default function BeneficiaryDetailsComponent({ beneficiary, showDetails =
       <div className="flex flex-col gap-4">
 
         {user && <UserDetailsComponent user={user} showDetails={true} />}
-        {ubs && <UbsDetailsComponent user={ubs} showDetails={true} />}
+        {ubs && <UbsDetailsComponent ubs={ubs} showDetails={true} />}
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <DetailField label="Nome do Responsável"      value={beneficiary.nameResponsible} />

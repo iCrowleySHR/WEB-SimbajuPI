@@ -126,7 +126,7 @@ export default function CreateBeneficiaryForm(props) {
                   onChange: e => setUbsId(e.target.value),
                   type: "select",
                   options: ubsList.map(ubs => ({
-                    label: ubs.name,
+                    label: ubs.user.name,
                     value: ubs.id
                   }))
                 }

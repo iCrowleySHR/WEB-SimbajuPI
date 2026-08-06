@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { createBeneficiary } from "../api/routers/beneficiary";
-import { getAllUbs } from "../api/routers/user";
+import { getAllUbs } from "../api/routers/ubs";
 import getErrorMessage from '../utils/getErrorMessage';
 import { useLoading } from "../contexts/LoadingContext";
 import { getAddressByCep } from "../utils/cepUtils";

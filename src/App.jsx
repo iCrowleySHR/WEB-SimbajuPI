@@ -48,7 +48,7 @@ import ResetPasswordLayout from "./components/Layout/ResetPasswordLayout";
 import ListWarehouse from "./pages/auth/secretary/ListWarehouse";
 import UserDetails from "./pages/auth/secretary/UserDetails";
 import ListUbs from "./pages/auth/secretary/ListUbs";
-import UbsData from "./pages/auth/beneficiary/UbsData";
+import UbsData from "./pages/auth/shared/UbsData";
 
 
 function App() {
@@ -100,6 +100,8 @@ function App() {
                         <Route path="ubs/lista" element={<ListUbs />} />
 
                         <Route path="usuario/detalhes/:id" element={<UserDetails />} />
+
+                        <Route path="ubs/detalhes/:id" element={<UbsData />} />
 
                         <Route path="retirada/lista" element={<HistoryWithdrawal />} />
                         <Route path="retirada/lista/:search" element={<HistoryWithdrawal />} />

@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createBeneficiary } from "../api/routers/beneficiary";
+import { getAllUbs } from "../api/routers/user";
 import getErrorMessage from '../utils/getErrorMessage';
 import { useLoading } from "../contexts/LoadingContext";
 import { getAddressByCep } from "../utils/cepUtils";
@@ -23,12 +24,27 @@ export function useNewBeneficiary() {
   const [neighborhood, setNeighborhood] = useState("");
   const [city, setCity] = useState("");
   const [message, setMessage] = useState(null);
+  const [ubsId, setUbsId] = useState("");
+  const [ubsList, setUbsList] = useState([]);
 
   const { showLoading, hideLoading } = useLoading();
 
+  useEffect(() => {
+    const loadUbs = async () => {
+      try {
+        const response = await getAllUbs();
+        setUbsList(response.data);
+      } catch (error) {
+        console.error("Erro ao buscar UBS", error);
+      }
+    };
+
+    loadUbs();
+  }, []);
+
   const resetFields = () => {
     setName(""); setEmail(""); setNameResponsible(""); setCpf(""); setEmailResponsible("");
-    setTelephone(""); setTelephoneResponsible(""); setBirthDate(""); setTypeBenefit("Judicial");
+    setTelephone(""); setTelephoneResponsible(""); setBirthDate(""); setTypeBenefit("Judicial"); setUbsId("");
     setPrescriptionTimeDays(""); setPrescriptionQuantity(""); setCepState("");
     setStreetName(""); setNumberHouse(""); setNeighborhood(""); setCity("");
   };
@@ -38,9 +54,21 @@ export function useNewBeneficiary() {
       setMessage({ type: "error", text: "Por favor, preencha todos os campos obrigatórios." });
       return;
     }
-    const data = { nameResponsible: nameResponsible || null, cpf: sanitizeCpf(cpf), emailResponsible: emailResponsible || null,
-      telephone : sanitizeNumeric(telephone),  telephoneResponsible: sanitizeNumeric(telephoneResponsible) || null, birthDate, typeBenefit,
-      prescriptionTimeDays, prescriptionQuantity, cep: sanitizeCep(cep), streetName, numberHouse, neighborhood, city, name, email };
+    if (
+      typeBenefit === "Administrativo" &&
+      !ubsId
+    ) {
+      setMessage({
+        type: "error",
+        text: "Selecione a UBS responsável pelo beneficiário."
+      });
+      return;
+    }
+    const data = {
+      nameResponsible: nameResponsible || null, cpf: sanitizeCpf(cpf), emailResponsible: emailResponsible || null,
+      telephone: sanitizeNumeric(telephone), telephoneResponsible: sanitizeNumeric(telephoneResponsible) || null, birthDate, typeBenefit,
+      prescriptionTimeDays, prescriptionQuantity, cep: sanitizeCep(cep), streetName, numberHouse, neighborhood, city, name, email, ubsId: typeBenefit === "Administrativo" ? ubsId : null
+    };
 
     try {
       showLoading();
@@ -71,6 +99,8 @@ export function useNewBeneficiary() {
     prescriptionTimeDays, setPrescriptionTimeDays, prescriptionQuantity, setPrescriptionQuantity,
     cep, setCep, streetName, setStreetName, numberHouse, setNumberHouse,
     neighborhood, setNeighborhood, city, setCity,
-    message, handleSubmit
+    message, handleSubmit, ubsId,
+    setUbsId,
+    ubsList
   };
 }

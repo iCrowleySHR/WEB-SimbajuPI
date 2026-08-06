@@ -3,7 +3,7 @@ import FormBox from "../FormBox";
 import { sanitizeCep, sanitizeCpf, sanitizeNumeric, sanitizeLetters } from "../../utils/sanitize";
 import { maskCep, maskCpf, maskTelephone } from "../../utils/mask";
 
-export default function BeneficiaryForm(props) {
+export default function CreateBeneficiaryForm(props) {
   const {
     name, setName,
     email, setEmail,
@@ -22,7 +22,10 @@ export default function BeneficiaryForm(props) {
     neighborhood, setNeighborhood,
     city, setCity,
     message,
-    handleSubmit
+    handleSubmit,
+    ubsId,
+    setUbsId,
+    ubsList
   } = props;
 
   return (
@@ -115,6 +118,20 @@ export default function BeneficiaryForm(props) {
                 { label: "Administrativo", value: "Administrativo" },
               ],
             },
+            ...(typeBenefit === "Administrativo"
+              ? [
+                {
+                  label: "UBS",
+                  value: ubsId,
+                  onChange: e => setUbsId(e.target.value),
+                  type: "select",
+                  options: ubsList.map(ubs => ({
+                    label: ubs.name,
+                    value: ubs.id
+                  }))
+                }
+              ]
+              : []),
             {
               label: "Data da Prescrição",
               value: prescriptionTimeDays,

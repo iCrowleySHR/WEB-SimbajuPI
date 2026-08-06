@@ -10,6 +10,8 @@ export default function UbsDetailsComponent({ user, showDetails = false }) {
         <DetailField label="Nome"         value={user.name} />
         <DetailField label="Email"        value={user.email} />
         <DetailField label="Função"       value={translate(user.role)} />
+        {/* <DetailField label="Criado em"    value={formatDate(user.created_at)} />
+        <DetailField label="Atualizado em" value={formatDate(user.updated_at)} /> */}
       </div>
     </CollapsibleSection>
   );

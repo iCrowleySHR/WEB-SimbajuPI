@@ -20,10 +20,6 @@ export const createWarehouse = async (data) => {
   return response.data;
 };
 
-export const createUbs = async (data) => {
-  const response = await api.post("/users/ubs", data);
-  return response.data;
-};
 
 export const getAllWarehouse = async (search, page = 1) => {
   const response = await api.get(`/users/allwarehouse`, {

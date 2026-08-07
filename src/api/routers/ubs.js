@@ -15,3 +15,9 @@ export const getUbsById = async (id) => {
   const response = await api.get(`/ubs/show/${id}`,);
   return response.data?.data || [];
 }
+
+
+export const createUbs = async (data) => {
+  const response = await api.post("/ubs/store", data);
+  return response.data;
+};

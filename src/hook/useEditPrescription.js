@@ -10,6 +10,7 @@ export function useBeneficiaryWithPrescription(beneficiaryId) {
     const [typeBenefit, setTypeBenefit] = useState("");
     const [prescriptionTimeDays, setPrescriptionTimeDays] = useState("");
     const [prescriptionQuantity, setPrescriptionQuantity] = useState("");
+    const [ubsId, setUbsId] = useState("");
 
     const [message, setMessage] = useState(null);
 
@@ -33,6 +34,13 @@ export function useBeneficiaryWithPrescription(beneficiaryId) {
             setTypeBenefit(data.typeBenefit || "");
             setPrescriptionTimeDays(data.prescriptionTimeDays || "");
             setPrescriptionQuantity(data.prescriptionQuantity ?? "");
+            setUbsId(
+                data.ubsId
+                    ? String(data.ubsId)
+                    : data.ubs?.id
+                        ? String(data.ubs.id)
+                        : ""
+            );
         } catch (err) {
             setMessage({ type: "error", text: getErrorMessage(err) });
         } finally {
@@ -49,9 +57,22 @@ export function useBeneficiaryWithPrescription(beneficiaryId) {
             if (!beneficiary) throw new Error("Beneficiário não carregado");
 
             const updatedFields = {};
-            if (typeBenefit !== beneficiary.typeBenefit) updatedFields.typeBenefit = typeBenefit;
-            if (prescriptionTimeDays !== beneficiary.prescriptionTimeDays) updatedFields.prescriptionTimeDays = prescriptionTimeDays;
-            if (prescriptionQuantity !== beneficiary.prescriptionQuantity) updatedFields.prescriptionQuantity = prescriptionQuantity;
+
+            if (typeBenefit !== beneficiary.typeBenefit) {
+                updatedFields.typeBenefit = typeBenefit;
+            }
+
+            if (prescriptionTimeDays !== beneficiary.prescriptionTimeDays) {
+                updatedFields.prescriptionTimeDays = prescriptionTimeDays;
+            }
+
+            if (prescriptionQuantity !== beneficiary.prescriptionQuantity) {
+                updatedFields.prescriptionQuantity = prescriptionQuantity;
+            }
+
+            if (Number(ubsId) !== Number(beneficiary.ubsId ?? beneficiary.ubs?.id)) {
+                updatedFields.ubsId = ubsId || null;
+            }
 
             if (Object.keys(updatedFields).length === 0) {
                 setMessage({ type: "info", text: "Nenhum campo foi alterado." });
@@ -66,6 +87,13 @@ export function useBeneficiaryWithPrescription(beneficiaryId) {
                 setTypeBenefit(updatedData.typeBenefit || "");
                 setPrescriptionTimeDays(updatedData.prescriptionTimeDays || "");
                 setPrescriptionQuantity(updatedData.prescriptionQuantity ?? "");
+                setUbsId(
+                    updatedData.ubsId
+                        ? String(updatedData.ubsId)
+                        : updatedData.ubs?.id
+                            ? String(updatedData.ubs.id)
+                            : ""
+                );
             }
 
             setMessage({ type: "success", text: "Prescrição atualizada com sucesso!" });
@@ -90,6 +118,8 @@ export function useBeneficiaryWithPrescription(beneficiaryId) {
         setPrescriptionTimeDays,
         prescriptionQuantity,
         setPrescriptionQuantity,
+        ubsId,
+        setUbsId,
         message,
         refetch: () => fetchBeneficiary(beneficiaryId),
         updatePrescription,

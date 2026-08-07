@@ -1,10 +1,12 @@
 import PrescriptionForm from "../../../../components/PrescriptionForm";
 import Title from "../../../../components/Title";
 import { useParams } from "react-router-dom";
+import useAllUbs from "../../../../hook/useAllUbs";
 import { useBeneficiaryWithPrescription } from "../../../../hook/useEditPrescription";
 
 export default function EditPrescription() {
     const { id } = useParams();
+
     const {
         beneficiary,
         typeBenefit,
@@ -13,15 +15,22 @@ export default function EditPrescription() {
         setPrescriptionTimeDays,
         prescriptionQuantity,
         setPrescriptionQuantity,
+        ubsId,
+        setUbsId,
         message,
         updatePrescription,
     } = useBeneficiaryWithPrescription(id);
 
+
+    const {
+        ubsUsers,
+        error
+    } = useAllUbs();
     return (
         <>
             <Title
-                title="Editar Prescrição"
-                subtitle="Edite a prescrição do beneficiário selecionado."
+                title="Editar Prescrição/UBS"
+                subtitle="Edite a prescrição/UBS do beneficiário selecionado."
                 back={true}
             />
 
@@ -36,6 +45,9 @@ export default function EditPrescription() {
                     setPrescriptionQuantity={setPrescriptionQuantity}
                     handlePrescriptionUpdate={updatePrescription}
                     messagePrescription={message}
+                    ubsId={ubsId}
+                    setUbsId={setUbsId}
+                    ubsUsers={ubsUsers}
                 />
             )}
         </>

@@ -10,6 +10,9 @@ export default function PrescriptionForm({
   setPrescriptionQuantity,
   handlePrescriptionUpdate,
   messagePrescription,
+  ubsId,
+  setUbsId,
+  ubsUsers,
 }) {
   return (
     <FormBox
@@ -23,6 +26,7 @@ export default function PrescriptionForm({
         items: [
           "O tipo de benefício deve ser 'Judicial' ou 'Administrativo'.",
           "O tempo de prescrição deve ser uma data válida.",
+          "No momento que você altera de Administrativo para Judicial, o Beneficiário perde o relacionamento com a UBS",
           "A quantidade de prescrição deve ser um número inteiro maior que 0.",
         ],
       }}
@@ -52,6 +56,26 @@ export default function PrescriptionForm({
           onChange: (e) => setPrescriptionQuantity(e.target.value),
           min: 1,
         },
+        ...(typeBenefit === "Administrativo"
+          ? [
+            {
+              label: "UBS Responsável",
+              type: "select",
+              value: ubsId,
+              onChange: (e) => setUbsId(e.target.value),
+              options: ubsUsers.map((ubs) => ({
+                label: ubs.name,
+                value: ubs.id
+              })),
+              options: ubsUsers.map((ubs) => ({
+                  label: ubs.name,
+                  value: String(ubs.id)
+              })),
+              required: true,
+            }
+          ]
+          : []
+        ),
       ]}
     />
   );

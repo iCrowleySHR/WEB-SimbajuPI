@@ -59,7 +59,7 @@ export default function ActionPanelBeneficiaryDetails({ beneficiary, refetch }) 
 
     secretary: [
       {
-        label: "Editar Prescrição",
+        label: "Editar Prescrição/UBS",
         color: "yellow",
         icon: "fa-regular fa-pen-to-square",
         onClick: () =>

@@ -4,10 +4,17 @@ import ContainerActionButton from "../../../../components/ContainerActionButton"
 import SubtitleHome from "../../../../components/SubtitleHome";
 import Title from "../../../../components/Title";
 import SearchBarHome from "../../../../components/SearchBarHome";
-import { beneficiaryActions } from "../../../../constants/beneficiaryActions";
+import { useBeneficiaryDetail } from "../../../../hook/useBeneficiaryDetails";
+import { getBeneficiaryActions } from "../../../../constants/beneficiaryActions";
 
 export default function BeneficiaryHome() {
   const [searchTerm, setSearchTerm] = useState("");
+  
+  const { beneficiary } = useBeneficiaryDetail();
+
+  const beneficiaryActions = getBeneficiaryActions(
+    beneficiary?.typeBenefit
+  );
 
   const filterActions = () => {
     if (!searchTerm.trim()) {

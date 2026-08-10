@@ -9,7 +9,8 @@ export default function SecretaryStatusForm({
   files,
   setFiles,
   handleStatusUpdate,
-  messageStatus
+  messageStatus,
+  handleMaintainStatus
 }) {
   const handleFileChange = (e) => {
     setFiles(Array.from(e.target.files));
@@ -22,6 +23,11 @@ export default function SecretaryStatusForm({
       color="blue"
       onSubmit={handleStatusUpdate}
       message={messageStatus}
+      extraButton={{
+        text: "Manter Status",
+        onClick: handleMaintainStatus,
+        className: "btn btn-secondary"
+      }}
       infoBox={{
         title: "Informações para atualização",
         items: [

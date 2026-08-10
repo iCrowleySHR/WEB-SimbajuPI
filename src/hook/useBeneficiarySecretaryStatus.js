@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { disableBeneficiaryById, getBeneficiaryById } from "../api/routers/beneficiary";
-import { updateSecretaryStatus, uploadFileSecretary } from "../api/routers/status";
+import { updateSecretaryStatus, uploadFileSecretary, maintainStatus } from "../api/routers/status";
 import getErrorMessage from "../utils/getErrorMessage";
 import { useLoading } from "../contexts/LoadingContext";
 
@@ -18,6 +18,35 @@ export function useBeneficiarySecretaryStatus(beneficiaryId) {
 
   const [files, setFiles] = useState([]);
   const { showLoading, hideLoading } = useLoading();
+
+  const handleMaintainStatus = async () => {
+    if (!beneficiary?.status?.id) return;
+
+    try {
+        setErrorUpdate("");
+        setMessageUpdate("");
+        showLoading();
+
+        const response = await maintainStatus(
+            beneficiary.status.id
+        );
+
+        setBeneficiary((prev) => ({
+            ...prev,
+            status: response
+        }));
+
+        setMessageUpdate({
+            type: "success",
+            text: "Status mantido com sucesso!"
+        });
+
+    } catch (err) {
+        setErrorUpdate(getErrorMessage(err));
+    } finally {
+        hideLoading();
+    }
+};
 
   const fetchBeneficiary = async () => {
     try {
@@ -123,6 +152,7 @@ export function useBeneficiarySecretaryStatus(beneficiaryId) {
     files,
     handleFileChange,
     handleUpdateStatus,
-    handleUploadFiles
+    handleUploadFiles,
+    handleMaintainStatus
   };
 }

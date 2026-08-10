@@ -25,7 +25,8 @@ export default function BeneficiaryStatusUbs() {
         files,
         handleFileChange,
         handleUpdateStatus,
-        handleUploadFiles
+        handleUploadFiles,
+        handleMaintainStatus
     } = useBeneficiaryUbsStatus(id);
 
     return (
@@ -43,6 +44,7 @@ export default function BeneficiaryStatusUbs() {
 
             {beneficiary && (
                 <>
+                
                     <StatusDetailsComponent status={beneficiary.status} />
                     <div className="mt-5">
                         <UbsStatusForm
@@ -50,6 +52,7 @@ export default function BeneficiaryStatusUbs() {
                             setUbsStatus={setUbsStatus}
                             observationUbs={observationUbs}
                             setObservationUbs={setObservationUbs}
+                            handleMaintainStatus={handleMaintainStatus}
                             handleStatusUpdate={handleUpdateStatus}
                             messageStatus={messageUpdate || errorUpdate}
                         />

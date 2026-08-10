@@ -11,6 +11,7 @@ export default function FormBox({
   onSubmit,
   infoBox,
   subtitle,
+  extraButton
 }) {
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -176,8 +177,8 @@ export default function FormBox({
     sections.length > 0
       ? sections
       : fields.length > 0
-      ? [{ fields }]
-      : [];
+        ? [{ fields }]
+        : [];
 
   return (
     <div className="bg-white rounded-2xl border border-gray-200 p-6 mt-6">
@@ -240,17 +241,37 @@ export default function FormBox({
           </div>
         )}
 
+        {extraButton && (
+          <button
+            type="button"
+            onClick={extraButton.onClick}
+            className={`
+      w-full mt-3 py-3 px-4 rounded-lg
+      text-base font-medium, cursor-pointer
+      flex items-center  gap-2
+      transition-all duration-150
+      border-s-2, underline
+      focus:outline-none focus:ring-4
+      active:scale-[0.99]
+      ${extraButton.className}
+    `}
+          >
+            <i className={extraButton.icon || "fas fa-sync-alt text-sm"} />
+            {extraButton.text}
+          </button>
+        )}
+
         <button
           type="submit"
           className={`
-            w-full mt-5 py-3 px-4 rounded-lg
-            text-white text-base font-medium
-            flex items-center justify-center gap-2
-            transition-all duration-150
-            focus:outline-none focus:ring-4
-            active:scale-[0.99]
-            ${theme.btn}
-          `}
+    w-full mt-5 py-3 px-4 rounded-lg
+    text-white text-base font-medium
+    flex items-center justify-center gap-2
+    transition-all duration-150, cursor-pointer
+    focus:outline-none focus:ring-4
+    active:scale-[0.99]
+    ${theme.btn}
+  `}
         >
           <i className="fas fa-paper-plane text-sm" />
           {type}

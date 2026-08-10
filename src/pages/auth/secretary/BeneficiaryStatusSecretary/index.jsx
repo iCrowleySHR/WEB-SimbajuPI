@@ -25,7 +25,8 @@ export default function BeneficiaryStatusSecretary() {
         files,
         handleFileChange,
         handleUpdateStatus,
-        handleUploadFiles
+        handleUploadFiles,
+        handleMaintainStatus
     } = useBeneficiarySecretaryStatus(id);
 
     return (
@@ -51,6 +52,7 @@ export default function BeneficiaryStatusSecretary() {
                             observationSecretary={observationSecretary}
                             setObservationSecretary={setObservationSecretary}
                             handleStatusUpdate={handleUpdateStatus}
+                            handleMaintainStatus={handleMaintainStatus}
                             messageStatus={messageUpdate || errorUpdate}
                         />
                     </div>

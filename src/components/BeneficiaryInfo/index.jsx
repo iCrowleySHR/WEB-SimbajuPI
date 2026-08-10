@@ -8,7 +8,7 @@ export default function BeneficiaryInfo({ beneficiary }) {
     { label: "CPF", value: maskCpf(beneficiary?.cpf), icon: "fas fa-id-card" },
     { label: "Perfil", value: translate(beneficiary?.user?.role), icon: "fas fa-shield-alt" },
     { label: "Criado em", value: formatDate(beneficiary?.user?.created_at), icon: "fas fa-calendar-plus" },
-    { label: "Última atualização", value: formatDate(beneficiary?.user?.updated_at), icon: "fas fa-clock" },
+    { label: "Ultima Verificação", value: formatDate(beneficiary?.status?.lastCheck), icon: "fas fa-clock" },
   ];
 
   const initials = beneficiary?.user?.name

@@ -10,9 +10,13 @@ export const updateUbsStatus = async (id, data) => {
   return response.data?.data || [];
 }
 
+export const maintainStatus = async (id, data) => {
+  const response = await api.put(`/status/maintain/${id}`, data);
+  return response.data?.data || [];
+}
 
-export const suspensionsUbs = async (page = 1) => {
-  const response = await api.get(`/status/suspensions/ubs?page=${page}`);
+export const suspensionsUbs = async (id) => {
+  const response = await api.get(`/status/maintain/${id}`);
   return response.data;
 }
 

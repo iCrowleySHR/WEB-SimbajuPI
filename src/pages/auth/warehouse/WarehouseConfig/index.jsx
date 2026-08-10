@@ -9,8 +9,6 @@ export default function WarehouseConfig() {
     const { data, error, message, updateConfig } = useWarehouseConfig();
     const [selectedDayId, setSelectedDayId] = useState(null);
 
-    if (error) return <Alert type="error" message={error} />;
-
     return (
         <>
             <Title
@@ -18,9 +16,22 @@ export default function WarehouseConfig() {
                 subtitle="Configure os horários de funcionamento da unidade."
                 back={true}
             />
+
+
+
             <div className="mb-5">
-                <BusinessHours data={data} onSelectDay={setSelectedDayId} />
+                <BusinessHours
+                    data={data}
+                    onSelectDay={setSelectedDayId}
+                />
+                
             </div>
+            
+            {error && (
+                <div className="mb-4">
+                    <Alert type="error" message={error} />
+                </div>
+            )}
 
             <BusinessHoursForm
                 schedule={data}
@@ -29,7 +40,6 @@ export default function WarehouseConfig() {
                 selectedDayId={selectedDayId}
                 setSelectedDayId={setSelectedDayId}
             />
-
         </>
     );
 }

@@ -32,8 +32,18 @@ export function useNewBeneficiary() {
   useEffect(() => {
     const loadUbs = async () => {
       try {
-        const response = await getAllUbs();
-        setUbsList(response.data);
+        const firstPage = await getAllUbs("", 1);
+
+        let allUbs = [...firstPage.data];
+
+        const lastPage = firstPage.meta.last_page;
+
+        for (let page = 2; page <= lastPage; page++) {
+          const response = await getAllUbs("", page);
+          allUbs = [...allUbs, ...response.data];
+        }
+
+        setUbsList(allUbs);
       } catch (error) {
         console.error("Erro ao buscar UBS", error);
       }

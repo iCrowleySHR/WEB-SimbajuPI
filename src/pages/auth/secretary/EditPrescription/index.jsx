@@ -21,11 +21,11 @@ export default function EditPrescription() {
         updatePrescription,
     } = useBeneficiaryWithPrescription(id);
 
-
     const {
         ubsUsers,
         error
-    } = useAllUbs();
+    } = useAllUbs(1, "", true);
+
     return (
         <>
             <Title
@@ -36,7 +36,7 @@ export default function EditPrescription() {
 
             {beneficiary && (
                 <PrescriptionForm
-                    key={beneficiary?.id}
+                    key={beneficiary.id}
                     typeBenefit={typeBenefit}
                     setTypeBenefit={setTypeBenefit}
                     prescriptionTimeDays={prescriptionTimeDays}

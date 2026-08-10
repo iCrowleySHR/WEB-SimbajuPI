@@ -118,30 +118,49 @@ export default function CreateBeneficiaryForm(props) {
                 { label: "Administrativo", value: "Administrativo" },
               ],
             },
+
             ...(typeBenefit === "Administrativo"
               ? [
                 {
                   label: "UBS",
+                  type: "autocomplete",
                   value: ubsId,
-                  onChange: e => setUbsId(e.target.value),
-                  type: "select",
-                  options: ubsList.map(ubs => ({
-                    label: ubs.user.name,
-                    value: ubs.id
-                  }))
-                }
+                  onChange: (val) => setUbsId(val),
+                  placeholder: "Pesquisar UBS...",
+
+                  initialLabel:
+                    ubsList.find(
+                      (ubs) => String(ubs.id) === String(ubsId)
+                    )?.name || "",
+
+                  options: (ubsList || [])
+                    .filter((ubs) => ubs && ubs.id)
+                    .map((ubs) => ({
+                      value: String(ubs.id),
+                      label: String(ubs.user.name || "UBS sem nome"),
+                      extra: String(ubs.user.email || ""),
+                    })),
+
+                  noResultsText: "Nenhuma UBS encontrada",
+                  required: true,
+                },
               ]
               : []),
+
             {
               label: "Data da Prescrição",
               value: prescriptionTimeDays,
               onChange: e => setPrescriptionTimeDays(e.target.value),
               type: "date",
             },
+
             {
               label: "Quantidade da Prescrição",
               value: prescriptionQuantity,
-              onChange: e => setPrescriptionQuantity(sanitizeNumeric(e.target.value)),
+              onChange: e =>
+                setPrescriptionQuantity(
+                  sanitizeNumeric(e.target.value)
+                ),
               type: "number",
               placeholder: "Ex: 120",
             },

@@ -193,6 +193,7 @@ export default function DynamicTable({
 
                 flex
                 flex-wrap
+                justify-end
                 gap-2
               "
             >

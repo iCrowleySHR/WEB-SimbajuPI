@@ -25,35 +25,52 @@ export default function BeneficiaryPdfPage() {
 
   // ─── Paleta de cores ───────────────────────────────────────────────
   const COLORS = {
-    primary:     [30,  64,  175],   // azul escuro (header)
-    primaryLight:[59,  130, 246],   // azul claro  (destaques)
-    accent:      [239, 246, 255],   // azul muito claro (linhas pares)
-    white:       [255, 255, 255],
-    gray100:     [248, 249, 250],
-    gray200:     [226, 232, 240],
-    gray600:     [100, 116, 139],
-    gray800:     [30,  41,  59],
-    success:     [22,  163, 74],
-    danger:      [220, 38,  38],
+    primary: [30, 64, 175],   // azul escuro (header)
+    primaryLight: [59, 130, 246],   // azul claro  (destaques)
+    accent: [239, 246, 255],   // azul muito claro (linhas pares)
+    white: [255, 255, 255],
+    gray100: [248, 249, 250],
+    gray200: [226, 232, 240],
+    gray600: [100, 116, 139],
+    gray800: [30, 41, 59],
+    success: [22, 163, 74],
+    danger: [220, 38, 38],
   };
 
   // ─── Helper: desenha seção título com barra colorida ───────────────
   const drawSectionHeader = (doc, label, y) => {
     const pageWidth = doc.internal.pageSize.width;
+    const pageHeight = doc.internal.pageSize.height;
 
-    // barra lateral colorida
+    // Espaço mínimo necessário para o título + início da tabela
+    const minimumSpace = 30;
+
+    // Se não houver espaço suficiente, cria uma nova página
+    if (y + minimumSpace > pageHeight - 20) {
+      doc.addPage();
+      y = 20;
+    }
+
     doc.setFillColor(...COLORS.primary);
     doc.rect(14, y - 4, 3, 7, "F");
 
-    // fundo suave
     doc.setFillColor(...COLORS.accent);
-    doc.roundedRect(18, y - 4, pageWidth - 32, 7, 1, 1, "F");
+    doc.roundedRect(
+      18,
+      y - 4,
+      pageWidth - 32,
+      7,
+      1,
+      1,
+      "F"
+    );
 
-    // texto
     doc.setFont("helvetica", "bold");
     doc.setFontSize(11);
     doc.setTextColor(...COLORS.primary);
+
     doc.text(label, 21, y + 0.5);
+
     doc.setTextColor(...COLORS.gray800);
 
     return y + 6;
@@ -100,7 +117,7 @@ export default function BeneficiaryPdfPage() {
     if (!beneficiary) return;
 
     const doc = new jsPDF({ unit: "mm", format: "a4" });
-    const pageWidth  = doc.internal.pageSize.width;
+    const pageWidth = doc.internal.pageSize.width;
     const pageHeight = doc.internal.pageSize.height;
 
     // ── CABEÇALHO ──────────────────────────────────────────────────
@@ -141,47 +158,84 @@ export default function BeneficiaryPdfPage() {
     // ── DADOS GERAIS ───────────────────────────────────────────────
     currentY = drawSectionHeader(doc, "Dados do Usuário", currentY);
     currentY = drawTable(doc, currentY, [
-      ["ID Usuário",            safe(beneficiary.user?.id)],
-      ["Nome",                  safe(beneficiary.user?.name)],
-      ["Email",                 safe(beneficiary.user?.email)],
-      ["Perfil",                safe(translate(beneficiary.user?.role))],
-      ["Trocar senha",          beneficiary.user?.must_change_password ? "Sim" : "Não"],
-      ["Criado em",             safe(formatDate(beneficiary.user?.created_at))],
-      ["Atualizado em",         safe(formatDate(beneficiary.user?.updated_at))],
-      ["Apagado em",            beneficiary.user?.deleted_at ? safe(formatDate(beneficiary.user.deleted_at)) : "Não"],
+      ["ID Usuário", safe(beneficiary.user?.id)],
+      ["Nome", safe(beneficiary.user?.name)],
+      ["Email", safe(beneficiary.user?.email)],
+      ["Perfil", safe(translate(beneficiary.user?.role))],
+      ["Trocar senha", beneficiary.user?.must_change_password ? "Sim" : "Não"],
+      ["Criado em", safe(formatDate(beneficiary.user?.created_at))],
+      ["Atualizado em", safe(formatDate(beneficiary.user?.updated_at))],
+      ["Apagado em", beneficiary.user?.deleted_at ? safe(formatDate(beneficiary.user.deleted_at)) : "Não"],
     ]);
 
     currentY = drawSectionHeader(doc, "Dados do Beneficiário", currentY);
     currentY = drawTable(doc, currentY, [
-      ["ID Beneficiário",              safe(beneficiary.id)],
-      ["Nome do Responsável",          safe(beneficiary.nameResponsible)],
-      ["CPF",                          safe(maskCpf(beneficiary.cpf))],
-      ["Email do Responsável",         safe(beneficiary.emailResponsible)],
-      ["Telefone",                     safe(maskTelephone(beneficiary.telephone))],
-      ["Telefone do Responsável",      safe(maskTelephone(beneficiary.telephoneResponsible))],
-      ["Data de Nascimento",           safe(formatDate(beneficiary.birthDate))],
-      ["Tipo de Benefício",            safe(beneficiary.typeBenefit)],
-      ["Prazo de Prescrição",          safe(formatDate(beneficiary.prescriptionTimeDays))],
-      ["Qtd. de Prescrição",           safe(beneficiary.prescriptionQuantity)],
-      ["Período Mín. de Agendamento",  safe(formatDate(beneficiary.minimumSchedulingPeriod))],
-      ["Criado em",                    safe(formatDate(beneficiary.created_at))],
-      ["Atualizado em",                safe(formatDate(beneficiary.updated_at))],
-      ["Apagado em",                   beneficiary.deleted_at ? safe(formatDate(beneficiary.deleted_at)) : "Não"],
+      ["ID Beneficiário", safe(beneficiary.id)],
+      ["Nome do Responsável", safe(beneficiary.nameResponsible)],
+      ["CPF", safe(maskCpf(beneficiary.cpf))],
+      ["Email do Responsável", safe(beneficiary.emailResponsible)],
+      ["Telefone", safe(maskTelephone(beneficiary.telephone))],
+      ["Telefone do Responsável", safe(maskTelephone(beneficiary.telephoneResponsible))],
+      ["Data de Nascimento", safe(formatDate(beneficiary.birthDate))],
+      ["Tipo de Benefício", safe(beneficiary.typeBenefit)],
+      ["Prazo de Prescrição", safe(formatDate(beneficiary.prescriptionTimeDays))],
+      ["Qtd. de Prescrição", safe(beneficiary.prescriptionQuantity)],
+      ["Período Mín. de Agendamento", safe(formatDate(beneficiary.minimumSchedulingPeriod))],
+      ["Criado em", safe(formatDate(beneficiary.created_at))],
+      ["Atualizado em", safe(formatDate(beneficiary.updated_at))],
+      ["Apagado em", beneficiary.deleted_at ? safe(formatDate(beneficiary.deleted_at)) : "Não"],
     ]);
 
     // ── LOCALIZAÇÃO ────────────────────────────────────────────────
     if (beneficiary.location) {
       currentY = drawSectionHeader(doc, "Localização", currentY);
       currentY = drawTable(doc, currentY, [
-        ["ID",           safe(beneficiary.location.id)],
-        ["CEP",          safe(beneficiary.location.cep)],
-        ["Rua",          safe(beneficiary.location.streetName)],
-        ["Número",       safe(beneficiary.location.numberHouse)],
-        ["Bairro",       safe(beneficiary.location.neighborhood)],
-        ["Cidade",       safe(beneficiary.location.city)],
-        ["Criado em",    safe(formatDate(beneficiary.location.created_at))],
-        ["Atualizado em",safe(formatDate(beneficiary.location.updated_at))],
-        ["Apagado em",   beneficiary.location.deleted_at ? safe(formatDate(beneficiary.location.deleted_at)) : "Não"],
+        ["ID", safe(beneficiary.location.id)],
+        ["CEP", safe(beneficiary.location.cep)],
+        ["Rua", safe(beneficiary.location.streetName)],
+        ["Número", safe(beneficiary.location.numberHouse)],
+        ["Bairro", safe(beneficiary.location.neighborhood)],
+        ["Cidade", safe(beneficiary.location.city)],
+        ["Criado em", safe(formatDate(beneficiary.location.created_at))],
+        ["Atualizado em", safe(formatDate(beneficiary.location.updated_at))],
+        ["Apagado em", beneficiary.location.deleted_at ? safe(formatDate(beneficiary.location.deleted_at)) : "Não"],
+      ]);
+    }
+
+    if (
+      beneficiary.typeBenefit === "Administrativo" &&
+      beneficiary.ubs
+    ) {
+      currentY = drawSectionHeader(
+        doc,
+        "UBS Vinculada",
+        currentY
+      );
+
+      currentY = drawTable(doc, currentY, [
+        ["ID UBS", safe(beneficiary.ubs.id)],
+        ["Nome", safe(beneficiary.ubs.user?.name)],
+        ["Email", safe(beneficiary.ubs.user?.email)],
+        ["Perfil", safe(translate(beneficiary.ubs.user?.role))],
+        [
+          "Trocar senha",
+          beneficiary.ubs.user?.must_change_password
+            ? "Sim"
+            : "Não",
+        ],
+        ["CEP", safe(beneficiary.ubs.location?.cep)],
+        ["Rua", safe(beneficiary.ubs.location?.streetName)],
+        ["Número", safe(beneficiary.ubs.location?.numberHouse)],
+        ["Bairro", safe(beneficiary.ubs.location?.neighborhood)],
+        ["Cidade", safe(beneficiary.ubs.location?.city)],
+        [
+          "Criado em",
+          safe(formatDate(beneficiary.ubs.created_at)),
+        ],
+        [
+          "Atualizado em",
+          safe(formatDate(beneficiary.ubs.updated_at)),
+        ],
       ]);
     }
 
@@ -189,17 +243,17 @@ export default function BeneficiaryPdfPage() {
     if (beneficiary.status) {
       currentY = drawSectionHeader(doc, "Status do Beneficiário", currentY);
       currentY = drawTable(doc, currentY, [
-        ["ID",                    safe(beneficiary.status.id)],
-        ["Status UBS",            safe(beneficiary.status.ubsStatus)],
-        ["Observação UBS",        safe(beneficiary.status.observationUbs)],
-        ["Documento UBS",         safe(beneficiary.status.documentationStatusUbs) || "Não disponível"],
-        ["Status Secretaria",     safe(beneficiary.status.secretaryStatus)],
+        ["ID", safe(beneficiary.status.id)],
+        ["Status UBS", safe(beneficiary.status.ubsStatus)],
+        ["Observação UBS", safe(beneficiary.status.observationUbs)],
+        ["Documento UBS", safe(beneficiary.status.documentationStatusUbs) || "Não disponível"],
+        ["Status Secretaria", safe(beneficiary.status.secretaryStatus)],
         ["Observação Secretaria", safe(beneficiary.status.observationSecretary)],
-        ["Documento Secretaria",  safe(beneficiary.status.documentationStatusSecretary) || "Não disponível"],
-        ["Última Verificação",    safe(formatDate(beneficiary.status.lastCheck))],
-        ["Criado em",             safe(formatDate(beneficiary.status.created_at))],
-        ["Atualizado em",         safe(formatDate(beneficiary.status.updated_at))],
-        ["Apagado em",            beneficiary.status.deleted_at ? safe(formatDate(beneficiary.status.deleted_at)) : "Não"],
+        ["Documento Secretaria", safe(beneficiary.status.documentationStatusSecretary) || "Não disponível"],
+        ["Última Verificação", safe(formatDate(beneficiary.status.lastCheck))],
+        ["Criado em", safe(formatDate(beneficiary.status.created_at))],
+        ["Atualizado em", safe(formatDate(beneficiary.status.updated_at))],
+        ["Apagado em", beneficiary.status.deleted_at ? safe(formatDate(beneficiary.status.deleted_at)) : "Não"],
       ]);
     }
 

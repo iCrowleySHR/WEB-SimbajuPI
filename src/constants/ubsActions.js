@@ -13,6 +13,20 @@ export const ubsActions = [
     ],
   },
   {
+    category: "Configurações",
+    items: [
+      {
+        title: "Atualizar endereço",
+        description:
+          "Atualize o endereço da sua UBS",
+        iconClass: "fa fa-location-dot",
+        bgColor: "bg-orange-600",
+        hoverColor: "hover:bg-orange-700",
+        to: "/ubs/atualizar-localizacao",
+      },
+    ],
+  },
+  {
     category: "Reavaliações",
     items: [
       {

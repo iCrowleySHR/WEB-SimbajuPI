@@ -49,6 +49,7 @@ import ListWarehouse from "./pages/auth/secretary/ListWarehouse";
 import UserDetails from "./pages/auth/secretary/UserDetails";
 import ListUbs from "./pages/auth/secretary/ListUbs";
 import UbsData from "./pages/auth/shared/UbsData";
+import UpdateLocate from "./pages/auth/ubs/UpdateLocate";
 
 
 function App() {
@@ -141,6 +142,10 @@ function App() {
                     <Route path="/ubs"  element={<PrivateRoute roles={['ubs']} />}>
                         <Route index element={<UbsHome />} />
                         <Route path="configuracoes" element={<GeneralSettings />} />
+
+                        <Route path="atualizar-localizacao" element={<UpdateLocate />} />
+
+
 
                         <Route path="beneficiario/detalhes/:id" element={<BeneficiaryDetails />} />
                         <Route path="beneficiario/lista" element={<AllBeneficiaries />} />

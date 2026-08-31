@@ -15,8 +15,8 @@ export const maintainStatus = async (id, data) => {
   return response.data?.data || [];
 }
 
-export const suspensionsUbs = async (id) => {
-  const response = await api.get(`/status/maintain/${id}`);
+export const suspensionsUbs = async (page = 1) => {
+  const response = await api.get(`/status/suspensions/ubs?page=${page}`);
   return response.data;
 }
 

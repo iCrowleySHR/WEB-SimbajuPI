@@ -14,7 +14,7 @@ import UbsSelect from "../../../../components/UbsSelect";
 export default function AllBeneficiaries() {
   const [searchTerm, setSearchTerm] = useState("");
   const debouncedSearch = useDebounce(searchTerm, 500);
-  
+
   // Estados de filtro
   const [selectedUbsId, setSelectedUbsId] = useState("");
   const [typeBenefit, setTypeBenefit] = useState("Todos");
@@ -63,14 +63,15 @@ export default function AllBeneficiaries() {
         }}
         placeholder="Pesquisar por nome ou CPF..."
       />
-
-      <UbsSelect
-        selectedUbsId={selectedUbsId}
-        onSelectUbs={(id) => {
-          setSelectedUbsId(id);
-          setCurrentPage(1);
-        }}
-      />
+      {(user.role === "secretary" || user.role === "warehouse") && (
+        <UbsSelect
+          selectedUbsId={selectedUbsId}
+          onSelectUbs={(id) => {
+            setSelectedUbsId(id);
+            setCurrentPage(1);
+          }}
+        />
+      )}
 
       {message && <Alert type="success" message={message} />}
       {error && <Alert type="error" message={error} />}

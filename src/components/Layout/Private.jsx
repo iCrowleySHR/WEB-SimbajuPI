@@ -2,12 +2,15 @@ import Footer from "../Footer";
 import { Outlet } from "react-router-dom";
 import NavBarAuth from "../NavBar/NavBarAuth";
 import { lazy, Suspense, useEffect, useState } from "react";
+import { useAndroidBackButton } from "../../hook/useAndroidBackButton";
 
 const AccessibilityWidgets = lazy(
     () => import("../AccessibilityWidgets")
 );
 
 export default function LayoutPrivate() {
+    useAndroidBackButton();
+
     const [isMobile, setIsMobile] = useState(
         window.matchMedia("(max-width: 767px)").matches
     );

@@ -64,10 +64,6 @@ export default function PrescriptionForm({
               value: ubsId,
               onChange: (e) => setUbsId(e.target.value),
               options: ubsUsers.map((ubs) => ({
-                label: ubs.name,
-                value: ubs.id
-              })),
-              options: ubsUsers.map((ubs) => ({
                   label: ubs.name,
                   value: String(ubs.id)
               })),

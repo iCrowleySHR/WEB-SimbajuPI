@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-export default function AccessibilityWidgets({ enabled }) {
+export default function AccessibilityWidgets() {
     useEffect(() => {
         // Evita carregar novamente se já existir
         if (document.getElementById("userway-script")) {
@@ -61,35 +61,6 @@ export default function AccessibilityWidgets({ enabled }) {
 
         document.body.appendChild(vlibrasScript);
     }, []);
-
-
-    // =========================
-    // CONTROLE DE VISIBILIDADE
-    // =========================
-
-    useEffect(() => {
-        // USERWAY
-        if (window.UserWay) {
-            if (enabled) {
-                window.UserWay.iconVisibilityOn();
-            } else {
-                window.UserWay.iconVisibilityOff();
-                window.UserWay.widgetClose();
-            }
-        }
-
-        // VLIBRAS
-        const vlibras = document.getElementById(
-            "vlibras-container"
-        );
-
-        if (vlibras) {
-            vlibras.style.display = enabled
-                ? ""
-                : "none";
-        }
-    }, [enabled]);
-
 
     return null;
 }

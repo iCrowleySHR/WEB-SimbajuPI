@@ -51,10 +51,10 @@ export default function NavBarAuth() {
 
   return (
     <header className="bg-white shadow-md border-b border-gray-200 pt-6 md:pt-0">
-      <div className="max-w-9/10 mx-auto px-4 py-3 flex justify-between items-center">
+      <div className="max-w-9/10 mx-auto py-3 flex justify-between items-center">
         <Link to={homeRoute} className="flex items-center space-x-3">
           <Logo size={40} />
-          <h1 className="text-lg sm:text-xl font-bold text-gray-800 ml-3">
+          <h1 className="text-lg sm:text-xl font-bold text-gray-800 ml-3 ">
             Sistema de Distribuição de Fraldas
           </h1>
         </Link>

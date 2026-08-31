@@ -47,7 +47,7 @@ export default function LandingPage() {
       <HeroSection />
 
       {/* ─── Como Funciona ─── */}
-      <section className="relative py-20 bg-white overflow-hidden">
+      <section className="relative py-20 bg-white overflow-hidden hidden md:block">
         {/* Corner decor */}
         <div className="absolute top-0 right-0 w-96 h-96 bg-blue-50/60 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
         <div className="absolute bottom-0 left-0 w-72 h-72 bg-indigo-50/40 rounded-full blur-3xl translate-y-1/2 -translate-x-1/4" />
@@ -78,7 +78,7 @@ export default function LandingPage() {
       </section>
 
       {/* ─── Fluxo do Processo ─── */}
-      <section className="relative py-20 bg-gray-50 overflow-hidden">
+      <section className="relative py-20 bg-gray-50 overflow-hidden hidden md:block">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_40%,rgba(59,130,246,0.04),transparent_60%)]" />
 
         <div className="container mx-auto px-4 relative z-10">
@@ -107,7 +107,7 @@ export default function LandingPage() {
       </section>
 
       {/* ─── Perfis de Usuário ─── */}
-      <section className="relative py-20 bg-white overflow-hidden">
+      <section className="relative py-20 bg-white overflow-hidden hidden md:block">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-50/30 rounded-full blur-3xl" />
 
         <div className="container mx-auto px-4 relative z-10">

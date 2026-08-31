@@ -1,13 +1,18 @@
 import { useState, useEffect } from "react";
-import { 
-  getAllBeneficiaries, 
-  searchBeneficiaries 
+import {
+  getAllBeneficiaries,
+  searchBeneficiaries,
 } from "../api/routers/beneficiary";
 import { useLoading } from "../contexts/LoadingContext";
 import getErrorMessage from "../utils/getErrorMessage";
 import { maskCpf } from "../utils/mask";
 
-export default function useAllBeneficiaries(page = 1, searchTerm = "", typeBenefit = "") {
+export default function useAllBeneficiaries(
+  page = 1,
+  searchTerm = "",
+  typeBenefit = "",
+  ubsId = ""
+) {
   const { showLoading, hideLoading } = useLoading();
 
   const [beneficiaries, setBeneficiaries] = useState([]);
@@ -24,9 +29,17 @@ export default function useAllBeneficiaries(page = 1, searchTerm = "", typeBenef
       let response;
 
       if (searchTerm) {
-        response = await searchBeneficiaries(searchTerm, page);
+        response = await searchBeneficiaries(
+          searchTerm,
+          page,
+          ubsId
+        );
       } else {
-        response = await getAllBeneficiaries(page, typeBenefit);
+        response = await getAllBeneficiaries(
+          page,
+          typeBenefit,
+          ubsId
+        );
       }
 
       const data = response?.data || [];
@@ -54,7 +67,7 @@ export default function useAllBeneficiaries(page = 1, searchTerm = "", typeBenef
 
   useEffect(() => {
     fetchAllBeneficiaries();
-  }, [page, searchTerm, typeBenefit]);
+  }, [page, searchTerm, typeBenefit, ubsId]);
 
   return {
     beneficiaries,

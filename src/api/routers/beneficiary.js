@@ -15,8 +15,8 @@ export const updateResponsibleData = async (userData) => {
   return response.data;
 }
 
-export const getAllBeneficiaries = async (page = 1, typeBenefit = "") => {
-  let url = `/beneficiary/allbeneficiares?page=${page}`;
+export const getAllBeneficiaries = async (page = 1, typeBenefit = "", ubsId = "" ) => {
+  let url = `/beneficiary/allbeneficiares?page=${page}&ubsId=${ubsId}`;
 
   if (typeBenefit) {
     url += `&typeBenefit=${typeBenefit}`;
@@ -26,11 +26,12 @@ export const getAllBeneficiaries = async (page = 1, typeBenefit = "") => {
   return response.data;
 };
 
-export const searchBeneficiaries = async (search, page = 1) => {
+export const searchBeneficiaries = async (search, page = 1, ubsId = "" ) => {
   const response = await api.get(`/beneficiary/allbeneficiares/search`, {
     params: {
       search,
       page,
+      ubsId
     },
   });
 

@@ -9,18 +9,22 @@ import Alert from "../../../../components/Alert";
 import useDebounce from "../../../../hook/useDebounce";
 import Pagination from "../../../../components/Pagination";
 import TypeBenefitFilter from "../../../../components/TypeBenefitFilter";
+import UbsSelect from "../../../../components/UbsSelect";
 
 export default function AllBeneficiaries() {
   const [searchTerm, setSearchTerm] = useState("");
   const debouncedSearch = useDebounce(searchTerm, 500);
-
+  
+  // Estados de filtro
+  const [selectedUbsId, setSelectedUbsId] = useState("");
   const [typeBenefit, setTypeBenefit] = useState("Todos");
   const [currentPage, setCurrentPage] = useState(1);
 
   const filterValue = typeBenefit === "Todos" ? "" : typeBenefit;
 
+  // Passando o selectedUbsId como 4º argumento para o hook
   const { beneficiaries, meta, error, message, refetch } =
-    useAllBeneficiaries(currentPage, debouncedSearch, filterValue);
+    useAllBeneficiaries(currentPage, debouncedSearch, filterValue, selectedUbsId);
 
   const { user } = useUser();
 
@@ -58,6 +62,14 @@ export default function AllBeneficiaries() {
           setCurrentPage(1);
         }}
         placeholder="Pesquisar por nome ou CPF..."
+      />
+
+      <UbsSelect
+        selectedUbsId={selectedUbsId}
+        onSelectUbs={(id) => {
+          setSelectedUbsId(id);
+          setCurrentPage(1);
+        }}
       />
 
       {message && <Alert type="success" message={message} />}

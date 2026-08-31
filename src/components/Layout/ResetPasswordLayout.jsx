@@ -1,8 +1,10 @@
 
+import { useAndroidBackButton } from "../../hook/useAndroidBackButton";
 import Footer from "../Footer";
 import { Outlet } from "react-router-dom";
 
 export default function ResetPasswordLayout() {
+    useAndroidBackButton();
     return (
         <div className="flex flex-col bg-gray-100 min-h-[111svh]">
 

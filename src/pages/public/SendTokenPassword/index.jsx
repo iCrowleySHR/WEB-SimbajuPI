@@ -14,7 +14,7 @@ export default function SendTokenPassword() {
             />
 
             <FormBox
-                type="Enviar Token"
+                type="Enviar Link de Redefinição"
                 subtitle="Digite seu e-mail cadastrado para receber o link de redefinição."
                 icon="fas fa-key"
                 color="blue"

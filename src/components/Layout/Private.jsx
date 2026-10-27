@@ -43,11 +43,11 @@ export default function LayoutPrivate() {
                 <Footer />
             </div>
 
-            {!isMobile && (
+            {/* {!isMobile && ( */}
                 <Suspense fallback={null}>
                     <AccessibilityWidgets />
                 </Suspense>
-            )}
+            {/* )} */}
         </>
     );
 }

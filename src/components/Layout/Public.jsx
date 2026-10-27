@@ -40,11 +40,11 @@ export default function LayoutPublic() {
                 <Footer />
             </div>
 
-            {!isMobile && (
+            {/* {!isMobile && ( */}
                 <Suspense fallback={null}>
                     <AccessibilityWidgets />
                 </Suspense>
-            )}
+            {/* )} */}
         </>
     );
 }

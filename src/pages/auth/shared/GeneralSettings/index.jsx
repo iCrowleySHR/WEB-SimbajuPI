@@ -2,7 +2,7 @@ import { useState } from "react";
 import Title from "../../../../components/Title";
 import { useUser } from "../../../../contexts/UserContext";
 import { useUserSettings } from "../../../../hook/useUserSettings";
-import UserInfo from "../../../../components/Settings/userInfo";
+import UserInfo from "../../../../components/Settings/UserInfo";
 import EmailForm from "../../../../components/Settings/EmailForm";
 import PasswordForm from "../../../../components/Settings/PasswordForm";
 
